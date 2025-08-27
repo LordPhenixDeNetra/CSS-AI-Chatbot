@@ -67,13 +67,13 @@ Une API RAG (Retrieval Augmented Generation) ultra performante avec support mult
 ```mermaid
 graph TB
     %% Style definitions
-    classDef apiLayer fill:#e1f5fe,stroke:#0277bd,stroke-width:2px
-    classDef cacheLayer fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px
-    classDef processingLayer fill:#e8f5e8,stroke:#388e3c,stroke-width:2px
-    classDef searchLayer fill:#fff3e0,stroke:#f57c00,stroke-width:2px
-    classDef llmLayer fill:#fce4ec,stroke:#c2185b,stroke-width:2px
-    classDef storageLayer fill:#f1f8e9,stroke:#689f38,stroke-width:2px
-    classDef monitoringLayer fill:#e3f2fd,stroke:#1976d2,stroke-width:2px
+    classDef apiLayer fill:#f0f8ff,stroke:#4a90e2,stroke-width:2px
+    classDef cacheLayer fill:#f8f0ff,stroke:#9b59b6,stroke-width:2px
+    classDef processingLayer fill:#f0fff0,stroke:#52c41a,stroke-width:2px
+    classDef searchLayer fill:#fff8e1,stroke:#ff9800,stroke-width:2px
+    classDef llmLayer fill:#fff0f5,stroke:#e91e63,stroke-width:2px
+    classDef storageLayer fill:#f5fffa,stroke:#4caf50,stroke-width:2px
+    classDef monitoringLayer fill:#f0f8ff,stroke:#2196f3,stroke-width:2px
 
     %% API Layer
     subgraph API["COUCHE API ET INTERFACE"]
@@ -319,7 +319,7 @@ sequenceDiagram
     Note over User,Monitor: Temps total ~500-2000ms selon cache
     
     %% Metriques finales
-    rect rgb(240, 248, 255)
+    rect rgb(248, 252, 255)
         Note over Monitor: METRIQUES CAPTUREES\n- Temps de reponse total\n- Cache hit rates par type\n- Nombre de resultats trouves\n- Performance par provider\n- Erreurs et fallbacks
     end
 
@@ -330,12 +330,12 @@ sequenceDiagram
 ```mermaid
 flowchart TD
     %% Style definitions
-    classDef inputFlow fill:#e3f2fd,stroke:#1565c0,stroke-width:2px
-    classDef processingFlow fill:#e8f5e8,stroke:#2e7d32,stroke-width:2px
-    classDef searchFlow fill:#fff3e0,stroke:#ef6c00,stroke-width:2px
-    classDef cacheFlow fill:#f3e5f5,stroke:#6a1b9a,stroke-width:2px
-    classDef outputFlow fill:#fce4ec,stroke:#ad1457,stroke-width:2px
-    classDef storageFlow fill:#f1f8e9,stroke:#558b2f,stroke-width:2px
+    classDef inputFlow fill:#f0f8ff,stroke:#4a90e2,stroke-width:2px
+    classDef processingFlow fill:#f0fff0,stroke:#52c41a,stroke-width:2px
+    classDef searchFlow fill:#fff8e1,stroke:#ff9800,stroke-width:2px
+    classDef cacheFlow fill:#f8f0ff,stroke:#9b59b6,stroke-width:2px
+    classDef outputFlow fill:#fff0f5,stroke:#e91e63,stroke-width:2px
+    classDef storageFlow fill:#f5fffa,stroke:#4caf50,stroke-width:2px
 
     %% Input Sources
     subgraph INPUT["SOURCES D ENTREE"]
@@ -933,4 +933,4 @@ Ce projet est sous licence MIT. Voir le fichier `LICENSE` pour plus de détails.
 
 ---
 
-**Développé avec ❤️ pour la communauté IA**
+**Développé avec ❤️ par la CSS**
