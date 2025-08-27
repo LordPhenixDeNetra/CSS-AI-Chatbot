@@ -1,4 +1,4 @@
-# 🚀 RAG Ultra Performant Multimodal API
+# 🚀 CSS RAG Multimodal API
 
 Une API RAG (Retrieval Augmented Generation) ultra performante avec support multimodal complet (texte + images) utilisant les dernières technologies d'IA.
 
