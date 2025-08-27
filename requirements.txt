@@ -1,0 +1,55 @@
+# API Framework
+fastapi
+uvicorn[standard]
+python-multipart
+
+# Core ML & Embeddings
+sentence-transformers
+transformers
+torch
+torchvision
+pypdf
+
+# Vector Database & Search
+chromadb
+rank-bm25
+
+# Document Processing
+langchain
+langchain-community
+langchain-experimental
+PyPDF2
+python-docx
+docx2txt
+reportlab
+huggingface_hub[hf_xet]
+
+# Image Processing
+Pillow
+opencv-python
+pytesseract
+
+# HTTP Client
+httpx
+
+# Data & Utils
+numpy
+pandas
+pydantic
+
+# Cache & Database
+redis
+
+# Environment & Config
+python-dotenv
+
+# Monitoring
+prometheus-client
+
+# Development & Testing
+pytest
+pytest-asyncio
+
+# Optional: CUDA support (uncomment if using GPU)
+# torch==2.1.0+cu118 --extra-index-url https://download.pytorch.org/whl/cu118
+# torchvision==0.16.0+cu118 --extra-index-url https://download.pytorch.org/whl/cu118

@@ -1,0 +1,76 @@
+# Docker Compose pour le développement - RAG Ultra Performant Multimodal API
+version: '3.8'
+
+services:
+  # Override du service principal pour le développement
+  rag-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: development
+    environment:
+      - DEBUG=true
+      - RELOAD=true
+      - LOG_LEVEL=debug
+    volumes:
+      # Mount du code source pour le hot reload
+      - ./app:/app/app:ro
+      - ./data:/app/data
+      - ./logs:/app/logs
+      - ./ultra_rag_db:/app/ultra_rag_db
+      - ./.cache:/app/.cache
+    command: >
+      uvicorn app.main:app 
+      --host 0.0.0.0 
+      --port 8000 
+      --reload 
+      --reload-dir /app/app 
+      --log-level debug
+    ports:
+      - "8000:8000"
+      - "5678:5678"  # Port pour le debugging
+
+  # Service de développement avec outils supplémentaires
+  dev-tools:
+    image: python:3.11-slim
+    container_name: rag-dev-tools
+    working_dir: /app
+    volumes:
+      - .:/app
+    command: tail -f /dev/null
+    networks:
+      - rag-network
+    profiles:
+      - dev-tools
+
+  # Base de données de test séparée
+  test-chromadb:
+    image: chromadb/chroma:latest
+    container_name: rag-test-chromadb
+    ports:
+      - "8002:8000"
+    environment:
+      - CHROMA_SERVER_HOST=0.0.0.0
+      - CHROMA_SERVER_HTTP_PORT=8000
+      - PERSIST_DIRECTORY=/chroma/test-chroma
+    volumes:
+      - test-chroma-data:/chroma/test-chroma
+    networks:
+      - rag-network
+    profiles:
+      - testing
+
+  # Redis de test
+  test-redis:
+    image: redis:7-alpine
+    container_name: rag-test-redis
+    ports:
+      - "6380:6379"
+    networks:
+      - rag-network
+    profiles:
+      - testing
+
+volumes:
+  test-chroma-data:
+    driver: local
