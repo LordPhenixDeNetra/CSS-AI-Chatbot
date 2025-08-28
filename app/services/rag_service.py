@@ -17,9 +17,13 @@ from app.core.llm_provider import OptimizedLLMProvider, PROVIDER_CONFIGS
 from app.core.multimodal_models import MultimodalModels
 from app.core.multimodal_embeddings import MultimodalEmbeddings
 from app.core.multimodal_processor import MultimodalProcessor
+from app.core.question_classifier import QuestionClassifier, QuestionType
+from app.core.direct_response_generator import DirectResponseGenerator
+from app.core.predefined_qa import PredefinedQASystem
 from app.models.enums import Provider, ContentType, ModalityType
 from app.utils.logging import logger
 from app.core.cache import cache
+from app.core.config import settings
 
 
 # RAG Ultra Performant - Classe principale
@@ -30,6 +34,18 @@ class UltraPerformantRAG:
         self.chunker = AdvancedChunker(self.embeddings)
         self.reranker = AdvancedReranker()
         self.query_enhancer = QueryEnhancer()
+        
+        # Nouveaux composants d'optimisation
+        self.question_classifier = QuestionClassifier()
+        self.direct_response_generator = DirectResponseGenerator()
+        
+        # Système de Q&A prédéfinies (configurable)
+        self.predefined_qa = PredefinedQASystem() if settings.ENABLE_PREDEFINED_QA else None
+        
+        if settings.ENABLE_PREDEFINED_QA:
+            logger.info("Système de Q&A prédéfinies activé")
+        else:
+            logger.info("Système de Q&A prédéfinies désactivé")
         
         # Composants multimodaux (chargement différé)
         self.multimodal_embeddings = None
@@ -313,6 +329,38 @@ class UltraPerformantRAG:
             if cached_response:
                 return cached_response
 
+            # 0. Vérification des réponses prédéfinies (priorité absolue)
+            predefined_response = None
+            if self.predefined_qa:
+                predefined_response = self.predefined_qa.get_predefined_answer(question)
+            
+            if predefined_response:
+                logger.info(f"Réponse prédéfinie trouvée pour: {question[:50]}...")
+                response = {
+                    "id": query_id,
+                    "answer": predefined_response["answer"],
+                    "context_found": True,
+                    "provider_used": "predefined_qa",
+                    "model_used": "template_based",
+                    "response_time_ms": round((time.time() - start_time) * 1000, 2),
+                    "timestamp": datetime.now().isoformat(),
+                    "search_results": 0,
+                    "ranked_results": 0,
+                    "enhanced_queries": [question],
+                    "sources": [{"type": "predefined", "content": "Base de connaissances CSS", "confidence": predefined_response["confidence"]}],
+                    "performance_metrics": {
+                        "search_time_ms": 0,
+                        "generation_time_ms": 0,
+                        "cache_hits": "predefined_response",
+                        "llm_calls_saved": True,
+                        "optimization_used": "predefined_qa",
+                        "matched_question": predefined_response["matched_question"]
+                    }
+                }
+                # Mise en cache de la réponse prédéfinie
+                cache.set(cache_key, response, ttl=3600, cache_type="full_response")
+                return response
+
             # 1. Provider LLM
             llm_provider = OptimizedLLMProvider(provider)
 
@@ -332,7 +380,7 @@ class UltraPerformantRAG:
             if not all_results:
                 no_context_response = {
                     "id": query_id,
-                    "answer": "Aucun document pertinent trouvé pour votre question.",
+                    "answer": "Je ne trouve pas d'informations spécifiques à votre question dans ma base de connaissances CSS. Pourriez-vous reformuler votre question ou être plus précis ?",
                     "context_found": False,
                     "provider_used": provider.value,
                     "model_used": PROVIDER_CONFIGS[provider]["model"],
@@ -369,7 +417,7 @@ class UltraPerformantRAG:
             context = "\n\n".join(context_parts)
 
             # 6. Prompt optimisé avec instructions spécifiques
-            optimized_prompt = f"""Vous êtes un assistant expert qui répond aux questions en utilisant uniquement le contexte fourni.
+            optimized_prompt = f"""Vous êtes un assistant expert de la Caisse de Sécurité Sociale du Sénégal.
 
 CONTEXTE:
 {context}
@@ -377,11 +425,11 @@ CONTEXTE:
 QUESTION: {question}
 
 INSTRUCTIONS:
-1. Répondez uniquement en utilisant les informations du contexte fourni
-2. Si vous ne trouvez pas d'informations pertinentes, dites-le clairement
-3. Citez les sources en utilisant "Source X" quand approprié
+1. Répondez de manière naturelle et professionnelle
+2. Utilisez uniquement les informations fournies dans le contexte
+3. Si les informations sont insuffisantes, proposez de reformuler la question
 4. Soyez précis et concis
-5. Si plusieurs sources contiennent des informations complémentaires, synthétisez-les
+5. Synthétisez les informations de manière cohérente
 
 RÉPONSE:"""
 

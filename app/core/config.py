@@ -33,5 +33,8 @@ class Settings(BaseSettings):
         "text_embedding": "sentence-transformers/clip-ViT-B-32-multilingual-v1"
     }
 
+    # Optimisation LLM
+    ENABLE_PREDEFINED_QA: bool = os.getenv("ENABLE_PREDEFINED_QA", "true").lower() == "true"
+
 
 settings = Settings()
