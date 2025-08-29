@@ -1,0 +1,73 @@
+# Dépendances pour le Bot Telegram CSS
+# Installation: pip install -r requirements_telegram.txt
+
+# Bot Telegram
+python-telegram-bot==20.7
+
+# Requêtes HTTP
+requests==2.31.0
+
+# Variables d'environnement
+python-dotenv==1.0.0
+
+# Base de données (optionnel)
+redis==5.0.1
+sqlite3  # Inclus dans Python standard
+
+# Validation de données
+pydantic==2.5.0
+
+# Logging avancé
+loguru==0.7.2
+
+# Utilitaires de date
+python-dateutil==2.8.2
+
+# Serveur web (pour webhook)
+Flask==3.0.0
+gunicorn==21.2.0
+
+# Monitoring et métriques
+prometheus-client==0.19.0
+
+# Sécurité
+cryptography==41.0.8
+
+# CLI et utilitaires
+click==8.1.7
+colorama==0.4.6
+
+# Traitement d'images (optionnel)
+Pillow==10.1.0
+
+# Gestion des fichiers temporaires
+tempfile  # Inclus dans Python standard
+
+# Gestion JSON
+json  # Inclus dans Python standard
+
+# Expressions régulières
+re  # Inclus dans Python standard
+
+# Gestion du temps
+datetime  # Inclus dans Python standard
+
+# Gestion des threads
+threading  # Inclus dans Python standard
+
+# Gestion des processus
+multiprocessing  # Inclus dans Python standard
+
+# Configuration avancée
+PyYAML==6.0.1
+
+# Tests (développement)
+pytest==7.4.3
+pytest-asyncio==0.21.1
+
+# Formatage de code (développement)
+black==23.11.0
+flake8==6.1.0
+
+# Documentation (développement)
+sphinx==7.2.6
