@@ -26,6 +26,7 @@ app.add_middleware(
 
 app.include_router(router)
 
+
 @app.on_event("startup")
 async def startup_event():
     """Événements de démarrage pour optimisation"""
@@ -45,6 +46,8 @@ async def startup_event():
 
     threading.Thread(target=preload_reranker, daemon=True).start()
 
+
 if __name__ == "__main__":
     import uvicorn
+
     uvicorn.run(app, host="0.0.0.0", port=8000)

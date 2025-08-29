@@ -5,7 +5,7 @@ FROM python:3.11-slim as base
 
 # Métadonnées
 LABEL maintainer="RAG Multimodal Team"
-LABEL description="API RAG Ultra Performante avec support multimodal"
+LABEL description="API RAG avec support multimodal"
 LABEL version="2005.0.1"
 
 # Variables d'environnement

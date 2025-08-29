@@ -36,7 +36,7 @@ function Print-Error($Message) {
     Write-ColorOutput Red "[ERROR] $Message"
 }
 
-Write-Host "🚀 Démarrage de RAG Ultra Performant Multimodal API" -ForegroundColor Cyan
+Write-Host "Démarrage de RAG Multimodal API" -ForegroundColor Cyan
 Write-Host "=================================================" -ForegroundColor Cyan
 Write-Host ""
 

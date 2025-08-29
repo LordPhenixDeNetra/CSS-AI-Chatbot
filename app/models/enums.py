@@ -1,5 +1,6 @@
 from enum import Enum
 
+
 class Provider(str, Enum):
     MISTRAL = "mistral"
     OPENAI = "openai"
@@ -7,11 +8,13 @@ class Provider(str, Enum):
     DEEPSEEK = "deepseek"
     GROQ = "groq"
 
+
 class ModalityType(str, Enum):
     TEXT = "text"
     IMAGE = "image"
     VIDEO = "video"
     AUDIO = "audio"
+
 
 class ContentType(str, Enum):
     DOCUMENT = "document"

@@ -5,6 +5,7 @@ from prometheus_client import Counter, Histogram, Gauge, generate_latest
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
+
 def setup_logging():
     return logger
 

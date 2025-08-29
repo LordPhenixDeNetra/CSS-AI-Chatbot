@@ -210,7 +210,50 @@ async def ask_question_stream_ultra(request: QuestionRequest):
             start_time = time.time()
             query_id = str(uuid.uuid4())
 
-            # Enhancement et recherche
+            # 0. Vérification des réponses prédéfinies (priorité absolue)
+            if multimodal_rag_system.predefined_qa:
+                predefined_response = multimodal_rag_system.predefined_qa.get_predefined_answer(request.question)
+                
+                if predefined_response:
+                    logger.info(f"Réponse prédéfinie trouvée pour streaming: {request.question[:50]}...")
+                    
+                    # Métadonnées initiales pour réponse prédéfinie
+                    initial_metadata = {
+                        "id": query_id,
+                        "provider": "predefined_qa",
+                        "enhanced_queries": [request.question],
+                        "timestamp": datetime.now().isoformat(),
+                        "optimization_used": "predefined_qa",
+                        "matched_question": predefined_response["matched_question"]
+                    }
+                    yield f"data: {json.dumps({'metadata': initial_metadata, 'type': 'init'})}\n\n"
+                    
+                    # Streaming simulé de la réponse prédéfinie (pour cohérence UX)
+                    answer = predefined_response["answer"]
+                    words = answer.split()
+                    
+                    for i, word in enumerate(words):
+                        if i == 0:
+                            yield f"data: {json.dumps({'content': word, 'type': 'chunk'})}\n\n"
+                        else:
+                            yield f"data: {json.dumps({'content': f' {word}', 'type': 'chunk'})}\n\n"
+                        # Petit délai pour simuler le streaming naturel
+                        await asyncio.sleep(0.05)
+                    
+                    # Métadonnées finales
+                    end_time = time.time()
+                    final_metadata = {
+                        "response_time_ms": round((end_time - start_time) * 1000, 2),
+                        "search_results": 0,
+                        "ranked_results": 0,
+                        "llm_calls_saved": True,
+                        "confidence": predefined_response["confidence"],
+                        "source": "predefined_qa"
+                    }
+                    yield f"data: {json.dumps({'metadata': final_metadata, 'type': 'final'})}\n\n"
+                    return
+
+            # Enhancement et recherche (si pas de réponse prédéfinie)
             llm_provider = OptimizedLLMProvider(request.provider)
             enhanced_queries = await multimodal_rag_system.query_enhancer.enhance_query(request.question, llm_provider)
 

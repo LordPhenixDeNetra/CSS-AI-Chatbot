@@ -4,6 +4,7 @@ from datetime import datetime
 
 from app.models.enums import Provider, ContentType
 
+
 class QuestionRequest(BaseModel):
     question: str
     provider: Optional[Provider] = Provider.MISTRAL
@@ -11,6 +12,7 @@ class QuestionRequest(BaseModel):
     temperature: Optional[float] = 0.3
     max_tokens: Optional[int] = 512
     top_k: Optional[int] = 3
+
 
 class AdvancedQuestionResponse(BaseModel):
     id: str
@@ -26,11 +28,13 @@ class AdvancedQuestionResponse(BaseModel):
     sources: List[Dict[str, Any]]
     performance_metrics: Dict[str, Any]
 
+
 class DocumentResponse(BaseModel):
     document_id: str
     chunks_created: int
     processing_time_ms: float
     status: str
+
 
 class PerformanceMetrics(BaseModel):
     total_queries: int
@@ -39,10 +43,12 @@ class PerformanceMetrics(BaseModel):
     error_rate: float
     active_documents: int
 
+
 class MultimodalUploadRequest(BaseModel):
     file_type: str = Field(..., description="Type de fichier: 'document', 'image', 'mixed'")
     extract_text_from_images: bool = Field(True, description="Extraire le texte des images (OCR)")
     generate_captions: bool = Field(True, description="Générer des descriptions d'images")
+
 
 class MultimodalQuestionRequest(QuestionRequest):
     content_types: Optional[List[ContentType]] = Field(
