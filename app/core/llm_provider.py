@@ -52,6 +52,7 @@ API_KEYS = {
     Provider.GROQ: settings.GROQ_API_KEY
 }
 
+
 # Provider LLM optimisé
 class OptimizedLLMProvider:
     def __init__(self, provider: Provider):

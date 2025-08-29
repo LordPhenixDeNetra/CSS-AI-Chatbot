@@ -7,7 +7,7 @@ from app.models.enums import Provider, ContentType
 
 class QuestionRequest(BaseModel):
     question: str
-    provider: Optional[Provider] = Provider.MISTRAL
+    provider: Optional[Provider] = Provider.DEEPSEEK
     model: Optional[str] = None
     temperature: Optional[float] = 0.3
     max_tokens: Optional[int] = 512
