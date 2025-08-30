@@ -222,7 +222,7 @@ $RECYCLE.BIN/
 .nfs*
 
 # Docker
-.dockerignore
+# .dockerignore
 Dockerfile.dev
 Dockerfile.prod
 docker-compose.override.yml

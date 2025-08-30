@@ -45,6 +45,7 @@ python-dotenv
 
 # Monitoring
 prometheus-client
+psutil
 
 # Development & Testing
 pytest

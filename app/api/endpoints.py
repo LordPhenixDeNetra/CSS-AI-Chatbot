@@ -22,6 +22,8 @@ from app.utils.helpers import image_to_base64
 from app.core.cache import REDIS_AVAILABLE, cache
 from app.utils.logging import logger
 from app.core.llm_provider import OptimizedLLMProvider, PROVIDER_CONFIGS
+from app.core.metrics import metrics_collector
+from app.core.health_check import health_checker
 
 router = APIRouter()
 
@@ -44,100 +46,270 @@ async def root():
         "endpoints": {
             "upload": "/upload-document, /upload-multimodal-document",
             "query": "/ask-question-ultra, /ask-multimodal-question",
-            "monitoring": "/health, /metrics, /performance-metrics"
+            "monitoring": "/health, /health/detailed, /metrics, /metrics/prometheus, /performance-metrics, /alerts"
         }
     }
 
 
-@router.get("/health", summary="Health check avancé")
+@router.get("/health", summary="Health check rapide")
 async def health_check():
-    """Vérification de santé complète du système"""
-    return {
-        "status": "healthy",
-        "timestamp": datetime.now().isoformat(),
-        "components": {
-            "redis": "connected" if REDIS_AVAILABLE else "disconnected",
-            "embeddings": "loaded",
-            "reranker": "loaded",
-            "multimodal_models": "loaded"
+    """Vérification rapide de l'état de santé du système"""
+    try:
+        health_data = await health_checker.quick_health_check()
+        return health_data
+    except Exception as e:
+        logger.error(f"Erreur lors du health check: {e}")
+        return {
+            "status": "unhealthy",
+            "timestamp": datetime.now().isoformat(),
+            "error": str(e)
         }
-    }
+
+@router.get("/health/detailed", summary="Health check détaillé")
+async def detailed_health_check():
+    """Vérification détaillée de l'état de santé de tous les composants"""
+    try:
+        system_health = await health_checker.perform_full_health_check()
+        
+        return {
+            "overall_status": system_health.overall_status.value,
+            "timestamp": system_health.timestamp.isoformat(),
+            "uptime_seconds": system_health.uptime,
+            "version": system_health.version,
+            "components": [
+                {
+                    "name": comp.name,
+                    "status": comp.status.value,
+                    "message": comp.message,
+                    "response_time": comp.response_time,
+                    "timestamp": comp.timestamp.isoformat(),
+                    "details": comp.details
+                }
+                for comp in system_health.components
+            ]
+        }
+    except Exception as e:
+        logger.error(f"Erreur lors du health check détaillé: {e}")
+        return {
+            "overall_status": "unhealthy",
+            "timestamp": datetime.now().isoformat(),
+            "error": str(e)
+        }
 
 
-@router.get("/metrics", summary="Métriques Prometheus")
+@router.get("/metrics", summary="Métriques JSON")
 async def metrics():
-    """Endpoint pour Prometheus"""
-    from app.utils.logging import generate_latest
-    return Response(generate_latest(), media_type="text/plain")
+    """Endpoint pour les métriques au format JSON"""
+    try:
+        metrics_summary = metrics_collector.get_metrics_summary()
+        return metrics_summary
+    except Exception as e:
+        logger.error(f"Erreur lors de la récupération des métriques: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@router.get("/metrics/prometheus", summary="Métriques Prometheus")
+async def prometheus_metrics():
+    """Endpoint pour Prometheus au format texte"""
+    try:
+        prometheus_data = metrics_collector.export_prometheus_format()
+        return Response(content=prometheus_data, media_type="text/plain")
+    except Exception as e:
+        logger.error(f"Erreur lors de l'export Prometheus: {e}")
+        return Response(content=f"# Error: {str(e)}", media_type="text/plain")
+
+@router.get("/metrics/history/{metric_name}", summary="Historique d'une métrique")
+async def metric_history(metric_name: str, limit: int = 100):
+    """Récupère l'historique d'une métrique spécifique"""
+    try:
+        history = metrics_collector.get_metric_history(metric_name, limit)
+        return {
+            "metric_name": metric_name,
+            "limit": limit,
+            "count": len(history),
+            "history": history
+        }
+    except Exception as e:
+        logger.error(f"Erreur lors de la récupération de l'historique: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
 
 
 @router.get("/performance-metrics", summary="Métriques de performance")
 async def get_performance_metrics():
-    """Métriques détaillées de performance"""
+    """Métriques de performance détaillées"""
     try:
-        # Calcul des métriques depuis Prometheus
-        from app.utils.logging import query_counter, response_time_histogram, cache_hit_counter
-
-        # Accès correct aux valeurs des métriques Prometheus
-        total_queries = 0
-        cache_hits = 0
-        response_count = 0
-        response_sum = 0
+        # Utilise le collecteur de métriques centralisé
+        metrics_summary = metrics_collector.get_metrics_summary()
         
-        # Pour Counter, on utilise collect() pour obtenir les samples
-        try:
-            for sample in query_counter.collect()[0].samples:
-                total_queries += sample.value
-        except (IndexError, AttributeError):
-            total_queries = 0
-            
-        try:
-            for sample in cache_hit_counter.collect()[0].samples:
-                cache_hits += sample.value
-        except (IndexError, AttributeError):
-            cache_hits = 0
-
-        # Pour Histogram, on récupère count et sum
-        try:
-            histogram_samples = response_time_histogram.collect()[0].samples
-            for sample in histogram_samples:
-                if sample.name.endswith('_count'):
-                    response_count = sample.value
-                elif sample.name.endswith('_sum'):
-                    response_sum = sample.value
-        except (IndexError, AttributeError):
-            response_count = 0
-            response_sum = 0
-
-        # Calculs
-        avg_response_time = (response_sum * 1000) / response_count if response_count > 0 else 0
-        cache_hit_rate = (cache_hits / total_queries * 100) if total_queries > 0 else 0
-
-        # Nombre de documents actifs
-        try:
-            collections = multimodal_rag_system.chroma_client.list_collections()
-            active_documents = sum(collection.count() for collection in collections)
-        except:
-            active_documents = 0
-
+        # Ajoute des métriques spécifiques si nécessaire
+        import psutil
+        cpu_percent = psutil.cpu_percent(interval=1)
+        memory = psutil.virtual_memory()
+        disk = psutil.disk_usage('/')
+        
+        # Métriques cache
+        cache_stats = {}
+        if REDIS_AVAILABLE and cache:
+            try:
+                cache_info = cache.redis_client.info()
+                cache_stats = {
+                    "connected_clients": cache_info.get('connected_clients', 0),
+                    "used_memory_human": cache_info.get('used_memory_human', '0B'),
+                    "keyspace_hits": cache_info.get('keyspace_hits', 0),
+                    "keyspace_misses": cache_info.get('keyspace_misses', 0)
+                }
+            except Exception as e:
+                logger.warning(f"Erreur récupération stats Redis: {e}")
+                cache_stats = {"error": str(e)}
+        
+        # Métriques RAG
+        rag_stats = {
+            "total_documents": multimodal_rag_system.collection.count() if multimodal_rag_system and hasattr(multimodal_rag_system, 'collection') else 0,
+            "embedding_model_loaded": hasattr(multimodal_rag_system, 'embeddings') if multimodal_rag_system else False,
+            "reranker_loaded": hasattr(multimodal_rag_system, 'reranker') if multimodal_rag_system else False
+        }
+        
         return {
-            "total_queries": int(total_queries),
-            "average_response_time_ms": round(avg_response_time, 2),
-            "cache_hit_rate": round(cache_hit_rate, 2),
-            "error_rate": 0.0,
-            "active_documents": active_documents,
-            "timestamp": datetime.now().isoformat()
+            "timestamp": datetime.now().isoformat(),
+            "system": {
+                "cpu_percent": cpu_percent,
+                "memory_percent": memory.percent,
+                "memory_used_gb": round(memory.used / (1024**3), 2),
+                "memory_total_gb": round(memory.total / (1024**3), 2),
+                "disk_percent": disk.percent,
+                "disk_used_gb": round(disk.used / (1024**3), 2),
+                "disk_total_gb": round(disk.total / (1024**3), 2)
+            },
+            "cache": cache_stats,
+            "rag": rag_stats,
+            "api": {
+                "redis_available": REDIS_AVAILABLE,
+                "multimodal_system_loaded": multimodal_rag_system is not None
+            },
+            "metrics_collector": metrics_summary
         }
     except Exception as e:
-        logger.error(f"Erreur calcul métriques: {e}")
+        logger.error(f"Erreur métriques performance: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@router.get("/alerts", summary="Système d'alertes")
+async def get_alerts():
+    """Récupère les alertes actives du système"""
+    try:
+        alerts = []
+        
+        # Vérification des seuils critiques
+        import psutil
+        cpu_percent = psutil.cpu_percent()
+        memory = psutil.virtual_memory()
+        disk = psutil.disk_usage('/')
+        
+        # Alertes CPU
+        if cpu_percent > 90:
+            alerts.append({
+                "level": "critical",
+                "component": "system",
+                "metric": "cpu_usage",
+                "value": cpu_percent,
+                "threshold": 90,
+                "message": f"CPU usage critical: {cpu_percent}%",
+                "timestamp": datetime.now().isoformat()
+            })
+        elif cpu_percent > 70:
+            alerts.append({
+                "level": "warning",
+                "component": "system",
+                "metric": "cpu_usage",
+                "value": cpu_percent,
+                "threshold": 70,
+                "message": f"CPU usage high: {cpu_percent}%",
+                "timestamp": datetime.now().isoformat()
+            })
+        
+        # Alertes mémoire
+        if memory.percent > 90:
+            alerts.append({
+                "level": "critical",
+                "component": "system",
+                "metric": "memory_usage",
+                "value": memory.percent,
+                "threshold": 90,
+                "message": f"Memory usage critical: {memory.percent}%",
+                "timestamp": datetime.now().isoformat()
+            })
+        elif memory.percent > 80:
+            alerts.append({
+                "level": "warning",
+                "component": "system",
+                "metric": "memory_usage",
+                "value": memory.percent,
+                "threshold": 80,
+                "message": f"Memory usage high: {memory.percent}%",
+                "timestamp": datetime.now().isoformat()
+            })
+        
+        # Alertes disque
+        if disk.percent > 95:
+            alerts.append({
+                "level": "critical",
+                "component": "system",
+                "metric": "disk_usage",
+                "value": disk.percent,
+                "threshold": 95,
+                "message": f"Disk usage critical: {disk.percent}%",
+                "timestamp": datetime.now().isoformat()
+            })
+        elif disk.percent > 85:
+            alerts.append({
+                "level": "warning",
+                "component": "system",
+                "metric": "disk_usage",
+                "value": disk.percent,
+                "threshold": 85,
+                "message": f"Disk usage high: {disk.percent}%",
+                "timestamp": datetime.now().isoformat()
+            })
+        
+        # Alertes Redis
+        if not REDIS_AVAILABLE:
+            alerts.append({
+                "level": "critical",
+                "component": "redis",
+                "metric": "connection",
+                "value": False,
+                "threshold": True,
+                "message": "Redis connection unavailable",
+                "timestamp": datetime.now().isoformat()
+            })
+        
+        # Vérification des métriques de performance
+        metrics_summary = metrics_collector.get_metrics_summary()
+        api_metrics = metrics_summary.get('api_metrics', {})
+        
+        # Alerte temps de réponse
+        avg_response_time = api_metrics.get('avg_response_time', 0)
+        if avg_response_time > 5.0:
+            alerts.append({
+                "level": "warning",
+                "component": "api",
+                "metric": "response_time",
+                "value": avg_response_time,
+                "threshold": 5.0,
+                "message": f"Average response time high: {avg_response_time:.2f}s",
+                "timestamp": datetime.now().isoformat()
+            })
+        
         return {
-            "total_queries": 0,
-            "average_response_time_ms": 0.0,
-            "cache_hit_rate": 0.0,
-            "error_rate": 0.0,
-            "active_documents": 0,
-            "timestamp": datetime.now().isoformat()
+            "timestamp": datetime.now().isoformat(),
+            "total_alerts": len(alerts),
+            "critical_count": len([a for a in alerts if a['level'] == 'critical']),
+            "warning_count": len([a for a in alerts if a['level'] == 'warning']),
+            "alerts": alerts
         }
+        
+    except Exception as e:
+        logger.error(f"Erreur lors de la récupération des alertes: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
 
 
 @router.post("/upload-document", response_model=DocumentResponse, summary="Upload document optimisé")

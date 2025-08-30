@@ -1,0 +1,114 @@
+# Fichiers et dossiers à ignorer lors du build Docker
+
+# Environnements virtuels Python
+venv/
+env/
+.venv/
+.env/
+
+# Cache Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+PYTHONPATH
+
+# IDEs
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Git
+.git/
+.gitignore
+
+# Docker
+Dockerfile*
+docker-compose*
+.dockerignore
+
+# Documentation
+*.md
+README*
+LICENSE*
+docs/
+
+# Tests
+tests/
+test_*.py
+*_test.py
+pytest.ini
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.nox/
+
+# Logs
+logs/
+*.log
+
+# Données temporaires
+temp/
+tmp/
+*.tmp
+*.temp
+
+# Modèles pré-téléchargés (seront téléchargés dans le conteneur)
+.cache/
+models/
+
+# Base de données locale (sera créée dans le conteneur)
+ultra_rag_db/
+*.db
+*.sqlite*
+
+# Fichiers de configuration locaux
+.env.local
+.env.development
+.env.test
+.env.production
+
+# Scripts de développement
+test_*.py
+create_test_*.py
+*.ps1
+*.sh
+
+# Monitoring (sera configuré séparément)
+monitoring/
+
+# Données utilisateur
+data/
+uploads/
+
+# Backup
+*.bak
+*.backup
