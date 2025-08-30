@@ -507,6 +507,8 @@ charts/*.tgz
 # Local environment files
 .env.local
 .env.*.local
+.env.exemple
+.env
 
 # IDE specific
 # IntelliJ IDEA
