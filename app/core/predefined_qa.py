@@ -20,6 +20,60 @@ class PredefinedQASystem:
                 "confidence": 0.95
             },
 
+            "Comment ça va": {
+                "answer": "Bien, merci ! Comment puis-je vous aider aujourd'hui ?",
+                "keywords": ["Comment", "ça", "va"],
+                "confidence": 0.95
+            },
+
+            "Comment vous appelez-vous": {
+                "answer": "Je m'appelle CSS AI. Comment puis-je vous aider aujourd'hui ?",
+                "keywords": ["Comment", "vous", "appelez-vous"],
+                "confidence": 0.95
+            },
+
+            "Comment vous présentez-vous": {
+                "answer": "Je suis une intelligence artificielle spécialisée dans la fourniture d'assistance aux citoyens en sénégal. Je suis capable de répondre à vos questions sur la retraite, les cotisations, les allocations familiales et bien plus encore. Comment puis-je vous aider aujourd'hui ?",
+                "keywords": ["Comment", "vous", "présentez-vous"],
+                "confidence": 0.95
+            },
+
+            "Comment vous pouvez vous aider": {
+                "answer": "Je suis là pour vous aider. Que souhaitez-vous savoir ?",
+                "keywords": ["Comment", "vous", "pouvez", "vous", "aider"],
+                "confidence": 0.95
+            },
+
+            "Quel est votre nom": {
+                "answer": "Je m'appelle CSS AI. Comment puis-je vous aider aujourd'hui ?",
+                "keywords": ["Quel", "est", "votre", "nom"],
+                "confidence": 0.95
+            },
+
+            "Quel est votre rôle": {
+                "answer": "Je suis une intelligence artificielle spécialisée dans la fourniture d'assistance aux citoyens en sénégal. Je suis capable de répondre à vos questions sur la retraite, les cotisations, les allocations familiales et bien plus encore. Comment puis-je vous aider aujourd'hui ?",
+                "keywords": ["Quel", "est", "votre", "rôle"],
+                "confidence": 0.95
+            },
+
+            "Qu'est-ce que la retraite": {
+                "answer": "La retraite est une pension sociale offerte aux travailleurs salariés affiliés à la CSS. Elle permet de couvrir les coûts de santé et de retraite des travailleurs en sénégal.",
+                "keywords": ["retraite", "pension", "sociale", "affilié"],
+                "confidence": 0.95
+            },
+
+            "Merci": {
+                "answer": "De rien ! N'hésitez pas à me poser d'autres questions.",
+                "keywords": ["Merci", "merci"],
+                "confidence": 0.95
+            },
+
+            "Ok": {
+                "answer": "Ok ! N'hésitez pas à me poser d'autres questions.",
+                "keywords": ["Ok", "ok"],
+                "confidence": 0.95
+            },
+
             # Questions sur l'âge de retraite
             "quel est l'âge de la retraite": {
                 "answer": "L'âge légal de départ à la retraite au Sénégal est de 60 ans pour les salariés du secteur privé affiliés à la CSS. Cependant, il est possible de partir en retraite anticipée sous certaines conditions ou de prolonger l'activité jusqu'à 65 ans.",
