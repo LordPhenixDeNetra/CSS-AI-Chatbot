@@ -1,0 +1,215 @@
+response_id,timestamp,question,response,sources,confidence_score,processing_time_ms,tokens_used,model_used,cache_hit,error_message
+3e22eba2-01e3-4b49-8608-4b38f124434c,2025-09-02T16:20:05.692692,Test question avec ID,Test response avec ID,"[""test.pdf""]",0.95,1000.0,100,gpt-4,False,
+93b5e051-5157-44ec-890f-2ee53cd19e11,2025-09-02T16:39:35.142659,Test question ultra,Test response ultra,,,100.5,,test_model,,
+624dada2-b792-440c-9e8d-2544a8b479c3,2025-09-02T18:48:46.078494,Bonjour,Bonjour ! Comment puis-je vous aider aujourd'hui ?,"[""Base de connaissances CSS...""]",,,,deepseek,,
+cb8f2c2d-1f2e-4c96-8451-ddcabb208c80,2025-09-02T18:49:52.306771,Parlez moi des prestations,"Les allocations familiales de la CSS sont versées mensuellement. Le montant varie selon le nombre d'enfants à charge et leur âge. Pour connaître le montant exact applicable à votre situation, veuillez consulter le barème en vigueur auprès de votre agence CSS.","[""Base de connaissances CSS...""]",,10.090112686157227,,deepseek,,
+fb1b3489-9a21-4cad-ba4b-35d931aacbe9,2025-09-02T18:51:01.245879,Accidents de travails,"Bonjour,
+
+En ma qualité d'expert de la Caisse de Sécurité Sociale du Sénégal, je me permets de vous apporter les précisions suivantes concernant les accidents du travail, en me basant strictement sur la réglementation en vigueur.
+
+Selon l'article 33 du code de la Sécurité Sociale, cité dans votre documentation, **est considéré comme accident du travail**, quelle qu'en soit la cause, *""l'accident survenu par le fait ou à l'occasion du travail, à toute personne salariée ou travaillant, à quelque titre ou en quelque lieu que ce soit pour le compte d'un employeur""*.
+
+Il existe également une catégorie spécifique : **l'accident de trajet**. Celui-ci est assimilé à un accident du travail. Il concerne tout accident survenu pendant le trajet entre :
+
+*   La résidence principale et le lieu de travail.
+*   Le lieu de travail et le lieu où le travailleur prend habituellement ses repas.
+
+Cette protection est soumise à des **conditions importantes** :
+*   Le parcours effectué ne doit pas être interrompu ou détourné pour un motif personnel (démarche non liée au travail ou au repas).
+*   Les accidents survenant lors de déplacements professionnels dont les frais sont pris en charge par l'employeur sont également couverts.
+
+Pour toute question spécifique sur une situation particulière, je vous invite à nous contacter directement pour un examen détaillé de votre dossier.
+
+Cordialement,  
+Votre expert de la Caisse de Sécurité Sociale.","[""..."", ""..."", ""...""]",,32731.767416000366,,deepseek,,
+483eddec-707e-4275-9534-a6c1fc1f3c5d,2025-09-02T19:16:15.583568,Prestations familiales,"Les allocations familiales de la CSS sont versées mensuellement. Le montant varie selon le nombre d'enfants à charge et leur âge. Pour connaître le montant exact applicable à votre situation, veuillez consulter le barème en vigueur auprès de votre agence CSS.","[""Base de connaissances CSS...""]",,15.264034271240234,,deepseek,,
+03e7d189-982e-48ac-8e98-4a66d9820fb5,2025-09-02T20:57:46.014911,Les cotisations,"En ma qualité d'expert de la Caisse de Sécurité Sociale du Sénégal, voici les informations dont je dispose concernant les cotisations :
+
+D'après les sources disponibles, les cotisations sociales présentent les caractéristiques principales suivantes :
+
+1.  **Exigibilité** : Elles deviennent immédiatement exigibles dans trois cas de figure :
+    *   En cas de cession d'activité.
+    *   En cas de cessation d'activité.
+    *   En cas de cessation complète de l'emploi des salariés.
+
+2.  **Nature** : Elles sont **portables et non quérables**. Cela signifie que c'est à la charge de l'employeur de les verser de manière spontanée et proactive, sans attendre une mise en demeure ou un rappel de la part des Institutions de sécurité sociale.
+
+Pour une réponse plus détaillée sur un aspect spécifique des cotisations (calcul, délais, etc.), je vous invite à reformuler votre question.","[""..."", ""..."", ""...""]",,24864.585161209106,,deepseek,,
+38f5ee44-1976-445b-ade2-2ba2839d4e21,2025-09-02T21:12:39.680822,Salut,Salut ! Comment puis-je vous aider aujourd'hui ?,"[""Base de connaissances CSS...""]",,,,deepseek,,
+356b2016-699d-4c97-bf23-4ca42db150ea,2025-09-03T17:06:18.709738,"Expliquez-moi les bases du CSS : sélecteurs, propriétés et valeurs","Bonjour,
+
+Je comprends que vous me questionnez sur les bases du CSS. Cependant, je dois vous informer que cette question ne relève pas du domaine de compétence de la Caisse de Sécurité Sociale du Sénégal, dont je suis l'assistant expert.
+
+D'après les informations contextuelles qui me sont fournies, je suis uniquement habilité à vous renseigner sur des sujets liés aux cotisations sociales, aux déclarations, aux modalités de paiement (telles que le virement bancaire à l'ordre de l'IPRES/CSS, le RIB, le portail NDAMLI), aux délais de déclaration pour les employeurs ou aux sanctions en cas de non-respect.
+
+Pourriez-vous, s'il vous plaît, reformuler votre question en la centrant sur les missions et les procédures de la Caisse de Sécurité Sociale du Sénégal ? Je serai ravi de vous apporter une réponse précise et utile.
+
+Je vous remercie pour votre compréhension.","[""..."", ""..."", ""...""]",,33839.24674987793,,deepseek,,
+ee08377a-0b5a-41b5-840d-128136e783c4,2025-09-03T17:07:05.855931,Bonjour,Bonjour ! Comment puis-je vous aider aujourd'hui ?,"[""Base de connaissances CSS...""]",,10.028839111328125,,deepseek,,
+61cd245e-4204-4f3a-9b60-fd68833a5184,2025-09-03T17:09:01.950145,Comment faire une demande de bourse d'études ?,"Bonjour,
+
+En ma qualité d'expert de la Caisse de Sécurité Sociale du Sénégal, je me permets de vous informer que votre question ne relève pas directement du champ de compétence de la CSS.
+
+Les sources fournies mentionnent les bourses d'études uniquement dans le cadre des **exclusions** pour l'obtention des prestations familiales. Conformément à ces documents, un enfant titulaire d'une bourse entière d'études est exclu du bénéfice de ces allocations.
+
+La CSS gère les prestations sociales (allocations familiales, indemnités journalières, etc.) et non l'attribution des bourses d'études.
+
+Pour obtenir des informations sur la procédure de demande de bourse d'études, je vous conseille de vous rapprocher des institutions concernées, telles que le Ministère de l'Éducation nationale ou les services spécifiques dédiés à l'octroi des bourses.
+
+N'hésitez pas à me poser toute autre question concernant les prestations de la CSS, comme les allocations familiales ou le congé de maternité, pour lesquelles je pourrai vous apporter une réponse précise.","[""..."", ""..."", ""...""]",,32243.417501449585,,deepseek,,
+3122dc31-5823-4a76-b413-1f5271da7788,2025-09-03T17:23:24.384795,Bonjour,Bonjour ! Comment puis-je vous aider aujourd'hui ?,"[""Base de connaissances CSS...""]",,,,deepseek,,
+9910187d-dbd7-4164-8cd2-f08ca9cdb5d5,2025-09-03T17:27:49.303123,Comment faire une demande de pension de retraite ?,"Bonjour,
+
+En ma qualité d'expert de la Caisse de Sécurité Sociale du Sénégal, je vous informe que les sources fournies détaillent les conditions d'éligibilité et le calcul de la pension de retraite, mais elles ne contiennent malheureusement pas les informations spécifiques sur la procédure à suivre pour déposer une demande.
+
+Les documents mentionnent un point crucial : la date de prise d'effet des allocations, qui est le premier jour du mois au cours duquel la demande parvient à l'IPRES. Cela confirme que l'IPRES (Institution de Prévoyance Retraite du Sénégal) est l'organisme gestionnaire de ce régime.
+
+Par conséquent, pour connaître la procédure exacte de demande (les formulaires à remplir, les pièces justificatives à fournir, les canaux de dépôt...), je vous invite à vous rapprocher directement de l'IPRES.
+
+Pour une réponse plus précise, je vous propose de reformuler votre question en vous focalisant sur un aspect spécifique des conditions d'accès, comme l'âge ou la durée de cotisation, qui sont, eux, bien documentés dans les sources.
+
+Je reste à votre disposition pour toute autre question.","[""..."", ""..."", ""...""]",,36739.17770385742,,deepseek,,
+108e4484-c01e-4ef4-a920-8bb579a575a1,2025-09-03T17:30:01.858165,Cotisations,"En tant qu'expert de la Caisse de Sécurité Sociale du Sénégal, voici les informations concernant les cotisations :
+
+**Obligations de l'employeur :**
+Les cotisations sociales sont portables et non quérables. Il appartient à l'employeur de les verser spontanément à l'institution, sans attendre d'être réclamé.
+
+**Exigibilité :**
+Les cotisations deviennent immédiatement exigibles dans les cas suivants :
+- Cession ou cessation d'activité de l'entreprise.
+- Cessation complète de l'emploi des salariés.
+
+**Modalités de paiement acceptées :**
+Vous pouvez régler votre facture de déclaration par :
+- **Chèque barré** à l'ordre de la ""Caisse de Sécurité Sociale (CSS)"" ou de l'""Institution de Prévoyance Retraite du Sénégal (IPRES)"".
+- **Paiement en espèces** directement aux caisses de nos agences.
+- **Virement bancaire** établi à l'ordre de la ""Caisse de Sécurité Sociale (CSS)"".","[""..."", ""..."", ""...""]",,32161.109447479248,,deepseek,,
+9b4835cf-ddfd-42d3-818a-7f476d436a2b,2025-09-03T17:37:22.352712,Cotisations,"En ma qualité d'expert de la Caisse de Sécurité Sociale du Sénégal, voici les informations concernant les cotisations, basées sur notre réglementation :
+
+Les cotisations sociales présentent les caractéristiques suivantes :
+
+1.  **Exigibilité immédiate** : Elles deviennent immédiatement exigibles dans trois cas de figure :
+    *   En cas de cession d'activité.
+    *   En cas de cessation d'activité.
+    *   En cas de cessation complète de l'emploi des salariés.
+
+2.  **Portables et non quérables** : Le principe est que les cotisations sont ""portables"". Cela signifie que c'est à la charge de l'employeur de les déclarer et de les verser spontanément et de manière proactive aux institutions, sans attendre que ces dernières aient à les réclamer (""non quérables"").
+
+En résumé, la responsabilité du versement ponctuel des cotisations incombe entièrement à l'employeur, et cet impératif est accru lors d'événements majeurs affectant l'entreprise ou l'emploi.","[""..."", ""..."", ""...""]",,35723.5746383667,,deepseek,,
+69604f3c-189a-4e70-b840-6738171cf07a,2025-09-03T17:38:04.872529,Bonjour,Bonjour ! Comment puis-je vous aider aujourd'hui ?,"[""Base de connaissances CSS...""]",,,,deepseek,,
+1fbac50c-cb94-44f6-a39a-8bde723968ea,2025-09-03T17:38:49.782082,Prestations,"Les Prestations en Nature de l'Action Sanitaire, Sociale et Familiale (A.S.S.F) ont pour objectif de compléter les prestations en espèces afin de protéger la mère et l'enfant. Elles visent à pallier les insuffisances du système national de santé.","[""..."", ""..."", ""...""]",,23221.652030944824,,deepseek,,
+882033ea-51ef-4edb-86fd-05703a8acb44,2025-09-03T17:39:53.078760,Comment faire une demande de pension de retraite ?,"Bonjour,
+
+Pour effectuer votre demande de pension de retraite, vous devez d'abord vous assurer de remplir les conditions d'admission suivantes, qui sont obligatoires :
+
+1.  **Conditions de cotisation** : Avoir cotisé au minimum 10 ans **OU** avoir capitalisé au moins 1 000 points.
+2.  **Conditions d'âge** : Avoir au moins 60 ans (âge normal). Une retraite anticipée est possible à partir de 55 ans, avec un abattement de 5% par année d'anticipation.
+3.  **Condition d'activité** : Avoir cessé toute activité salariée.
+
+Une fois ces conditions remplies, vous pouvez soumettre votre demande à l'IPRES. Il est important de noter que **la pension prend effet le premier jour du mois au cours duquel votre demande parvient à l'IPRES**.
+
+Pour les détails spécifiques sur la procédure à suivre (où et comment retirer le formulaire de demande, quels documents fournir, etc.), les sources fournies ne contiennent malheureusement pas ces informations précises.
+
+Je vous invite à reformuler votre question en précisant le type d'information procedural que vous recherchez, ou à contacter directement l'IPRES pour obtenir un guide complet des démarches.","[""..."", ""..."", ""...""]",,33926.78952217102,,deepseek,,
+6a6daa57-4b8e-4020-a2d4-d5327b5b6aba,2025-09-03T17:40:13.761220,Allocation familiale,"Les allocations familiales de la CSS sont versées mensuellement. Le montant varie selon le nombre d'enfants à charge et leur âge. Pour connaître le montant exact applicable à votre situation, veuillez consulter le barème en vigueur auprès de votre agence CSS.","[""Base de connaissances CSS...""]",,,,deepseek,,
+b718bd1d-a3f9-4766-abca-6b32e94fed53,2025-09-03T20:47:02.172843,Comment faire une demande de pension de retraite ?,"Bonjour,
+
+En ma qualité d'expert de la Caisse de Sécurité Sociale du Sénégal, je me permets de vous informer que les documents fournis en contexte détaillent les conditions d'éligibilité et le calcul de la pension de retraite, mais ils ne contiennent pas les informations spécifiques sur la procédure à suivre pour déposer une demande.
+
+Les sources mentionnent uniquement que **""Les allocations prennent effet le premier jour du mois au cours duquel la demande parvient à l'IPRES""**, sans indiquer le processus pour la soumettre.
+
+Par conséquent, je vous invite à reformuler votre question pour des aspects comme les conditions d'admission ou le calcul de la pension. Pour connaître la procédure exacte de demande (formulaires, pièces justificatives, canaux de dépôt), je vous recommande de vous rapprocher directement de l'IPRES pour obtenir un guide complet et précis.
+
+Je reste à votre disposition pour toute autre question concernant les conditions d'accès à la retraite.","[""..."", ""..."", ""...""]",,29222.27382659912,,deepseek,,
+1bf54d85-0921-4636-86c8-e0842a070e4c,2025-09-03T21:12:48.330559,Comment s'inscrire à la CSS ?,"Pour s'inscrire à la CSS, vous devez fournir : une copie de votre pièce d'identité, un certificat de travail, les bulletins de salaire des 3 derniers mois, une fiche d'état civil, et le formulaire d'immatriculation dûment rempli.","[""Base de connaissances CSS...""]",,2.9993057250976562,,deepseek,,
+8c873c61-818f-4a2b-a799-152d374182ae,2025-09-03T21:14:38.560123,Quels sont les avantages de la CSS ?,"Bonjour,
+
+Sur la base des informations qui m'ont été fournies, le document ne contient pas de détails spécifiques sur les avantages offerts par la Caisse de Sécurité Sociale (CSS).
+
+Les sources mentionnent que la CSS, conjointement avec l'IPRES, attribue un numéro d'identification unique à chaque participant, qui le suit tout au long de sa carrière. Cependant, la nature précise des prestations ou avantages liés à ce numéro et aux cotisations n'est pas détaillée dans le contexte fourni.
+
+Afin de mieux vous répondre, pourriez-vous reformuler votre question ? Par exemple, vous pourriez préciser si vous souhaitez des informations sur les avantages liés à la retraite, à la santé, aux prestations familiales, ou à un autre domaine spécifique de la sécurité sociale.
+
+Je reste à votre disposition pour toute précision.","[""..."", ""..."", ""...""]",,23738.40856552124,,deepseek,,
+58fffceb-b1e0-4b75-82cb-a4aaea689db9,2025-09-03T21:20:09.252104,Les prestations,"Bonjour,
+
+En tant qu'assistant de la Caisse de Sécurité Sociale du Sénégal, je me base sur les informations fournies pour vous répondre.
+
+Les Prestations en Nature de l'Action Sanitaire, Sociale et Familiale (A.S.S.F) ont pour objectif de **compléter les prestations en espèces pour protéger la mère et l'enfant en palliant les insuffisances du système national de santé**.
+
+Concernant les autres prestations, les informations disponibles précisent que les **prestations familiales** sont une branche distincte de cotisation, mais leur nature détaillée n'est pas incluse dans le contexte fourni.
+
+Pour obtenir des détails plus complets sur l'étendue des prestations couvertes (comme les soins médicaux, les allocations, etc.), je vous invite à reformuler ou préciser votre question.","[""..."", ""..."", ""...""]",,25675.170183181763,,deepseek,,
+4a589c63-2e65-4863-bf40-dc9cfaaaaa77,2025-09-03T22:08:14.270328,Salut,Salut ! Comment puis-je vous aider aujourd'hui ?,"[""Base de connaissances CSS...""]",,0.5083084106445312,,deepseek,,
+2821e029-ea5d-4a44-8233-7416221cdc93,2025-09-03T22:09:15.717571,Comment faire une demande de pension de retraite ?,"Bonjour,
+
+En ma qualité d'expert de la Caisse de Sécurité Sociale du Sénégal, je vous informe que les sources fournies détaillent les conditions d'éligibilité et le calcul de la pension de retraite, mais elles ne contiennent malheureusement pas les informations spécifiques sur la procédure à suivre pour déposer une demande.
+
+Les documents mentionnent uniquement que **""Les allocations prennent effet le premier jour du mois au cours duquel la demande parvient à l'IPRES""**, ce qui confirme que la demande doit être adressée à l'IPRES (Institution de Prévoyance Retraite du Sénégal), sans plus de précision sur le processus.
+
+Par conséquent, je ne peux pas vous indiquer avec précision comment effectuer cette demande (les documents à rassembler, le formulaire à utiliser, le canal de dépôt...).
+
+Je vous invite à reformuler votre question pour obtenir des informations sur les conditions d'admission ou le calcul de la pension, ou à contacter directement l'IPRES pour connaître la procédure exacte de demande.
+
+Je reste à votre disposition pour toute autre question.","[""..."", ""..."", ""...""]",,28300.82607269287,,deepseek,,
+1c57239c-35d5-4e9f-9bc5-16833f298ed3,2025-09-03T22:34:02.341472,Salut,Salut ! Comment puis-je vous aider aujourd'hui ?,"[""Base de connaissances CSS...""]",,,,deepseek,,
+85d7bc97-358f-4707-99ea-54e6be3314a7,2025-09-03T22:34:35.757169,Les prestations,"Bonjour,
+
+D'après les informations dont je dispose, les Prestations en Nature de l'Action Sanitaire, Sociale et Familiale (A.S.S.F) ont pour objectif principal de **compléter les prestations en espèces**.
+
+Leur mission spécifique est de **protéger la mère et l'enfant** en **palliant les insuffisances du système national de santé**.
+
+Pour obtenir des détails plus précis sur les types de prestations ou les conditions d'accès, je vous invite à reformuler votre question.","[""..."", ""..."", ""...""]",,18364.57061767578,,deepseek,,
+bf4e40d2-a0ca-4c06-913f-2d3ca62d68cd,2025-09-03T22:36:38.708660,Comment faire une demande de pension de retraite ?,"Bonjour,
+
+En ma qualité d'expert de la Caisse de Sécurité Sociale du Sénégal, je me permets de vous informer que les sources fournies détaillent les conditions d'éligibilité et le calcul de la pension de retraite, mais elles ne contiennent malheureusement pas les informations spécifiques sur la procédure à suivre pour déposer une demande.
+
+Les documents consultés indiquent uniquement que **la prise d'effet de la pension intervient le premier jour du mois au cours duquel la demande parvient à l'IPRES**.
+
+Pour obtenir des instructions précises sur la démarche à entreprendre (formulaire à utiliser, pièces justificatives à fournir, point de dépôt, etc.), je vous invite à reformuler votre question ou à vous rapprocher directement de l'IPRES pour une information complète et à jour.
+
+Je reste à votre disposition pour toute autre question concernant les conditions d'admission ou le calcul de votre pension.","[""..."", ""..."", ""...""]",,22539.334058761597,,deepseek,,
+d0d7dd2f-f5a6-4b77-9b18-9b163a7f24f4,2025-09-03T22:52:18.707449,Prestations,"Bonjour,
+
+En ma qualité d'expert de la Caisse de Sécurité Sociale du Sénégal, je me permets de vous présenter une synthèse des prestations mentionnées dans les documents fournis.
+
+Les prestations se divisent en deux catégories principales :
+
+1.  **Les Prestations en Nature de l'Action Sanitaire, Sociale et Familiale (A.S.S.F)**
+    *   **Objectif :** Compléter les prestations en espèces pour protéger la mère et l'enfant en palliant les insuffisances du système national de santé.
+
+2.  **Les Prestations en cas de décès**
+    Ces prestations sont versées sous forme de rentes calculées sur la base du salaire annuel de la victime, avec une limite globale ne pouvant excéder 85% de ce salaire.
+    *   **Rente au conjoint survivant :**
+        *   **Conditions :** Mariage constaté avant le décès, absence de divorce, de séparation ou de condamnation pour abandon de famille.
+        *   **Montant :** 30% du salaire annuel.
+        *   **Polygamie :** Répartition égale du montant entre les veuves.
+        *   **Remariage :** Cessation du droit s'il n'y a pas d'enfant à charge, avec le versement d'une indemnité forfaitaire équivalente à 3 fois le montant de la rente. Le rachat est reporté en présence d'enfants ayants-droit.
+
+    *   **Rente aux enfants :**
+        *   **Barème :**
+            *   1 enfant : 15% du salaire annuel
+            *   2 enfants : 30% du salaire annuel
+            *   3 enfants : 40% du salaire annuel
+            *   Chaque enfant supplémentaire : +10%
+
+    *   **Rente aux ascendants :**
+        *   **Conditions :** Être à la charge de la victime au moment de l'accident et ne pas disposer de ressources suffisantes.
+        *   **Montant :** 10% par ascendant, avec un maximum de 30% au total.
+
+Pour toute précision sur un type de prestation spécifique, n'hésitez pas à reformuler votre demande.","[""..."", ""..."", ""...""]",,36446.178913116455,,deepseek,,
+0ba68697-d3fd-435c-b4d3-630dcbac8b3d,2025-09-03T23:12:05.729903,Salut,Salut ! Comment puis-je vous aider aujourd'hui ?,"[""Base de connaissances CSS...""]",,,,deepseek,,
+be9fa15a-272c-4550-bc47-d87c71dcd4e8,2025-09-03T23:26:53.907863,Salut,Salut ! Comment puis-je vous aider aujourd'hui ?,"[""Base de connaissances CSS...""]",,,,deepseek,,
+16667db8-8c0f-44f7-b98c-298d8389e3bd,2025-09-03T23:28:11.039453,Les prestations,"Bonjour,
+
+En me basant sur les informations fournies, voici ce que je peux vous communiquer concernant les prestations.
+
+Les Prestations en Nature de l'Action Sanitaire, Sociale et Familiale (A.S.S.F) ont pour objectif de compléter les prestations en espèces afin de protéger la mère et l'enfant. Leur rôle est de pallier les insuffisances du système national de santé.
+
+Concernant les Prestations Familiales (PF), elles constituent une branche distincte de cotisation. L'assiette pour le calcul des cotisations pour cette branche est plafonnée à 63 000 F CFA.
+
+Pour toute question plus spécifique sur les types de prestations ou leurs conditions d'attribution, je vous invite à reformuler votre demande.","[""..."", ""..."", ""...""]",,19387.519598007202,,deepseek,,
+bf1384a1-de02-40c0-8e04-b393c3fd88ef,2025-09-03T23:43:26.796206,Salut,Salut ! Comment puis-je vous aider aujourd'hui ?,"[""Base de connaissances CSS...""]",,,,deepseek,,
+d2c6704f-a85e-4c2b-962b-5283018d73a7,2025-09-03T23:50:08.638632,Bonjour,Bonjour ! Comment puis-je vous aider aujourd'hui ?,"[""Base de connaissances CSS...""]",,,,deepseek,,
+b0ea9561-4a8f-49bd-8a7b-50d693252d08,2025-09-03T23:50:37.195945,Les prestations familiales,"Les allocations familiales de la CSS sont versées mensuellement. Le montant varie selon le nombre d'enfants à charge et leur âge. Pour connaître le montant exact applicable à votre situation, veuillez consulter le barème en vigueur auprès de votre agence CSS.","[""Base de connaissances CSS...""]",,,,deepseek,,
+a94f46b6-d473-4405-9b97-3082354ae3f5,2025-09-03T23:52:03.933201,Salut,Salut ! Comment puis-je vous aider aujourd'hui ?,"[""Base de connaissances CSS...""]",,5.562305450439453,,deepseek,,

@@ -338,8 +338,8 @@ temp/
 *.safetensors
 
 # Dataset files
-*.csv
-*.json
+# *.csv
+# *.json
 *.jsonl
 *.parquet
 *.feather

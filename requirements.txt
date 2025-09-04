@@ -47,6 +47,26 @@ python-dotenv
 prometheus-client
 psutil
 
+# Telegram
+python-telegram-bot
+aiohttp
+aiofiles
+loguru
+python-dateutil
+#Flask
+gunicorn
+cryptography
+click
+colorama
+PyYAML
+
+# Formatage de code (développement)
+black
+flake8
+
+# Documentation (développement)
+sphinx
+
 # Development & Testing
 pytest
 pytest-asyncio

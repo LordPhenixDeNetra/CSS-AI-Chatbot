@@ -1,0 +1,3 @@
+response_id,timestamp,question,query_image_info,image_analysis,response,sources,confidence_score,processing_time_ms,tokens_used,model_used,cache_hit,ocr_extracted_text,image_caption,image_size,image_format,similarity_matches,error_message
+de95a0d5-7147-4864-a808-bcc713b678cf,2025-09-02T16:20:05.692692,Test image analysis avec ID,"{""filename"": ""test.jpg"", ""size"": ""1024x768""}","{""objects"": [""car"", ""tree""]}",Test image analysis response avec ID,"[""image_analysis.pdf""]",0.89,4000.0,250,claude-3-vision,False,Test OCR text,Test caption,1024x768,JPEG,"[{""score"": 0.9, ""doc"": ""test.pdf""}]",
+b72ae956-9b80-4960-802b-88f15c109e05,2025-09-02T16:39:35.142659,Test image question,,,Test image response,,,250.3,,test_model,,,,,,,

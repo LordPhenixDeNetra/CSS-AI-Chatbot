@@ -1,0 +1,477 @@
+{
+  "api_endpoints_responses_examples": {
+    "information_endpoints": {
+      "GET /": {
+        "description": "Point d'entrée principal de l'API",
+        "example_response": {
+          "message": "CSS ChatBot",
+          "version": "2005.0.1",
+          "features": [
+            "Recherche hybride dense/sparse",
+            "Re-ranking avec cross-encoder",
+            "Cache multi-niveaux (Redis + mémoire)",
+            "Support multimodal (texte + images)",
+            "Métriques Prometheus",
+            "Streaming des réponses",
+            "Optimisations avancées"
+          ],
+          "endpoints": {
+            "upload": "/upload-document, /upload-multimodal-document",
+            "query": "/ask-question-ultra, /ask-multimodal-question",
+            "monitoring": "/health, /health/detailed, /metrics, /metrics/prometheus, /performance-metrics, /alerts"
+          }
+        }
+      },
+      "GET /health": {
+        "description": "Health check rapide",
+        "example_response": {
+          "status": "healthy",
+          "timestamp": "2024-01-15T10:30:00.123Z",
+          "uptime_seconds": 3600,
+          "version": "2005.0.1"
+        }
+      },
+      "GET /health/detailed": {
+        "description": "Health check détaillé de tous les composants",
+        "example_response": {
+          "overall_status": "healthy",
+          "timestamp": "2024-01-15T10:30:00.123Z",
+          "uptime_seconds": 3600,
+          "version": "2005.0.1",
+          "components": [
+            {
+              "name": "database",
+              "status": "healthy",
+              "message": "ChromaDB accessible",
+              "response_time": 15.2,
+              "timestamp": "2024-01-15T10:30:00.123Z",
+              "details": {
+                "collections_count": 1,
+                "documents_count": 150
+              }
+            },
+            {
+              "name": "redis_cache",
+              "status": "healthy",
+              "message": "Redis connecté",
+              "response_time": 2.1,
+              "timestamp": "2024-01-15T10:30:00.123Z",
+              "details": {
+                "connected_clients": 5,
+                "used_memory": "45MB"
+              }
+            }
+          ]
+        }
+      }
+    },
+    "monitoring_endpoints": {
+      "GET /metrics": {
+        "description": "Métriques au format JSON",
+        "example_response": {
+          "timestamp": "2024-01-15T10:30:00.123Z",
+          "counters": {
+            "api_requests_total": 1250,
+            "rag_queries_total": 890,
+            "cache_hits_total": 450,
+            "errors_total": 12
+          },
+          "histograms": {
+            "response_time_ms": {
+              "count": 890,
+              "sum": 125000,
+              "avg": 140.4
+            }
+          },
+          "business_metrics": {
+            "unique_sessions": 45,
+            "popular_queries": [
+              "Qu'est-ce que l'IA ?",
+              "Comment fonctionne le machine learning ?"
+            ]
+          }
+        }
+      },
+      "GET /metrics/prometheus": {
+        "description": "Métriques au format Prometheus",
+        "example_response": "# HELP api_requests_total Total API requests\n# TYPE api_requests_total counter\napi_requests_total{method=\"POST\",endpoint=\"/ask-question-ultra\"} 890\n# HELP response_time_seconds Response time in seconds\n# TYPE response_time_seconds histogram\nresponse_time_seconds_bucket{le=\"0.1\"} 450\nresponse_time_seconds_bucket{le=\"0.5\"} 780\nresponse_time_seconds_bucket{le=\"+Inf\"} 890"
+      },
+      "GET /performance-metrics": {
+        "description": "Métriques de performance système",
+        "example_response": {
+          "timestamp": "2024-01-15T10:30:00.123Z",
+          "system": {
+            "cpu_percent": 45.2,
+            "memory_percent": 68.5,
+            "memory_used_gb": 5.5,
+            "memory_total_gb": 8.0,
+            "disk_percent": 35.0,
+            "disk_used_gb": 175.0,
+            "disk_total_gb": 500.0
+          },
+          "cache": {
+            "connected_clients": 5,
+            "used_memory_human": "45MB",
+            "keyspace_hits": 1250,
+            "keyspace_misses": 180
+          },
+          "rag": {
+            "total_documents": 150,
+            "embedding_model_loaded": true,
+            "reranker_loaded": true
+          },
+          "api": {
+            "redis_available": true,
+            "multimodal_system_loaded": true
+          }
+        }
+      },
+      "GET /alerts": {
+        "description": "Alertes actives du système",
+        "example_response": {
+          "alerts": [
+            {
+              "level": "warning",
+              "component": "system",
+              "metric": "memory_usage",
+              "value": 75.2,
+              "threshold": 70,
+              "message": "Memory usage high: 75.2%",
+              "timestamp": "2024-01-15T10:30:00.123Z"
+            }
+          ],
+          "total_alerts": 1,
+          "critical_count": 0,
+          "warning_count": 1,
+          "info_count": 0
+        }
+      }
+    },
+    
+    "question_endpoints": {
+      "POST /ask-question-ultra": {
+        "description": "Question ultra optimisée avec réponse complète",
+        "request_example": {
+          "question": "Qu'est-ce que l'intelligence artificielle ?",
+          "provider": "deepseek",
+          "temperature": 0.3,
+          "max_tokens": 512,
+          "top_k": 3
+        },
+        "example_response": {
+          "id": "550e8400-e29b-41d4-a716-446655440000",
+          "answer": "L'intelligence artificielle (IA) est une technologie qui permet aux machines de simuler l'intelligence humaine...",
+          "context_found": true,
+          "provider_used": "deepseek",
+          "model_used": "deepseek-chat",
+          "response_time_ms": 1250.5,
+          "timestamp": "2024-01-15T10:30:00.123Z",
+          "search_results": 15,
+          "ranked_results": 3,
+          "enhanced_queries": [
+            "Qu'est-ce que l'intelligence artificielle ?",
+            "définition intelligence artificielle",
+            "IA machine learning"
+          ],
+          "sources": [
+            {
+              "document_id": "doc_123",
+              "chunk_id": "chunk_456",
+              "score": 0.95,
+              "content": "L'IA est une branche de l'informatique..."
+            }
+          ],
+          "performance_metrics": {
+            "embedding_time_ms": 45.2,
+            "search_time_ms": 120.3,
+            "rerank_time_ms": 85.1,
+            "llm_time_ms": 999.9
+          }
+        }
+      },
+      "POST /ask-question-stream-ultra": {
+        "description": "Question streaming avec réponse progressive",
+        "request_example": {
+          "question": "Expliquez le machine learning",
+          "provider": "mistral",
+          "temperature": 0.3,
+          "max_tokens": 512,
+          "top_k": 3
+        },
+        "example_response": "data: {\"metadata\": {\"id\": \"550e8400-e29b-41d4-a716-446655440000\", \"provider\": \"mistral\", \"enhanced_queries\": [\"Expliquez le machine learning\"], \"timestamp\": \"2024-01-15T10:30:00.123Z\"}, \"type\": \"init\"}\n\ndata: {\"content\": \"Le\", \"type\": \"chunk\"}\n\ndata: {\"content\": \" machine\", \"type\": \"chunk\"}\n\ndata: {\"content\": \" learning\", \"type\": \"chunk\"}\n\ndata: {\"metadata\": {\"response_time_ms\": 1450.2, \"search_results\": 12, \"ranked_results\": 3}, \"type\": \"final\"}\n\n"
+      }
+    },
+    "multimodal_endpoints": {
+      "POST /ask-multimodal-question": {
+        "description": "Question multimodale (texte + images)",
+        "request_example": {
+          "question": "Montrez-moi des diagrammes sur l'architecture des réseaux de neurones",
+          "provider": "mistral",
+          "content_types": ["document", "image"],
+          "include_images": true,
+          "multimodal_boost": 0.1,
+          "top_k": 3
+        },
+        "example_response": {
+          "id": "550e8400-e29b-41d4-a716-446655440001",
+          "answer": "Voici des informations sur l'architecture des réseaux de neurones avec des diagrammes explicatifs...",
+          "context_found": true,
+          "provider_used": "mistral",
+          "model_used": "mistral-large",
+          "response_time_ms": 1850.3,
+          "timestamp": "2024-01-15T10:30:00.123Z",
+          "search_results": 20,
+          "ranked_results": 3,
+          "enhanced_queries": [
+            "architecture réseaux neurones diagrammes",
+            "neural networks architecture diagrams"
+          ],
+          "sources": [
+            {
+              "document_id": "doc_456",
+              "chunk_id": "chunk_789",
+              "content_type": "image",
+              "score": 0.92,
+              "content": "Diagramme montrant l'architecture d'un réseau de neurones convolutionnel",
+              "image_caption": "Architecture CNN avec couches de convolution et pooling"
+            }
+          ],
+          "multimodal_results": {
+            "text_results": 2,
+            "image_results": 1,
+            "total_results": 3
+          }
+        }
+      },
+      "POST /ask-multimodal-with-image": {
+        "description": "Question avec image de requête",
+        "request_example": {
+          "question": "Analysez cette image et trouvez des contenus similaires",
+          "provider": "mistral",
+          "top_k": 3,
+          "query_image": "[fichier image uploadé]"
+        },
+        "example_response": {
+          "id": "550e8400-e29b-41d4-a716-446655440002",
+          "answer": "Cette image montre un diagramme de réseau de neurones. J'ai trouvé des contenus similaires...",
+          "context_found": true,
+          "provider_used": "mistral",
+          "response_time_ms": 2150.7,
+          "query_had_image": true,
+          "query_image_info": {
+            "filename": "neural_network.png",
+            "size": [800, 600],
+            "mode": "RGB"
+          },
+          "sources": [
+            {
+              "document_id": "doc_789",
+              "content_type": "image",
+              "similarity_score": 0.89,
+              "content": "Diagramme similaire d'architecture de réseau neuronal"
+            }
+          ]
+        }
+      }
+    },
+    
+    "document_endpoints": {
+      "POST /upload-document": {
+        "description": "Upload et traitement de document",
+        "request_example": {
+          "file": "[fichier PDF/DOCX/TXT]"
+        },
+        "example_response": {
+          "document_id": "doc_550e8400-e29b-41d4-a716-446655440003",
+          "chunks_created": 25,
+          "processing_time_ms": 3500.2,
+          "status": "success"
+        }
+      },
+      "POST /upload-multimodal-document": {
+        "description": "Upload document multimodal avec analyse d'images",
+        "request_example": {
+          "file": "[fichier PDF avec images]",
+          "extract_text": true,
+          "generate_captions": true
+        },
+        "example_response": {
+          "document_id": "doc_550e8400-e29b-41d4-a716-446655440004",
+          "chunks_created": 35,
+          "processing_time_ms": 8500.5,
+          "status": "success",
+          "content_types": ["text", "image"],
+          "image_analysis": {
+            "images_found": 8,
+            "captions_generated": 8,
+            "ocr_text_extracted": true
+          },
+          "text_extraction": {
+            "total_text_length": 15000,
+            "ocr_text_length": 2500
+          }
+        }
+      },
+      "GET /documents-advanced": {
+        "description": "Liste des documents avec statistiques",
+        "example_response": {
+          "total_documents": 25,
+          "total_chunks": 450,
+          "documents": [
+            {
+              "document_id": "doc_123",
+              "filename": "guide_ia.pdf",
+              "chunks_count": 18,
+              "upload_date": "2024-01-15T09:00:00.123Z",
+              "file_size_bytes": 2048576,
+              "content_type": "application/pdf"
+            },
+            {
+              "document_id": "doc_456",
+              "filename": "presentation_ml.pptx",
+              "chunks_count": 22,
+              "upload_date": "2024-01-15T10:15:00.123Z",
+              "file_size_bytes": 5242880,
+              "content_type": "application/vnd.openxmlformats-officedocument.presentationml.presentation"
+            }
+          ]
+        }
+      }
+    },
+    "image_analysis_endpoints": {
+      "POST /analyze-image": {
+        "description": "Analyse complète d'image sans ajout à la base",
+        "request_example": {
+          "file": "[fichier image]"
+        },
+        "example_response": {
+          "filename": "diagram.png",
+          "analysis": {
+            "caption": "Un diagramme montrant l'architecture d'un réseau de neurones avec plusieurs couches",
+            "ocr_text": "Input Layer\nHidden Layer 1\nHidden Layer 2\nOutput Layer",
+            "has_text": true,
+            "image_size": [1024, 768],
+            "image_mode": "RGB"
+          },
+          "searchable_content": "Diagramme architecture réseau neurones couches Input Layer Hidden Layer Output Layer",
+          "metadata": {
+            "file_size_bytes": 156789,
+            "format": "PNG",
+            "color_mode": "RGB",
+            "dimensions": [1024, 768]
+          }
+        }
+      },
+      "POST /search-by-image": {
+        "description": "Recherche par similarité d'image",
+        "request_example": {
+          "file": "[fichier image]",
+          "top_k": 5
+        },
+        "example_response": {
+          "query_image_analysis": {
+            "caption": "Diagramme de réseau de neurones",
+            "ocr_text": "Neural Network Architecture",
+            "image_size": [800, 600]
+          },
+          "similar_images": [
+            {
+              "document_id": "doc_789",
+              "chunk_id": "img_chunk_123",
+              "similarity_score": 0.92,
+              "caption": "Architecture de réseau neuronal convolutionnel",
+              "image_metadata": {
+                "size": [1200, 900],
+                "format": "JPEG"
+              }
+            },
+            {
+              "document_id": "doc_456",
+              "chunk_id": "img_chunk_456",
+              "similarity_score": 0.87,
+              "caption": "Schéma de perceptron multicouche",
+              "image_metadata": {
+                "size": [600, 400],
+                "format": "PNG"
+              }
+            }
+          ],
+          "search_metadata": {
+            "total_images_searched": 150,
+            "search_time_ms": 450.2,
+            "results_returned": 2
+          }
+        }
+      },
+      "GET /multimodal-capabilities": {
+        "description": "Informations sur les capacités multimodales",
+        "example_response": {
+          "multimodal_enabled": true,
+          "supported_modalities": ["text", "image"],
+          "supported_content_types": ["document", "image"],
+          "supported_image_formats": ["jpg", "jpeg", "png", "gif", "bmp", "webp"],
+          "models_status": {
+            "clip": "loaded",
+            "blip": "loaded",
+            "ocr": "available"
+          },
+          "features": {
+            "image_search": true,
+            "text_extraction_ocr": true,
+            "image_captioning": true,
+            "hybrid_text_image_search": true,
+            "cross_modal_retrieval": true,
+            "query_with_image": true
+          },
+          "device": "cuda:0",
+          "models_info": {
+            "clip_model": "openai/clip-vit-base-patch32",
+            "blip_model": "Salesforce/blip-image-captioning-base",
+            "embedding_model": "sentence-transformers/all-MiniLM-L6-v2"
+          }
+        }
+      }
+    },
+    "utility_endpoints": {
+      "POST /clear-cache": {
+        "description": "Vider le cache Redis",
+        "example_response": {
+          "status": "success",
+          "message": "Cache vidé avec succès",
+          "keys_deleted": 45,
+          "timestamp": "2024-01-15T10:30:00.123Z"
+        }
+      },
+      "DELETE /documents/{document_id}": {
+        "description": "Suppression d'un document",
+        "example_response": {
+          "status": "success",
+          "message": "Document supprimé avec succès",
+          "document_id": "doc_123",
+          "chunks_deleted": 18,
+          "timestamp": "2024-01-15T10:30:00.123Z"
+        }
+      }
+    }
+  },
+  "notes": {
+    "response_formats": {
+      "json": "La plupart des endpoints retournent du JSON structuré",
+      "streaming": "Les endpoints stream utilisent Server-Sent Events (SSE)",
+      "prometheus": "L'endpoint /metrics/prometheus retourne du texte au format Prometheus"
+    },
+    "common_fields": {
+      "timestamp": "Présent dans la plupart des réponses au format ISO 8601",
+      "response_time_ms": "Temps de traitement en millisecondes",
+      "status": "Statut de l'opération (success, error, etc.)",
+      "id": "Identifiant unique pour les opérations (UUID v4)"
+    },
+    "error_responses": {
+      "format": "Les erreurs suivent le format FastAPI standard",
+      "example": {
+        "detail": "Message d'erreur descriptif",
+        "status_code": 400
+      }
+    }
+  }
+}

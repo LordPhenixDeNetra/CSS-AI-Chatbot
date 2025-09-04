@@ -101,7 +101,7 @@ class OptimizedLLMProvider:
         headers = self.get_headers()
         data = self.format_messages(prompt, **kwargs)
 
-        async with httpx.AsyncClient(timeout=30.0) as client:
+        async with httpx.AsyncClient(timeout=60.0) as client:
             response = await client.post(
                 self.config["base_url"],
                 headers=headers,
@@ -126,7 +126,7 @@ class OptimizedLLMProvider:
         data = self.format_messages(prompt)
         data["stream"] = True
 
-        async with httpx.AsyncClient(timeout=60.0) as client:
+        async with httpx.AsyncClient(timeout=120.0) as client:
             async with client.stream(
                     'POST',
                     self.config["base_url"],

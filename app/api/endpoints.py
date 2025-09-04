@@ -6,6 +6,7 @@ import uuid
 import time
 from datetime import datetime
 import json
+import base64
 from pathlib import Path
 from io import BytesIO
 from PIL import Image
@@ -18,6 +19,7 @@ from app.models.schemas import (
 from app.models.enums import Provider, ContentType, ModalityType
 from app.services.rag_service import multimodal_rag_system
 from app.services.document_service import process_document_advanced
+from app.services.csv_logger import csv_logger
 from app.utils.helpers import image_to_base64
 from app.core.cache import REDIS_AVAILABLE, cache
 from app.utils.logging import logger
@@ -346,6 +348,7 @@ async def upload_document_optimized(background_tasks: BackgroundTasks, file: Upl
 async def ask_question_ultra(request: QuestionRequest):
     """Endpoint de question ultra optimisé avec métriques"""
     start_time = time.time()
+    error_message = None
 
     try:
         result = await multimodal_rag_system.query(
@@ -359,12 +362,37 @@ async def ask_question_ultra(request: QuestionRequest):
         # Métriques
         from app.utils.logging import query_counter
         query_counter.labels(provider=request.provider.value, status="success").inc()
+        
+        # Enregistrement CSV asynchrone
+        processing_time = (time.time() - start_time) * 1000
+        csv_logger.log_ask_question_ultra(
+            question=request.question,
+            response=result.get("answer", ""),
+            sources=[source.get("content", "")[:100] + "..." for source in result.get("sources", [])],
+            confidence_score=result.get("confidence", None),
+            processing_time_ms=processing_time,
+            tokens_used=result.get("tokens_used", None),
+            model_used=request.provider.value,
+            cache_hit=result.get("cache_hit", None)
+        )
 
         return AdvancedQuestionResponse(**result)
 
     except Exception as e:
+        error_message = str(e)
         from app.utils.logging import query_counter
         query_counter.labels(provider=request.provider.value, status="error").inc()
+        
+        # Enregistrement CSV de l'erreur
+        processing_time = (time.time() - start_time) * 1000
+        csv_logger.log_ask_question_ultra(
+            question=request.question,
+            response="",
+            processing_time_ms=processing_time,
+            model_used=request.provider.value,
+            error_message=error_message
+        )
+        
         logger.error(f"Erreur question ultra: {e}")
         raise HTTPException(status_code=500, detail=str(e))
 
@@ -377,9 +405,17 @@ async def ask_question_stream_ultra(request: QuestionRequest):
         raise HTTPException(status_code=400, detail="Question vide")
 
     async def generate_ultra_stream():
+        # Variables pour le logging CSV
+        start_time = time.time()
+        response_chunks = []
+        final_response = ""
+        error_message = None
+        sources = []
+        confidence_score = None
+        cache_hit = None
+        
         try:
             # Recherche et préparation du contexte (partie non-streaming)
-            start_time = time.time()
             query_id = str(uuid.uuid4())
 
             # 0. Vérification des réponses prédéfinies (priorité absolue)
@@ -405,17 +441,22 @@ async def ask_question_stream_ultra(request: QuestionRequest):
                     words = answer.split()
                     
                     for i, word in enumerate(words):
-                        if i == 0:
-                            yield f"data: {json.dumps({'content': word, 'type': 'chunk'})}\n\n"
-                        else:
-                            yield f"data: {json.dumps({'content': f' {word}', 'type': 'chunk'})}\n\n"
+                        chunk_content = word if i == 0 else f' {word}'
+                        response_chunks.append(chunk_content)
+                        yield f"data: {json.dumps({'content': chunk_content, 'type': 'chunk'})}\n\n"
                         # Petit délai pour simuler le streaming naturel
                         await asyncio.sleep(0.05)
                     
+                    # Données pour CSV
+                    final_response = answer
+                    confidence_score = predefined_response["confidence"]
+                    cache_hit = True
+                    
                     # Métadonnées finales
                     end_time = time.time()
+                    processing_time = round((end_time - start_time) * 1000, 2)
                     final_metadata = {
-                        "response_time_ms": round((end_time - start_time) * 1000, 2),
+                        "response_time_ms": processing_time,
                         "search_results": 0,
                         "ranked_results": 0,
                         "llm_calls_saved": True,
@@ -423,6 +464,19 @@ async def ask_question_stream_ultra(request: QuestionRequest):
                         "source": "predefined_qa"
                     }
                     yield f"data: {json.dumps({'metadata': final_metadata, 'type': 'final'})}\n\n"
+                    
+                    # Enregistrement CSV asynchrone pour réponse prédéfinie
+                    csv_logger.log_ask_question_stream_ultra(
+                        question=request.question,
+                        response_chunks=response_chunks,
+                        final_response=final_response,
+                        confidence_score=confidence_score,
+                        processing_time_ms=processing_time,
+                        model_used="predefined_qa",
+                        cache_hit=cache_hit,
+                        stream_duration_ms=processing_time,
+                        chunk_count=len(response_chunks)
+                    )
                     return
 
             # Enhancement et recherche (si pas de réponse prédéfinie)
@@ -466,21 +520,57 @@ Réponse:"""
 
             # Streaming de la génération
             provider = OptimizedLLMProvider(request.provider)
-
+            
+            # Collecte des chunks pour le CSV
             async for chunk in provider.generate_stream(optimized_prompt):
                 if chunk:
+                    response_chunks.append(chunk)
+                    final_response += chunk
                     yield f"data: {json.dumps({'content': chunk, 'type': 'chunk'})}\n\n"
+            
+            # Données pour CSV
+            sources = [result.content[:100] + "..." for result in ranked_results]
+            cache_hit = False  # RAG normal n'utilise pas le cache
 
             # Métadonnées finales
             end_time = time.time()
+            processing_time = round((end_time - start_time) * 1000, 2)
+            stream_duration = processing_time
             final_metadata = {
-                "response_time_ms": round((end_time - start_time) * 1000, 2),
+                "response_time_ms": processing_time,
                 "search_results": len(all_results),
                 "ranked_results": len(ranked_results)
             }
             yield f"data: {json.dumps({'metadata': final_metadata, 'type': 'final'})}\n\n"
+            
+            # Enregistrement CSV asynchrone pour RAG normal
+            csv_logger.log_ask_question_stream_ultra(
+                question=request.question,
+                response_chunks=response_chunks,
+                final_response=final_response,
+                sources=sources,
+                processing_time_ms=processing_time,
+                model_used=request.provider.value,
+                cache_hit=cache_hit,
+                stream_duration_ms=stream_duration,
+                chunk_count=len(response_chunks)
+            )
 
         except Exception as e:
+            error_message = str(e)
+            processing_time = round((time.time() - start_time) * 1000, 2)
+            
+            # Enregistrement CSV de l'erreur
+            csv_logger.log_ask_question_stream_ultra(
+                question=request.question,
+                response_chunks=response_chunks,
+                final_response=final_response,
+                processing_time_ms=processing_time,
+                model_used=request.provider.value,
+                error_message=error_message,
+                chunk_count=len(response_chunks)
+            )
+            
             yield f"data: {json.dumps({'error': str(e), 'type': 'error'})}\n\n"
 
     return StreamingResponse(
@@ -559,6 +649,9 @@ async def ask_multimodal_question(request: MultimodalQuestionRequest):
     if not request.question.strip():
         raise HTTPException(status_code=400, detail="Question vide")
 
+    start_time = time.time()
+    error_message = None
+
     try:
         result = await multimodal_rag_system.multimodal_query(
             query=request.question,
@@ -572,11 +665,38 @@ async def ask_multimodal_question(request: MultimodalQuestionRequest):
         if "error" in result:
             raise HTTPException(status_code=500, detail=result["error"])
 
+        # Enregistrement CSV asynchrone
+        processing_time = (time.time() - start_time) * 1000
+        csv_logger.log_ask_multimodal_question(
+            question=request.question,
+            images_count=len([ct for ct in request.content_types if ct == ContentType.IMAGE]),
+            response=result.get("answer", ""),
+            sources=[source.get("content", "")[:100] + "..." for source in result.get("sources", [])],
+            confidence_score=result.get("confidence", None),
+            processing_time_ms=processing_time,
+            tokens_used=result.get("tokens_used", None),
+            model_used=request.provider.value,
+            cache_hit=result.get("cache_hit", None),
+            multimodal_analysis=result.get("multimodal_analysis", None)
+        )
+
         return result
 
     except HTTPException:
         raise
     except Exception as e:
+        error_message = str(e)
+        
+        # Enregistrement CSV de l'erreur
+        processing_time = (time.time() - start_time) * 1000
+        csv_logger.log_ask_multimodal_question(
+            question=request.question,
+            images_count=len([ct for ct in request.content_types if ct == ContentType.IMAGE]),
+            processing_time_ms=processing_time,
+            model_used=request.provider.value,
+            error_message=error_message
+        )
+        
         logger.error(f"Erreur question multimodale: {e}")
         raise HTTPException(status_code=500, detail=f"Erreur: {str(e)}")
 
@@ -595,9 +715,12 @@ async def ask_multimodal_with_image(
     if not question.strip():
         raise HTTPException(status_code=400, detail="Question vide")
 
+    start_time = time.time()
+    error_message = None
+    query_image_pil = None
+
     try:
         # Traitement de l'image de requête si fournie
-        query_image_pil = None
         if query_image and query_image.filename:
             # Vérification du type d'image
             if not multimodal_rag_system.multimodal_processor.is_image_file(query_image.filename):
@@ -627,11 +750,44 @@ async def ask_multimodal_with_image(
                 "mode": query_image_pil.mode
             }
 
+        # Enregistrement CSV asynchrone
+        processing_time = (time.time() - start_time) * 1000
+        csv_logger.log_ask_multimodal_with_image(
+            question=question,
+            query_image_filename=query_image.filename if query_image and query_image.filename else None,
+            query_image_size=f"{query_image_pil.size[0]}x{query_image_pil.size[1]}" if query_image_pil else None,
+            query_image_format=query_image_pil.mode if query_image_pil else None,
+            image_analysis=result.get("image_analysis", None),
+            response=result.get("answer", ""),
+            sources=[source.get("content", "")[:100] + "..." for source in result.get("sources", [])],
+            confidence_score=result.get("confidence", None),
+            processing_time_ms=processing_time,
+            tokens_used=result.get("tokens_used", None),
+            model_used=provider.value,
+            cache_hit=result.get("cache_hit", None),
+            ocr_text=result.get("ocr_text", None),
+            image_caption=result.get("image_caption", None)
+        )
+
         return result
 
     except HTTPException:
         raise
     except Exception as e:
+        error_message = str(e)
+        
+        # Enregistrement CSV de l'erreur
+        processing_time = (time.time() - start_time) * 1000
+        csv_logger.log_ask_multimodal_with_image(
+            question=question,
+            query_image_filename=query_image.filename if query_image and query_image.filename else None,
+            query_image_size=f"{query_image_pil.size[0]}x{query_image_pil.size[1]}" if query_image_pil else None,
+            query_image_format=query_image_pil.mode if query_image_pil else None,
+            processing_time_ms=processing_time,
+            model_used=provider.value,
+            error_message=error_message
+        )
+        
         logger.error(f"Erreur question avec image: {e}")
         raise HTTPException(status_code=500, detail=f"Erreur: {str(e)}")
 

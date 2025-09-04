@@ -1,0 +1,3 @@
+response_id,timestamp,question,images_count,image_descriptions,response,sources,confidence_score,processing_time_ms,tokens_used,model_used,cache_hit,multimodal_analysis,ocr_text,image_similarity_scores,error_message
+a2adde15-d413-40a2-aae0-b306024fe0e4,2025-09-02T16:20:05.692692,Test multimodal question avec ID,1,"[""Test image""]",Test multimodal response avec ID,"[""multimodal.pdf""]",0.92,3000.0,200,gpt-4-vision,False,"{""objects"": [""test""]}",Test OCR,[0.85],
+023596b1-e691-4938-bbd4-2da9dce04099,2025-09-02T16:39:35.142659,Test multimodal question,2,,Test multimodal response,,,200.8,,test_model,,,,,

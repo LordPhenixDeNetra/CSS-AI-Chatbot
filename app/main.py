@@ -1,3 +1,4 @@
+import os
 from fastapi import FastAPI
 from starlette.middleware.cors import CORSMiddleware
 
@@ -42,6 +43,9 @@ app.include_router(dashboard_router)
 async def startup_event():
     """Événements de démarrage pour optimisation"""
     import threading
+    import subprocess
+    import sys
+    from pathlib import Path
     from app.utils.logging import logger
 
     logger.info("Démarrage du RAG Ultra Performant Multimodal...")
@@ -55,7 +59,55 @@ async def startup_event():
         except Exception as e:
             logger.warning(f"Erreur pré-chargement reranker: {e}")
 
+    def start_telegram_bot():
+        """Démarre le bot Telegram automatiquement"""
+        try:
+            # Vérifier si le bot doit être démarré automatiquement
+            auto_start_bot = os.getenv('AUTO_START_TELEGRAM_BOT', 'false').lower() == 'true'
+            
+            if not auto_start_bot:
+                logger.info("Démarrage automatique du bot Telegram désactivé")
+                return
+                
+            # Chemin vers le script du bot avancé
+            bot_script = Path(__file__).parent.parent / "telegram_advanced.py"
+            
+            if not bot_script.exists():
+                logger.warning(f"Script du bot Telegram non trouvé: {bot_script}")
+                return
+                
+            # Vérifier les variables d'environnement nécessaires
+            telegram_token = os.getenv('TELEGRAM_TOKEN')
+            css_api_url = os.getenv('CSS_API_URL', 'http://localhost:8000')
+            
+            if not telegram_token:
+                logger.warning("TELEGRAM_TOKEN non défini - bot Telegram non démarré")
+                return
+                
+            logger.info("🤖 Démarrage automatique du bot Telegram avancé...")
+            
+            # Définir les variables d'environnement pour le bot
+            env = os.environ.copy()
+            env['TELEGRAM_TOKEN'] = telegram_token
+            env['CSS_API_URL'] = css_api_url
+            
+            # Démarrer le bot avancé en arrière-plan
+            bot_cwd = Path(__file__).parent.parent
+            subprocess.Popen(
+                [sys.executable, str(bot_script)],
+                cwd=str(bot_cwd),
+                env=env,
+                start_new_session=True
+            )
+            
+            logger.info("✅ Bot Telegram démarré automatiquement")
+            
+        except Exception as e:
+            logger.error(f"Erreur lors du démarrage automatique du bot Telegram: {e}")
+
+    # Démarrage des tâches en arrière-plan
     threading.Thread(target=preload_reranker, daemon=True).start()
+    threading.Thread(target=start_telegram_bot, daemon=True).start()
 
 
 if __name__ == "__main__":
