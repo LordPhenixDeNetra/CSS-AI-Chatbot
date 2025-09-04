@@ -365,14 +365,29 @@ async def ask_question_ultra(request: QuestionRequest):
         
         # Enregistrement CSV asynchrone
         processing_time = (time.time() - start_time) * 1000
+        
+        # Déterminer le modèle utilisé selon le type de réponse
+        model_used = result.get("provider_used", request.provider.value)
+        if model_used == "predefined_qa":
+            model_used = "predefined_qa"
+        else:
+            model_used = request.provider.value
+            
+        # Extraire le score de confiance des sources si disponible
+        confidence_score = result.get("confidence", None)
+        if not confidence_score and result.get("sources"):
+            # Essayer d'extraire la confiance de la première source
+            first_source = result.get("sources", [])[0] if result.get("sources") else {}
+            confidence_score = first_source.get("confidence", None)
+        
         csv_logger.log_ask_question_ultra(
             question=request.question,
             response=result.get("answer", ""),
             sources=[source.get("content", "")[:100] + "..." for source in result.get("sources", [])],
-            confidence_score=result.get("confidence", None),
+            confidence_score=confidence_score,
             processing_time_ms=processing_time,
             tokens_used=result.get("tokens_used", None),
-            model_used=request.provider.value,
+            model_used=model_used,
             cache_hit=result.get("cache_hit", None)
         )
 
