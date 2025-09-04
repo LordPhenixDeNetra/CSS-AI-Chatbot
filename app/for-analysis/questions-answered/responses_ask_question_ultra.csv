@@ -213,3 +213,406 @@ bf1384a1-de02-40c0-8e04-b393c3fd88ef,2025-09-03T23:43:26.796206,Salut,Salut ! Co
 d2c6704f-a85e-4c2b-962b-5283018d73a7,2025-09-03T23:50:08.638632,Bonjour,Bonjour ! Comment puis-je vous aider aujourd'hui ?,"[""Base de connaissances CSS...""]",,,,deepseek,,
 b0ea9561-4a8f-49bd-8a7b-50d693252d08,2025-09-03T23:50:37.195945,Les prestations familiales,"Les allocations familiales de la CSS sont versées mensuellement. Le montant varie selon le nombre d'enfants à charge et leur âge. Pour connaître le montant exact applicable à votre situation, veuillez consulter le barème en vigueur auprès de votre agence CSS.","[""Base de connaissances CSS...""]",,,,deepseek,,
 a94f46b6-d473-4405-9b97-3082354ae3f5,2025-09-03T23:52:03.933201,Salut,Salut ! Comment puis-je vous aider aujourd'hui ?,"[""Base de connaissances CSS...""]",,5.562305450439453,,deepseek,,
+21526264-e658-42fe-80a4-44381ed3838b,2025-09-04T15:04:55.264960,Les prestations familiales,"Les allocations familiales de la CSS sont versées mensuellement. Le montant varie selon le nombre d'enfants à charge et leur âge. Pour connaître le montant exact applicable à votre situation, veuillez consulter le barème en vigueur auprès de votre agence CSS.","[""Base de connaissances CSS...""]",0.85,,,predefined_qa,,
+3da89808-1db0-4736-ae05-c753d1eca281,2025-09-04T15:21:13.277898,Les prestations familiales,"Les allocations familiales de la CSS sont versées mensuellement. Le montant varie selon le nombre d'enfants à charge et leur âge. Pour connaître le montant exact applicable à votre situation, veuillez consulter le barème en vigueur auprès de votre agence CSS.","[""Base de connaissances CSS...""]",0.85,,,predefined_qa,,
+071d8123-8871-422c-961b-677f8a22af80,2025-09-04T15:30:03.127774,Prestations,"Bonjour,
+
+En ma qualité d'expert de la Caisse de Sécurité Sociale du Sénégal, je me permets de vous présenter une synthèse des prestations évoquées dans votre demande.
+
+Les prestations de l'Action Sanitaire, Sociale et Familiale (A.S.S.F) ont pour objectif de **compléter les prestations en espèces pour protéger la mère et l'enfant**, en palliant les insuffisances du système national de santé.
+
+Concernant les **prestations en cas de décès**, les informations suivantes s'appliquent :
+
+**1. Rente au conjoint survivant :**
+*   **Conditions :** Mariage constaté avant le décès, et absence de divorce, séparation ou condamnation pour abandon de famille.
+*   **Montant :** 30% du salaire annuel de la victime.
+*   **Cas de polygamie :** La rente est répartie de manière égale entre les veuves.
+*   **En cas de remariage :** Le droit à la rente cesse s'il n'y a pas d'enfant à charge. Le conjoint survivant reçoit alors une indemnité forfaitaire équivalente à 3 fois le montant de la rente. Le rachat est reporté en présence d'enfants ayants-droit.
+
+**2. Rente aux enfants :**
+Le montant est calculé selon le barème suivant, en pourcentage du salaire annuel de la victime :
+*   1 enfant : 15%
+*   2 enfants : 30%
+*   3 enfants : 40%
+*   Chaque enfant supplémentaire : +10%
+
+**3. Rente aux ascendants :**
+*   **Conditions :** L'ascendant doit avoir été à la charge de la victime au moment de l'accident et ne pas disposer de ressources suffisantes.
+*   **Montant :** 10% par ascendant, avec un maximum de 30% au total.
+
+**Limite globale :** L'ensemble des rentes versées (conjoint, enfants et ascendants) ne peut excéder **85% du salaire annuel** de la victime.
+
+Pour toute précision sur un cas spécifique, n'hésitez pas à nous contacter directement.","[""..."", ""..."", ""...""]",,37093.767166137695,,deepseek,,
+529caedf-3453-4a35-843d-2a9c8d3bc2be,2025-09-04T15:31:23.966950,Les prestations,"Bonjour,
+
+En me basant sur les informations fournies, je peux vous informer sur l'objectif général des prestations en nature de l'Action Sanitaire, Sociale et Familiale (A.S.S.F).
+
+L'objectif principal de ces prestations est de **compléter les prestations en espèces pour protéger la mère et l'enfant**. Elles visent spécifiquement à **pallier les insuffisances du système national de santé**.
+
+Pour obtenir des détails plus précis sur les types de prestations ou les conditions d'accès, je vous invite à reformuler votre question. Je suis à votre disposition pour vous accompagner.","[""..."", ""..."", ""...""]",,18855.421781539917,,deepseek,,
+cf090bd8-ad7d-48d3-b8ef-a6b04e92acb3,2025-09-04T15:37:42.475743,Comment faire une demande de pension de retraite ?,"Bonjour,
+
+Pour faire une demande de pension de retraite, vous devez adresser votre dossier à l'IPRES (Institution de Prévoyance Retraite du Sénégal).
+
+Selon les informations dont je dispose, la prise d'effet de votre pension est une information cruciale : **les allocations prennent effet le premier jour du mois au cours duquel votre demande parvient à l'IPRES**.
+
+Cela signifie qu'il est important de bien caler l'envoi de votre dossier pour que votre pension commence à vous être versée au plus tôt.
+
+Malheureusement, les sources fournies ne détaillent pas la liste exacte des pièces justificatives à joindre ni les modalités pratiques de dépôt (en ligne, par courrier, ou en agence).
+
+Pour une procédure complète et précise, je vous recommande de **reformuler votre question** en demandant spécifiquement quelles sont **les pièces à fournir** et **les démarches à suivre** pour constituer et envoyer le dossier de demande.
+
+Je reste à votre disposition pour toute information complémentaire.","[""..."", ""..."", ""...""]",,29655.31086921692,,deepseek,,
+12c0afff-c0bb-4d3e-adbd-2af5e23a6562,2025-09-04T15:42:34.252512,Allocation familiale,"Les allocations familiales de la CSS sont versées mensuellement. Le montant varie selon le nombre d'enfants à charge et leur âge. Pour connaître le montant exact applicable à votre situation, veuillez consulter le barème en vigueur auprès de votre agence CSS.","[""Base de connaissances CSS...""]",0.85,,,predefined_qa,,
+b44bcfbe-3b6f-482e-bf53-e7f301c4f770,2025-09-04T15:44:01.052801,Comment déclarer un accident de travail ?,"Pour déclarer un accident de travail, l'employeur a l'obligation d'accomplir les formalités suivantes dans un délai de 48 heures :
+
+*   Adresser une déclaration d'accident du travail à l'Inspection du Travail et à la Caisse de Sécurité Sociale.
+*   Fournir un carnet d'accident à la victime.
+*   Assurer les soins de première urgence.
+*   Aviser le médecin de l'entreprise ou le médecin le plus proche.
+*   Diriger la victime vers le service médical approprié.
+
+**En cas de carence de l'employeur**, la victime ou ses ayants-droit disposent d'un délai de **2 ans** pour effectuer eux-mêmes la déclaration.
+
+**Note importante :** La date de première constatation médicale est considérée comme la date de l'accident.","[""..."", ""..."", ""...""]",,24058.502197265625,,deepseek,,
+e2b8431a-c269-471e-95b7-d126efe536ef,2025-09-04T15:57:53.559637,Comment faire une demande de pension de retraite ?,"Bonjour,
+
+Pour faire une demande de pension de retraite, vous devez adresser votre dossier à l'IPRES (Institution de Prévoyance Retraite du Sénégal).
+
+Selon les informations dont je dispose, la prise d'effet de votre pension est directement liée à la date de réception de votre demande. En effet, **les allocations prennent effet le premier jour du mois au cours duquel la demande parvient à l'IPRES**.
+
+Pour que votre demande soit recevable, vous devez au préalable remplir les conditions d'admission suivantes :
+*   **Conditions de cotisation** : Avoir cotisé au minimum 10 ans **ou** avoir capitalisé au moins 1 000 points.
+*   **Conditions d'âge** : Avoir au moins 60 ans (âge normal). Une retraite anticipée est possible à partir de 55 ans, mais elle est soumise à un abattement de 5% par année d'anticipation.
+*   **Condition d'activité** : Avoir cessé toute activité salariée.
+
+Malheureusement, les documents fournis ne détaillent pas la liste exacte des pièces à fournir ni les canaux de dépôt (en ligne, par courrier, accueil). Je vous recommande de contacter directement l'IPRES pour obtenir ces informations précises et ainsi constituer votre dossier complet.
+
+Cordialement,
+Votre assistant de la Caisse de Sécurité Sociale du Sénégal.","[""..."", ""..."", ""...""]",,35936.27905845642,,deepseek,,
+fc631527-04d8-49f1-93f8-57aeb4186d00,2025-09-04T16:01:52.263539,Les allocations familiales,"Les allocations familiales de la CSS sont versées mensuellement. Le montant varie selon le nombre d'enfants à charge et leur âge. Pour connaître le montant exact applicable à votre situation, veuillez consulter le barème en vigueur auprès de votre agence CSS.","[""Base de connaissances CSS...""]",0.85,,,predefined_qa,,
+5710e6c0-2b8a-4ee1-bfd6-cdfce2a3c85d,2025-09-04T16:05:45.850189,Comment faire une demande de pension de retraite ?,"Bonjour,
+
+Pour faire une demande de pension de retraite, vous devez adresser votre dossier à l'IPRES (Institution de Prévoyance Retraite du Sénégal).
+
+La date de prise d'effet de votre pension est une information cruciale : **les allocations prennent effet le premier jour du mois au cours duquel votre demande parvient à l'IPRES**.
+
+Pour que votre demande soit recevable, vous devez au préalable remplir les conditions d'admission suivantes :
+*   **Conditions de cotisation :** Avoir cotisé au minimum 10 ans **ou** avoir capitalisé au moins 1 000 points.
+*   **Conditions d'âge :** Avoir au moins 60 ans (âge normal). Une retraite anticipée est possible à partir de 55 ans, mais elle subira un abattement de 5% par année d'anticipation.
+*   **Condition d'activité :** Avoir cessé toute activité salariée.
+
+Pour connaître les documents spécifiques à fournir et obtenir le formulaire de demande, je vous invite à vous rapprocher directement des services de l'IPRES, car ces détails pratiques ne figurent pas dans les sources fournies.
+
+Cordialement,
+Votre assistant de la Caisse de Sécurité Sociale du Sénégal.","[""..."", ""..."", ""...""]",,33988.150119781494,,deepseek,,
+4a1fe005-472b-4a27-916d-bd226ac5adb1,2025-09-04T16:08:07.473986,Salut,Salut ! Comment puis-je vous aider aujourd'hui ?,"[""Base de connaissances CSS...""]",0.95,,,predefined_qa,,
+4b95b75f-a275-4e88-b175-4b431581fa06,2025-09-04T16:09:06.396059,Comment faire une demande de pension de retraite ?,"Bonjour,
+
+Pour faire une demande de pension de retraite, vous devez adresser votre dossier à l'IPRES (Institution de Prévoyance Retraite du Sénégal).
+
+Selon les informations dont je dispose, la prise d'effet de votre pension est une information cruciale : **les allocations prennent effet le premier jour du mois au cours duquel votre demande parvient à l'IPRES**.
+
+Cela signifie qu'il est important de soumettre votre demande en temps utile, car son traitement débutera à compter de la date de sa réception par l'organisme.
+
+Malheureusement, les sources fournies ne détaillent pas la liste exacte des pièces justificatives à joindre ni les canaux de dépôt (démarche en ligne, en agence, par courrier). 
+
+Par conséquent, je vous invite à reformuler votre question pour obtenir des détails plus précis, par exemple :
+*   « Quelles sont les pièces à fournir pour une demande de retraite ? »
+*   « Où et comment déposer sa demande de pension à l'IPRES ? »
+
+Je reste à votre disposition pour toute précision supplémentaire.
+
+Cordialement,
+Votre assistant expert de la Caisse de Sécurité Sociale du Sénégal.","[""..."", ""..."", ""...""]",,34683.88509750366,,deepseek,,
+453ed3c3-10d7-4b68-991d-1496d300bb2e,2025-09-04T16:12:09.207205,Salut,Salut ! Comment puis-je vous aider aujourd'hui ?,"[""Base de connaissances CSS...""]",0.95,,,predefined_qa,,
+e878b344-38d6-4c72-8eae-ab300fd95f22,2025-09-04T16:13:05.711756,Comment faire une demande de pension de retraite ?,"Bonjour,
+
+Pour faire une demande de pension de retraite, vous devez adresser votre dossier à l'IPRES (Institution de Prévoyance Retraite du Sénégal).
+
+Selon les informations dont je dispose, la prise d'effet de votre pension est directement liée à la date de réception de votre demande. En effet, **les allocations prennent effet le premier jour du mois au cours duquel la demande parvient à l'IPRES**.
+
+Pour que votre demande soit recevable, vous devez au préalable remplir les conditions d'admission suivantes :
+*   **Conditions de cotisation :** Avoir cotisé au minimum 10 ans **ou** avoir capitalisé au moins 1 000 points.
+*   **Conditions d'âge :** Avoir au moins 60 ans (âge normal). Une retraite anticipée est possible à partir de 55 ans, mais elle est soumise à un abattement de 5% par année d'anticipation.
+*   **Condition d'activité :** Avoir cessé toute activité salariée.
+
+Malheureusement, les documents fournis ne détaillent pas la liste exacte des pièces justificatives à joindre ni les canaux de dépôt (courrier, guichet, etc.).
+
+Pour obtenir des instructions précises sur la procédure à suivre et la composition du dossier, je vous recommande de contacter directement l'IPRES ou de reformuler votre question pour cibler les ""pièces à fournir pour une demande de retraite"".
+
+Cordialement,
+Votre assistant expert de la Caisse de Sécurité Sociale du Sénégal.","[""..."", ""..."", ""...""]",,38324.22637939453,,deepseek,,
+982a2d99-b3c5-4a25-abe0-412127c4e1e1,2025-09-04T16:23:30.451521,Comment faire une demande de pension de retraite ?,"Bonjour,
+
+Pour faire une demande de pension de retraite à l'IPRES, vous devez soumettre votre demande auprès de l'institution. Selon les informations dont je dispose, la prise d'effet de votre pension interviendra le premier jour du mois au cours duquel votre demande parvient à l'IPRES.
+
+Les documents spécifiques à fournir ou les modalités précises de dépôt (en ligne, par courrier, sur place) ne sont pas détaillés dans les sources fournies.
+
+Pour obtenir des instructions plus précises sur la procédure à suivre et la liste exacte des pièces justificatives à joindre à votre dossier, je vous invite à reformuler votre question ou à contacter directement l'IPRES.
+
+Cordialement,
+Votre assistant de la Caisse de Sécurité Sociale du Sénégal.","[""..."", ""..."", ""...""]",,29672.213077545166,,deepseek,,
+faac8757-31c3-4bc5-9f26-00b73cbc7804,2025-09-04T16:25:58.836387,Les prestations familiales,"Les allocations familiales de la CSS sont versées mensuellement. Le montant varie selon le nombre d'enfants à charge et leur âge. Pour connaître le montant exact applicable à votre situation, veuillez consulter le barème en vigueur auprès de votre agence CSS.","[""Base de connaissances CSS...""]",0.85,,,predefined_qa,,
+13840ec0-61f5-4746-8b37-a2e7bc4133a0,2025-09-04T16:28:56.610148,Salut,Salut ! Comment puis-je vous aider aujourd'hui ?,"[""Base de connaissances CSS...""]",0.95,,,predefined_qa,,
+a9afec2e-cdae-458b-bdad-58a76c19eda0,2025-09-04T16:29:40.120441,Comment déclarer un accident de travail ?,"Pour déclarer un accident de travail, l'employeur doit accomplir les formalités suivantes dans un délai de 48 heures :
+
+1.  Adresser une déclaration d'accident du travail à l'Inspection du Travail et à la Caisse de Sécurité Sociale.
+2.  Fournir un carnet d'accident à la victime.
+3.  Assurer les soins de première urgence.
+4.  Aviser le médecin de l'entreprise ou le médecin le plus proche.
+5.  Diriger la victime vers le service médical approprié.
+
+En cas de carence de l'employeur, la victime ou ses ayants-droit disposent d'un délai de 2 ans pour effectuer la déclaration.
+
+Notez que les accidents de trajet (entre la résidence et le lieu de travail, ou le lieu de travail et le lieu habituel du repas, sans interruption ou détour pour un motif personnel) sont assimilés à des accidents du travail.","[""..."", ""..."", ""...""]",,33471.58980369568,,deepseek,,
+e01740ae-2eeb-4bb2-94a9-82b608d0ef42,2025-09-04T16:36:42.829098,Comment déclarer un accident de travail ?,"Bonjour,
+
+Pour déclarer un accident de travail, l'employeur a l'obligation d'accomplir les formalités suivantes **dans un délai de 48 heures** :
+
+1.  **Adresser une déclaration d'accident du travail** à l'Inspection du Travail et à la Caisse de Sécurité Sociale.
+2.  **Fournir un carnet d'accident** à la victime.
+3.  **Assurer les soins de première urgence**.
+4.  **Aviser le médecin de l'entreprise** ou le médecin le plus proche.
+5.  **Diriger la victime** vers le service médical approprié.
+
+**En cas de carence de l'employeur**, la victime ou ses ayants-droit disposent d'un **délai de 2 ans** pour effectuer eux-mêmes la déclaration auprès de la Caisse.
+
+Cordialement,  
+Votre expert de la Caisse de Sécurité Sociale du Sénégal.","[""..."", ""..."", ""...""]",,27707.290649414062,,deepseek,,
+dff55f02-c421-403a-94d9-f20e431d7ab6,2025-09-04T16:45:04.861508,Quelles sont les conditions pour bénéficier des prestations familiales ?,"Les allocations familiales de la CSS sont versées mensuellement. Le montant varie selon le nombre d'enfants à charge et leur âge. Pour connaître le montant exact applicable à votre situation, veuillez consulter le barème en vigueur auprès de votre agence CSS.","[""Base de connaissances CSS...""]",0.85,,,predefined_qa,,
+9a899a51-bb30-49bf-8883-bc325489cfae,2025-09-04T16:50:11.656089,Comment faire une demande de pension de retraite ?,"Bonjour,
+
+Pour faire une demande de pension de retraite, vous devez adresser votre dossier à l'IPRES (Institution de Prévoyance Retraite du Sénégal).
+
+Selon les informations dont je dispose, la prise d'effet de votre pension est une information cruciale : **les allocations prennent effet le premier jour du mois au cours duquel votre demande parvient à l'IPRES**.
+
+Cela signifie qu'il est important de planifier l'envoi de votre dossier pour que votre pension commence à vous être versée au moment le plus opportun.
+
+Malheureusement, les sources fournies ne détaillent pas la liste exacte des pièces justificatives à joindre ni les modalités pratiques de dépôt (par courrier, en agence, etc.).
+
+Afin de bénéficier d'un guide précis et complet pour constituer votre dossier, je vous recommande de reformuler votre question en demandant quelles sont **les pièces à fournir** ou **la procédure exacte** pour effectuer la demande.
+
+Je reste à votre disposition pour toute autre question.","[""..."", ""..."", ""...""]",,31034.411907196045,,deepseek,,
+29340d13-d05e-4b65-b502-3740d7d48d7b,2025-09-04T16:51:45.635489,Les prestations familiales,"Les allocations familiales de la CSS sont versées mensuellement. Le montant varie selon le nombre d'enfants à charge et leur âge. Pour connaître le montant exact applicable à votre situation, veuillez consulter le barème en vigueur auprès de votre agence CSS.","[""Base de connaissances CSS...""]",0.85,,,predefined_qa,,
+59e0db15-d1a1-45df-8d3e-2a95208ee33b,2025-09-04T17:00:05.398259,Quelles sont les conditions pour bénéficier des prestations familiales ?,"Les allocations familiales de la CSS sont versées mensuellement. Le montant varie selon le nombre d'enfants à charge et leur âge. Pour connaître le montant exact applicable à votre situation, veuillez consulter le barème en vigueur auprès de votre agence CSS.","[""Base de connaissances CSS...""]",0.85,12.310981750488281,,predefined_qa,,
+73f7480a-7bbd-4e00-b7f6-d60dfae37cf9,2025-09-04T17:01:00.126408,Les frontières,"Bonjour,
+
+Votre question concernant ""les frontières"" est trop vague pour que je puisse vous apporter une réponse précise avec les informations fournies.
+
+Le contexte documenté traite principalement des assiettes de cotisation, des taux, des procédures de déclaration pour les employeurs et des prestations familiales. Le terme ""frontières"" pourrait faire référence à plusieurs aspects non détaillés dans les sources, tels que :
+
+-   Les frontières géographiques de couverture des prestations (ex: pour les enfants résidant au Sénégal)
+-   Les limites d'âge pour le bénéfice des allocations familiales
+-   Les plafonds et planchers de l'assiette des cotisations
+
+Afin de vous aider efficacement, pourriez-vous, s'il vous plaît, reformuler votre question en la précisant ? Par exemple :
+-   ""Quelles sont les conditions de résidence pour bénéficier des prestations familiales ?""
+-   ""Quel est le plafond de salaire pour cotiser à la branche vieillesse du régime général ?""
+
+Je me tiens à votre disposition pour toute information relative aux cotisations et prestations de la Caisse de Sécurité Sociale.","[""..."", ""..."", ""...""]",,32010.73980331421,,deepseek,,
+8c12a698-b015-4cad-ae75-3d60ea27f450,2025-09-04T17:05:51.504434,Salut,Salut ! Comment puis-je vous aider aujourd'hui ?,"[""Base de connaissances CSS...""]",0.95,,,predefined_qa,,
+4d539fc1-0705-44ae-a1e3-816ed692c904,2025-09-04T17:06:37.301961,Où puis-je retirer ma carte d'assuré social ?,"Bonjour,
+
+D'après les informations dont je dispose, je ne trouve pas de précision sur le lieu de retrait de la carte d'assuré social.
+
+Pour obtenir une réponse précise à votre question, je vous invite à vous rapprocher directement de l'agence de la Caisse de Sécurité Sociale la plus proche de votre domicile ou à contacter notre service client. Ils pourront vous indiquer la procédure exacte et le lieu où retirer votre carte.
+
+Je reste à votre disposition pour toute autre question concernant les documents nécessaires à diverses démarches.","[""..."", ""..."", ""...""]",,25216.593742370605,,deepseek,,
+a984f999-3015-4569-81d5-337409c73060,2025-09-04T17:16:46.600162,Salut,Salut ! Comment puis-je vous aider aujourd'hui ?,"[""Base de connaissances CSS...""]",0.95,0.9999275207519531,,predefined_qa,,
+51cf09d1-0d3d-4440-b5ea-0895d8a3c075,2025-09-04T17:17:39.119560,Où puis-je retirer ma carte d'assuré social ?,"Bonjour,
+
+En me basant sur les informations mises à ma disposition, je ne trouve pas de précision concernant le lieu de retrait d'une carte d'assuré social.
+
+Pour obtenir une réponse précise sur ce point, je vous invite à vous rapprocher directement de votre agence de la Caisse de Sécurité Sociale ou à les contacter via leurs canaux officiels. Ils pourront vous indiquer la procédure exacte et le lieu où retirer votre carte.
+
+N'hésitez pas à reformuler votre question si vous avez besoin d'autres renseignements.","[""..."", ""..."", ""...""]",,23955.307960510254,,deepseek,,
+1f49e2e5-8c30-4183-b73b-4500d26f61a1,2025-09-04T17:45:51.108370,Comment faire une demande de pension de retraite ?,"Bonjour,
+
+Pour faire une demande de pension de retraite, vous devez adresser votre dossier à l'IPRES (Institution de Prévoyance Retraite du Sénégal).
+
+La date de prise d'effet de votre pension est une information cruciale : **les allocations prennent effet le premier jour du mois au cours duquel votre demande parvient à l'IPRES**.
+
+Pour que votre demande soit recevable, vous devez au préalable remplir les conditions d'admission suivantes :
+*   **Conditions de cotisation :** Avoir cotisé au minimum 10 ans **ou** avoir capitalisé au moins 1 000 points.
+*   **Conditions d'âge :** Avoir au moins 60 ans (âge normal). Une retraite anticipée est possible à partir de 55 ans, mais elle est soumise à un abattement de 5% par année d'anticipation.
+*   **Condition d'activité :** Avoir cessé toute activité salariée.
+
+Pour connaître les documents spécifiques à fournir et obtenir le formulaire de demande, je vous invite à contacter directement l'IPRES, car ces détails pratiques ne sont pas précisés dans les sources fournies.
+
+Cordialement,
+Votre assistant de la Caisse de Sécurité Sociale du Sénégal.","[""..."", ""..."", ""...""]",,30874.812126159668,,deepseek,,
+c22df36e-6ef0-4889-8dfd-16969b0ec236,2025-09-04T17:47:16.798420,Comment faire une présentation,"Bonjour,
+
+En ma qualité d'expert de la Caisse de Sécurité Sociale du Sénégal, je me ferai un plaisir de vous guider.
+
+Pour effectuer un paiement de vos cotisations, voici la procédure à suivre, synthétisée à partir des textes officiels :
+
+**1. Téléchargement de la facture :**
+Après avoir soumis votre déclaration sur le portail, une facture téléchargeable est générée pour chaque période déclarée. Cette facture est indispensable pour procéder au règlement.
+
+**2. Méthodes de paiement disponibles :**
+Vous pouvez régler vos cotisations de l'une des manières suivantes :
+*   **Par virement bancaire** aux coordonnées suivantes :
+    *   **Bénéficiaire :** IPRES / CSS
+    *   **Banque :** Banque de Dakar
+    *   **RIB :** SN191 01001 002000137005 75
+    *   **Montant :** Le montant indiqué sur votre facture.
+    *   **Motif :** Vous devez impérativement indiquer le numéro de la facture.
+*   **Par chèque barré**, à l'ordre de la CSS ou de l'IPRES.
+*   **En espèces**, directement aux caisses des agences de la CSS ou de l'IPRES.
+
+**3. Lieux de paiement :**
+*   En ligne, via le portail NDAMLI CSS/IPRES.
+*   Physiquement, dans les agences CSS/IPRES.
+
+**4. Justificatif :**
+Un reçu de paiement vous sera remis ou sera disponible en ligne pour justifier du règlement effectué.
+
+Cordialement,
+Votre expert de la Caisse de Sécurité Sociale du Sénégal.","[""..."", ""..."", ""...""]",,32099.846601486206,,deepseek,,
+d0a22fa4-bd3d-44b0-b13a-b148508bf169,2025-09-04T18:07:00.365997,Une présentation se passe comment ?,"Bonjour,
+
+Pour procéder à une immatriculation, vous avez deux options principales :
+
+**Option 1 : En ligne**
+*   Accès au portail 7j/7.
+*   Téléchargement direct des formulaires nécessaires.
+*   Possibilité d'un suivi en temps réel de votre dossier.
+
+**Option 2 : En agence**
+*   Vous devez vous présenter physiquement dans une agence de la Caisse de Sécurité Sociale (CSS) ou de l'IPRES.
+*   Il est impératif de vous munir de tous les documents requis pour votre dossier.
+
+Si votre question concernait le paiement des cotisations, n'hésitez pas à me le préciser.","[""..."", ""..."", ""...""]",,20675.182342529297,,deepseek,,
+aa667c95-0c87-42e0-ae81-cc4f0d7a0ca5,2025-09-04T18:15:56.278323,Comment faire une demande de pension de retraite ?,"Bonjour,
+
+En ma qualité d'expert de la Caisse de Sécurité Sociale du Sénégal, je vous informe que les sources fournies détaillent les conditions d'éligibilité et le calcul de la pension de retraite, mais elles ne contiennent malheureusement pas la procédure précise pour effectuer la demande.
+
+Les documents indiquent uniquement que **la prise d'effet de la pension intervient le premier jour du mois au cours duquel la demande parvient à l'IPRES**. Pour connaître les modalités pratiques de dépôt de votre dossier (formulaires à remplir, pièces justificatives à fournir, guichet ou plateforme à utiliser), je vous invite à reformuler votre question ou à vous rapprocher directement de l'IPRES pour obtenir un guide complet de la démarche.
+
+Je reste à votre disposition pour toute question concernant les conditions d'admission ou le calcul de votre pension.","[""..."", ""..."", ""...""]",,27325.932264328003,,deepseek,,
+b4e410d7-ed62-4a51-b235-d2ba6a0ed2d4,2025-09-04T18:17:00.501867,Comment presté,"Bonjour,
+
+Votre question semble incomplète. Pourriez-vous la reformuler ou préciser votre demande ?
+
+Par exemple, souhaitez-vous savoir :
+*   Comment **payer** les cotisations sociales ?
+*   Comment **déclarer** les salaires ?
+*   Comment **calculer** les cotisations ?
+
+Je reste à votre disposition pour vous apporter une réponse précise dès que vous aurez précisé votre requête.","[""..."", ""..."", ""...""]",,17046.122074127197,,deepseek,,
+f1dcc7af-23fe-4733-a1b1-29518f714f47,2025-09-04T18:19:13.294826,Quelles sont les conditions pour bénéficier des prestations familiales ?,"Les allocations familiales de la CSS sont versées mensuellement. Le montant varie selon le nombre d'enfants à charge et leur âge. Pour connaître le montant exact applicable à votre situation, veuillez consulter le barème en vigueur auprès de votre agence CSS.","[""Base de connaissances CSS...""]",0.85,,,predefined_qa,,
+993b6089-c6d1-4fed-9e2f-e0fb9b619275,2025-09-04T18:20:02.170039,Comment prêter,"Bonjour,
+
+Je comprends que vous souhaitez connaître les modalités de paiement des cotisations sociales.
+
+Sur la base des informations dont je dispose, voici comment procéder :
+
+**Comment payer ?**
+
+Le règlement des cotisations peut s'effectuer de deux manières :
+1.  **En ligne** via le portail NDAMLI CSS/IPRES.
+2.  **Directement** dans les agences CSS/IPRES.
+
+**Moyen de paiement :**
+Le paiement s'effectue par **virement bancaire**. L'ordre de virement doit impérativement comporter les informations suivantes :
+*   **Bénéficiaire :** IPRES / CSS
+*   **Banque domiciliataire :** Banque de Dakar
+*   **RIB :** SN191 01001 002000137005 75
+*   **Motif :** Le numéro de facture de cotisations
+*   **Montant :** Selon le montant indiqué sur votre facture de cotisations
+
+**Pièce justificative :**
+Un reçu de paiement vous sera remis comme justificatif de votre règlement.
+
+Pour toute précision supplémentaire sur les procédures de prêt ou de financement, je vous invite à reformuler votre question ou à vous rapprocher directement de l'une de nos agences.
+
+Cordialement,
+Votre expert CSS.","[""..."", ""..."", ""...""]",,27811.929941177368,,deepseek,,
+c8fb30bc-bd1c-4d19-a4bf-b4ec4aa2e689,2025-09-04T18:23:19.262557,Une présentation se passe comment ?,"Bonjour,
+
+Pour procéder à une immatriculation, vous avez deux options principales :
+
+**Option 1 : En ligne**
+*   Accès au portail 7j/7.
+*   Téléchargement direct des formulaires nécessaires.
+*   Possibilité de suivre votre dossier en temps réel.
+
+**Option 2 : En agence**
+*   Vous devez vous présenter physiquement dans une agence de la CSS ou de l'IPRES.
+*   Il est impératif de vous munir de tous les documents requis pour votre dossier.
+
+Si votre question concernait une autre procédure, merci de la reformuler pour que je puisse vous apporter une réponse plus précise.","[""..."", ""..."", ""...""]",,20558.119773864746,,deepseek,,
+8e032981-befe-4e7e-8931-b09d804a2555,2025-09-04T18:24:39.234764,Une demande d'allocation se passe comment ?,"Bonjour,
+
+Pour effectuer une demande d'allocation de retraite auprès de l'IPRES, la procédure est la suivante :
+
+**1. Conditions préalables :**
+Vous devez remplir les conditions d'admission :
+*   **Conditions de cotisation :** Avoir cotisé au minimum 10 ans **OU** avoir capitalisé au moins 1 000 points.
+*   **Condition d'âge :** Avoir au moins 60 ans (âge normal). Une anticipation est possible à partir de 55 ans, avec un abattement de 5% par année d'anticipation.
+*   **Condition d'activité :** Avoir cessé toute activité salariée.
+
+**2. Soumission de la demande :**
+La demande doit être envoyée à l'IPRES. Sa prise d'effet est rétroactive **au premier jour du mois au cours duquel votre demande parvient à l'IPRES**.
+
+**Pour optimiser vos droits et préparer votre dossier, il est conseillé de :**
+*   Garder une trace de tous vos bulletins de paie.
+*   Demander régulièrement un relevé de vos points de retraite à l'IPRES pour en contrôler l'évolution et vous assurer qu'ils sont correctement enregistrés.
+*   Signaler immédiatement toute anomalie dans vos relevés.
+
+Pour toute précision supplémentaire sur le processus de demande lui-même (formulaire à utiliser, pièces justificatives à fournir), je vous invite à reformuler votre question ou à contacter directement l'IPRES.","[""..."", ""..."", ""...""]",,29556.107997894287,,deepseek,,
+4924e59b-059d-496e-9aaf-e7bfc4906fa3,2025-09-04T18:38:35.885787,Où puis-je retirer ma carte d'assuré social ?,"Bonjour,
+
+En tant qu'assistant de la Caisse de Sécurité Sociale du Sénégal, je me base strictement sur la documentation officielle fournie pour vous répondre.
+
+Malheureusement, les documents à ma disposition ne contiennent pas d'information spécifique sur les modalités de retrait d'une carte d'assuré social.
+
+Pour obtenir une réponse précise et officielle, je vous recommande de vous rapprocher directement de votre agence locale de la Caisse de Sécurité Sociale ou de consulter son site internet officiel.
+
+Je reste à votre disposition pour toute autre question concernant les prestations, les conditions ou la constitution d'un dossier, pour lesquelles les informations sont disponibles.","[""..."", ""..."", ""...""]",,27740.005493164062,,deepseek,,
+5b705060-52e0-442c-a2dd-6ef4df8d3735,2025-09-04T18:55:03.666770,Quelles sont les conditions pour bénéficier des prestations familiales ?,"Les allocations familiales de la CSS sont versées mensuellement. Le montant varie selon le nombre d'enfants à charge et leur âge. Pour connaître le montant exact applicable à votre situation, veuillez consulter le barème en vigueur auprès de votre agence CSS.","[""Base de connaissances CSS...""]",0.85,10.776758193969727,,predefined_qa,,
+2bad973d-d650-435d-84e2-8443b2dcb388,2025-09-04T18:55:47.799019,Les prestations,"Bonjour,
+
+En me basant sur les informations fournies, je peux vous informer sur l'objectif général des prestations en nature de l'Action Sanitaire, Sociale et Familiale (A.S.S.F).
+
+L'objectif principal de ces prestations est de **compléter les prestations en espèces pour protéger la mère et l'enfant en palliant les insuffisances du système national de santé**.
+
+Pour obtenir des détails plus précis sur les types de prestations, leurs conditions d'accès ou leurs modalités, je vous invite à reformuler votre question. Je serai alors en mesure de vous fournir une réponse plus complète.
+
+Cordialement,
+Votre assistant de la Caisse de Sécurité Sociale du Sénégal.","[""..."", ""..."", ""...""]",,29112.366437911987,,deepseek,,
+98087eb2-0976-4f54-8f4b-eb887c62c3d9,2025-09-04T19:17:50.613654,Salut,Salut ! Comment puis-je vous aider aujourd'hui ?,"[""Base de connaissances CSS...""]",0.95,,,predefined_qa,,
+61e26966-273d-4861-a4f4-7febad09f769,2025-09-04T19:18:02.019568,Les prestations familiales,"Les allocations familiales de la CSS sont versées mensuellement. Le montant varie selon le nombre d'enfants à charge et leur âge. Pour connaître le montant exact applicable à votre situation, veuillez consulter le barème en vigueur auprès de votre agence CSS.","[""Base de connaissances CSS...""]",0.85,,,predefined_qa,,
+a8b92e2b-3004-4565-aa42-ab3515e60147,2025-09-04T19:25:56.550143,Familiales Allocation,"Bonjour,
+
+En ma qualité d'expert de la Caisse de Sécurité Sociale du Sénégal, je vous informe sur les prestations familiales.
+
+Sur la base des textes en vigueur, voici les informations essentielles concernant les allocations familiales :
+
+**Bénéficiaires :**
+*   Travailleurs salariés (relevant du Code du travail ou de la marine marchande)
+*   Veuves d'allocataires
+*   Travailleurs en incapacité permanente totale (à la suite d'un Accident du Travail ou d'une Maladie Professionnelle - AT/MP)
+
+**Tranches d'âge couvertes :**
+*   De 2 à 14 ans : tous les enfants à charge
+*   De 15 à 18 ans : enfants en apprentissage
+*   De 15 à 21 ans : enfants poursuivant des études
+
+**Montant et limites :**
+*   Le montant est de **2 600 FCFA par mois et par enfant**.
+*   Une limite de **6 enfants maximum** est appliquée, avec une possibilité de glissement.
+
+**Début des droits :**
+*   Les allocations sont dues à partir du 1er jour du mois suivant le 2ème anniversaire de l'enfant.
+
+**Exclusion importante :**
+*   Les enfants titulaires d'une **bourse entière d'études** sont exclus du bénéfice de cette allocation.
+
+Pour toute question plus spécifique sur votre situation personnelle, n'hésitez pas à nous contacter directement.","[""..."", ""..."", ""...""]",,28281.196117401123,,deepseek,,
+c07c8bbe-5fde-44f7-a4be-b2a13a8921f2,2025-09-04T19:27:45.102353,Comment allez vous,Je suis là pour vous aider. Que souhaitez-vous savoir ?,"[""Base de connaissances CSS...""]",0.95,,,predefined_qa,,
+d3271322-318f-4c0b-b452-252e7c17af85,2025-09-04T19:28:12.971081,Comment allez vous,Je suis là pour vous aider. Que souhaitez-vous savoir ?,"[""Base de connaissances CSS...""]",0.95,0.9634494781494141,,predefined_qa,,
+47c9e791-2680-44d8-b42d-c3d1f52dfe07,2025-09-04T19:28:51.005950,Comment ça va ?,"Bien, merci ! Comment puis-je vous aider aujourd'hui ?","[""Base de connaissances CSS...""]",0.95,,,predefined_qa,,
+51270644-27fc-4631-b444-2b3a57dc0ef9,2025-09-04T19:29:20.356178,Comment ça va ?,"Bien, merci ! Comment puis-je vous aider aujourd'hui ?","[""Base de connaissances CSS...""]",0.95,,,predefined_qa,,

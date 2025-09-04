@@ -57,3 +57,18 @@ class MultimodalQuestionRequest(QuestionRequest):
     )
     include_images: bool = Field(True, description="Inclure les résultats d'images")
     multimodal_boost: float = Field(0.1, description="Boost pour les résultats multimodaux")
+
+
+class SatisfactionRequest(BaseModel):
+    response_id: str = Field(..., description="ID de la réponse à évaluer")
+    is_satisfied: bool = Field(..., description="Satisfaction de l'utilisateur (True/False)")
+
+
+class SatisfactionResponse(BaseModel):
+    satisfaction_id: str
+    response_id: str
+    question: str
+    response: str
+    is_satisfied: bool
+    timestamp: str
+    status: str

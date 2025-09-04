@@ -21,7 +21,8 @@ class AsyncCSVLogger:
             "ask_question_ultra": "responses_ask_question_ultra.csv",
             "ask_question_stream_ultra": "responses_ask_question_stream_ultra.csv",
             "ask_multimodal_question": "responses_ask_multimodal_question.csv",
-            "ask_multimodal_with_image": "responses_ask_multimodal_with_image.csv"
+            "ask_multimodal_with_image": "responses_ask_multimodal_with_image.csv",
+            "user_satisfaction": "user_satisfaction.csv"
         }
         
         # Queue pour les tâches d'écriture asynchrone
@@ -234,6 +235,30 @@ class AsyncCSVLogger:
         
         self.write_queue.put({
             "endpoint_type": "ask_multimodal_with_image",
+            "data": data
+        })
+    
+    def log_user_satisfaction(self,
+                            satisfaction_id: str,
+                            response_id: str,
+                            question: str,
+                            response: str,
+                            is_satisfied: bool,
+                            error_message: Optional[str] = None):
+        """Enregistre la satisfaction utilisateur pour une réponse"""
+        
+        data = {
+            "satisfaction_id": satisfaction_id,
+            "timestamp": datetime.now().isoformat(),
+            "response_id": response_id,
+            "question": question,
+            "response": response,
+            "is_satisfied": is_satisfied,
+            "error_message": error_message or ""
+        }
+        
+        self.write_queue.put({
+            "endpoint_type": "user_satisfaction",
             "data": data
         })
     

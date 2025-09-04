@@ -193,11 +193,19 @@ class TelegramCSSBotAdvanced:
     
     @staticmethod
     def clean_markdown_text(text: str) -> str:
-        """Nettoie le texte pour éviter les erreurs de parsing Markdown"""
+        """Nettoie le texte pour éviter les erreurs de parsing Markdown et corrige l'encodage"""
         if not text:
             return text
         
-        # Remplacer les caractères problématiques
+        # Décoder les caractères Unicode échappés AVANT le nettoyage
+        if '\\u' in text:
+            try:
+                import codecs
+                text = codecs.decode(text, 'unicode_escape')
+            except (UnicodeDecodeError, UnicodeEncodeError):
+                pass
+        
+        # Remplacer les caractères problématiques pour Markdown
         cleaned = text.replace('`', "'").replace('*', '•').replace('_', '-')
         cleaned = cleaned.replace('[', '(').replace(']', ')')
         cleaned = cleaned.replace('\\', '/')
@@ -991,6 +999,8 @@ class TelegramCSSBotAdvanced:
         cached_response = await self.cache_manager.get(cache_key)
         
         if cached_response:
+            # Appliquer la correction Unicode aux réponses en cache
+            cached_response = self.fix_unicode_encoding(cached_response)
             await update.message.reply_text(
                 f"{cached_response}",
                 parse_mode=ParseMode.MARKDOWN
@@ -1006,7 +1016,7 @@ class TelegramCSSBotAdvanced:
                 session.state = ConversationState.MAIN_MENU
                 return
             else:
-                response = await self.call_standard_endpoint(question)
+                response, response_id = await self.call_standard_endpoint(question)
                 
                 # La fonction call_standard_endpoint retourne maintenant toujours une réponse (succès ou erreur)
                 await self.send_long_message(update.message, response)
@@ -1038,7 +1048,7 @@ class TelegramCSSBotAdvanced:
                     )
                 
                 # Ajout à l'historique (succès ou échec)
-                self.add_to_history(session, question, response, is_success)
+                self.add_to_history(session, question, response, is_success, response_id)
         
         except Exception as e:
             logger.error(f"Erreur traitement question: {e}")
@@ -1067,6 +1077,8 @@ class TelegramCSSBotAdvanced:
                 response = await self.call_multimodal_endpoint(question, session.uploaded_files)
             
             if response:
+                # Appliquer la correction Unicode aux réponses multimodales
+                response = self.fix_unicode_encoding(response)
                 await self.send_long_message(update.message, response)
                 self.add_to_history(session, f"[Multimodal] {question}", response, True)
                 self.stats['multimodal_queries'] += 1
@@ -1722,38 +1734,56 @@ Envoyez une image puis posez votre question.
             question_index = int(parts[2])
             
             if question_index < len(session.question_history):
-                # Enregistre le feedback
-                feedback_entry = {
-                    'user_id': session.user_id,
-                    'timestamp': datetime.now().isoformat(),
-                    'rating': feedback_type,
-                    'question': session.question_history[question_index].get('question'),
-                    'response': session.question_history[question_index].get('response')
-                }
+                question_entry = session.question_history[question_index]
+                response_id = question_entry.get('response_id')
                 
-                self.feedback_data.append(feedback_entry)
-                
-                # Marque le feedback dans l'historique
-                session.question_history[question_index]['feedback'] = feedback_type
-                
-                feedback_text = "👍 Merci !" if feedback_type == 'good' else "👎 Merci pour votre retour !"
-                await query.answer(feedback_text)
-                
-                # Propose un feedback textuel pour les évaluations négatives
-                if feedback_type == 'bad':
-                    session.state = ConversationState.PROVIDING_FEEDBACK
-                    session.feedback_data = {'rating': feedback_type, 'question_index': question_index}
+                if response_id:
+                    # Appelle l'endpoint /record-satisfaction
+                    satisfaction = feedback_type == 'good'
+                    success = await self.call_satisfaction_endpoint(response_id, satisfaction)
                     
-                    await query.edit_message_text(
-                        "💬 **Aidez-nous à nous améliorer !**\n\nPouvez-vous nous dire ce qui n'a pas fonctionné ?\n\n✍️ Tapez votre commentaire :",
-                        parse_mode=ParseMode.MARKDOWN,
-                        reply_markup=InlineKeyboardMarkup([[
-                            InlineKeyboardButton("⏭️ Passer", callback_data="main_menu")
-                        ]])
-                    )
+                    if success:
+                        # Marque le feedback dans l'historique local
+                        session.question_history[question_index]['feedback'] = feedback_type
+                        
+                        feedback_text = "👍 Merci !" if feedback_type == 'good' else "👎 Merci pour votre retour !"
+                        await query.answer(feedback_text)
+                        
+                        # Propose un feedback textuel pour les évaluations négatives
+                        if feedback_type == 'bad':
+                            session.state = ConversationState.PROVIDING_FEEDBACK
+                            session.feedback_data = {'rating': feedback_type, 'question_index': question_index}
+                            
+                            await query.edit_message_text(
+                                "💬 **Aidez-nous à nous améliorer !**\n\nPouvez-vous nous dire ce qui n'a pas fonctionné ?\n\n✍️ Tapez votre commentaire :",
+                                parse_mode=ParseMode.MARKDOWN,
+                                reply_markup=InlineKeyboardMarkup([[
+                                    InlineKeyboardButton("⏭️ Passer", callback_data="main_menu")
+                                ]])
+                            )
+                        else:
+                            await query.edit_message_text(
+                                "✅ **Merci pour votre feedback !**\n\nVotre évaluation nous aide à améliorer le service.",
+                                parse_mode=ParseMode.MARKDOWN,
+                                reply_markup=InlineKeyboardMarkup([[
+                                    InlineKeyboardButton("🏠 Menu Principal", callback_data="main_menu")
+                                ]])
+                            )
+                    else:
+                        # Erreur lors de l'enregistrement
+                        await query.answer("❌ Erreur lors de l'enregistrement du feedback")
+                        await query.edit_message_text(
+                            "❌ **Erreur**\n\nImpossible d'enregistrer votre feedback. Veuillez réessayer plus tard.",
+                            parse_mode=ParseMode.MARKDOWN,
+                            reply_markup=InlineKeyboardMarkup([[
+                                InlineKeyboardButton("🏠 Menu Principal", callback_data="main_menu")
+                            ]])
+                        )
                 else:
+                    # Pas de response_id disponible (ancienne réponse)
+                    await query.answer("⚠️ Feedback non disponible pour cette réponse")
                     await query.edit_message_text(
-                        "✅ **Merci pour votre feedback !**\n\nVotre évaluation nous aide à améliorer le service.",
+                        "⚠️ **Feedback non disponible**\n\nCette réponse ne supporte pas le feedback.",
                         parse_mode=ParseMode.MARKDOWN,
                         reply_markup=InlineKeyboardMarkup([[
                             InlineKeyboardButton("🏠 Menu Principal", callback_data="main_menu")
@@ -1790,8 +1820,10 @@ Envoyez une image puis posez votre question.
                 parse_mode=ParseMode.MARKDOWN
             )
     
-    async def call_standard_endpoint(self, question: str, progress_message=None) -> str:
-        """Appelle l'endpoint ask-question-ultra avec indicateur de progression"""
+    async def call_standard_endpoint(self, question: str, progress_message=None) -> tuple[str, str]:
+        """Appelle l'endpoint ask-question-ultra avec indicateur de progression
+        Retourne un tuple (response_text, response_id)
+        """
         import time
         start_time = time.time()
         
@@ -1806,7 +1838,8 @@ Envoyez une image puis posez votre question.
                 except:
                     pass
             
-            async with aiohttp.ClientSession(timeout=aiohttp.ClientTimeout(total=30)) as session:
+            # Timeout plus long pour les requêtes complexes (60 secondes)
+            async with aiohttp.ClientSession(timeout=aiohttp.ClientTimeout(total=60)) as session:
                 if progress_message:
                     try:
                         await progress_message.edit_text(
@@ -1833,44 +1866,98 @@ Envoyez une image puis posez votre question.
                         data = await response.json()
                         response_time = time.time() - start_time
                         logger.info(f"API standard réussie en {response_time:.2f}s - Question: {question[:50]}...")
-                        if response_time > 10.0:
+                        if response_time > 45.0:
+                            logger.warning(f"Requête API standard très lente (proche du timeout): {response_time:.2f}s - Question: {question[:50]}...")
+                        elif response_time > 30.0:
                             logger.warning(f"Requête API standard lente: {response_time:.2f}s - Question: {question[:50]}...")
                         self.stats['total_queries'] += 1
                         self.stats['successful_queries'] += 1
-                        return self.format_response(data)
+                        
+                        # Extraire le response_id de la réponse
+                        response_id = data.get('response_id', '')
+
+                        response_text = self.format_response(data)
+                        # Appliquer la correction Unicode
+                        response_text = self.fix_unicode_encoding(response_text)
+                        return response_text, response_id
                     else:
                         error_text = await response.text()
                         response_time = time.time() - start_time
                         logger.error(f"Erreur API standard: {response.status} - {error_text} - Temps: {response_time:.2f}s")
                         self.stats['total_queries'] += 1
                         self.stats['failed_queries'] += 1
-                        return f"❌ **Erreur API CSS (Code: {response.status})**\n\nL'API CSS a retourné une erreur. Veuillez réessayer plus tard.\n\n🔧 **Détails techniques:** {error_text[:100]}..."
+                        error_msg = f"❌ **Erreur API CSS (Code: {response.status})**\n\nL'API CSS a retourné une erreur. Veuillez réessayer plus tard.\n\n🔧 **Détails techniques:** {error_text[:100]}..."
+                        # Décoder les caractères Unicode échappés
+                        error_msg = self.fix_unicode_encoding(error_msg)
+                        return error_msg, ""
         except aiohttp.ClientConnectorError:
             response_time = time.time() - start_time
             logger.error(f"Impossible de se connecter à l'API CSS: {self.css_api_url} - Temps: {response_time:.2f}s")
             self.stats['total_queries'] += 1
             self.stats['failed_queries'] += 1
-            return f"🔌 **API CSS non disponible**\n\nImpossible de se connecter à l'API CSS.\n\n🔧 **Solutions possibles:**\n• Vérifiez que l'API CSS est démarrée\n• Vérifiez l'URL: `{self.css_api_url}`\n• Contactez l'administrateur système"
+            error_msg = f"🔌 **API CSS non disponible**\n\nImpossible de se connecter à l'API CSS.\n\n🔧 **Solutions possibles:**\n• Vérifiez que l'API CSS est démarrée\n• Vérifiez l'URL: `{self.css_api_url}`\n• Contactez l'administrateur système"
+            # Utiliser la méthode de correction d'encodage
+            error_msg = self.fix_unicode_encoding(error_msg)
+            return error_msg, ""
         except aiohttp.ServerTimeoutError as e:
             response_time = time.time() - start_time
             logger.error(f"Timeout API standard: {e} - URL: {self.css_api_url} - Temps: {response_time:.2f}s")
             self.stats['total_queries'] += 1
             self.stats['failed_queries'] += 1
-            return f"⏱️ **Timeout API CSS**\n\nLa requête a pris trop de temps (>30s).\n\n🔧 **Solutions possibles:**\n• Réessayez avec une question plus simple\n• Vérifiez la charge du serveur\n• Contactez l'administrateur si le problème persiste"
+            error_msg = f"⏱️ **Timeout API CSS**\n\nLa requête a pris trop de temps (>30s).\n\n🔧 **Solutions possibles:**\n• Réessayez avec une question plus simple\n• Vérifiez la charge du serveur\n• Contactez l'administrateur si le problème persiste"
+            # Décoder les caractères Unicode échappés
+            error_msg = self.fix_unicode_encoding(error_msg)
+            return error_msg, ""
         except aiohttp.ClientError as e:
             response_time = time.time() - start_time
             logger.error(f"Erreur client HTTP API standard: {type(e).__name__}: {e} - URL: {self.css_api_url} - Temps: {response_time:.2f}s")
             self.stats['total_queries'] += 1
             self.stats['failed_queries'] += 1
-            return f"🌐 **Erreur de connexion**\n\nProblème de communication avec l'API CSS.\n\n🔧 **Type d'erreur:** {type(e).__name__}\n**Détails:** {str(e)[:100]}..."
+            error_msg = f"🌐 **Erreur de connexion**\n\nProblème de communication avec l'API CSS.\n\n🔧 **Type d'erreur:** {type(e).__name__}\n**Détails:** {str(e)[:100]}..."
+            # Décoder les caractères Unicode échappés
+            error_msg = self.fix_unicode_encoding(error_msg)
+            return error_msg, ""
         except Exception as e:
             response_time = time.time() - start_time
             logger.error(f"Erreur appel API standard: {type(e).__name__}: {e} - URL: {self.css_api_url} - Temps: {response_time:.2f}s")
             logger.exception("Stack trace complète:")
             self.stats['total_queries'] += 1
             self.stats['failed_queries'] += 1
-            return f"⚠️ **Erreur technique**\n\nUne erreur inattendue s'est produite.\n\n🔧 **Type:** {type(e).__name__}\n**Détails:** {str(e)[:100]}..."
+            error_msg = f' Erreur technique. Une erreur inattendue s\'est produite. Type: {type(e).__name__} Détails: {str(e)[:100]}...'
+            # Décoder les caractères Unicode échappés
+            error_msg = self.fix_unicode_encoding(error_msg)
+            return error_msg, ""
     
+    async def call_satisfaction_endpoint(self, response_id: str, satisfaction: bool) -> bool:
+        """Appelle l'endpoint /record-satisfaction pour enregistrer la satisfaction utilisateur"""
+        try:
+            satisfaction_url = f"{self.css_api_url}/record-satisfaction"
+            
+            payload = {
+                "response_id": response_id,
+                "satisfaction": satisfaction
+            }
+            
+            async with aiohttp.ClientSession(timeout=aiohttp.ClientTimeout(total=30)) as session:
+                async with session.post(satisfaction_url, json=payload) as response:
+                    if response.status == 200:
+                        logger.info(f"Satisfaction enregistrée avec succès: response_id={response_id}, satisfaction={satisfaction}")
+                        return True
+                    else:
+                        error_text = await response.text()
+                        logger.error(f"Erreur enregistrement satisfaction: {response.status} - {error_text}")
+                        return False
+                        
+        except aiohttp.ClientConnectorError:
+            logger.error(f"Impossible de se connecter à l'API pour enregistrer la satisfaction: {self.css_api_url}")
+            return False
+        except aiohttp.ServerTimeoutError:
+            logger.error(f"Timeout lors de l'enregistrement de la satisfaction")
+            return False
+        except Exception as e:
+            logger.error(f"Erreur inattendue lors de l'enregistrement de la satisfaction: {type(e).__name__}: {e}")
+            return False
+     
     async def call_stream_endpoint(self, update: Update, question: str):
         """Appelle l'endpoint ask-question-stream-ultra avec streaming"""
         import time
@@ -1911,7 +1998,9 @@ Envoyez une image puis posez votre question.
                                     
                                     # Gestion des chunks de contenu
                                     if data.get('type') == 'chunk' and 'content' in data:
-                                        response_text += data['content']
+                                        # MODIFICATION CRITIQUE : Décoder chaque chunk
+                                        chunk_content = self.fix_unicode_encoding(data['content'])
+                                        response_text += chunk_content
                                         
                                         # Mise à jour du message toutes les 2 secondes ou tous les 50 caractères
                                         current_time = asyncio.get_event_loop().time()
@@ -1919,6 +2008,7 @@ Envoyez une image puis posez votre question.
                                             len(response_text) - len(response_text.split('\n')[-1]) > 50):
                                             
                                             try:
+                                                # Le texte est déjà décodé, pas besoin de re-décoder
                                                 await message.edit_text(
                                                     f"🌊 **Réponse en cours...**\n\n{response_text}{'▌' if len(response_text) < 500 else ''}",
                                                     parse_mode=ParseMode.MARKDOWN
@@ -1931,6 +2021,7 @@ Envoyez une image puis posez votre question.
                                     # Gestion des erreurs
                                     elif data.get('type') == 'error':
                                         error_msg = data.get('error', 'Erreur inconnue')
+                                        error_msg = self.fix_unicode_encoding(error_msg)
                                         await message.edit_text(
                                             f"❌ **Erreur lors du streaming**\n\n{error_msg}",
                                             parse_mode=ParseMode.MARKDOWN
@@ -1944,6 +2035,9 @@ Envoyez une image puis posez votre question.
                         
                         # Message final
                         if response_text.strip():
+                            # Le texte a déjà été décodé chunk par chunk, une correction finale
+                            response_text = self.fix_unicode_encoding(response_text)
+                            
                             # Vérifier si c'est un message d'erreur
                             if response_text.startswith(("❌", "🔌", "⚠️")):
                                 await message.edit_text(
@@ -1973,8 +2067,6 @@ Envoyez une image puis posez votre question.
                                 
                                 response_time = time.time() - start_time
                                 logger.info(f"API streaming réussie en {response_time:.2f}s - Question: {question[:50]}...")
-                                if response_time > 15.0:
-                                    logger.warning(f"Requête API streaming lente: {response_time:.2f}s - Question: {question[:50]}...")
                                 
                                 self.stats['total_queries'] += 1
                                 self.stats['successful_queries'] += 1
@@ -1985,6 +2077,7 @@ Envoyez une image puis posez votre question.
                                 
                                 # Ajout à l'historique
                                 self.add_to_history(user_session, question, response_text, True)
+
                         else:
                             response_time = time.time() - start_time
                             logger.warning(f"Streaming terminé sans contenu en {response_time:.2f}s - Question: {question[:50]}...")
@@ -1998,8 +2091,14 @@ Envoyez une image puis posez votre question.
                         error_text = await response.text()
                         response_time = time.time() - start_time
                         logger.error(f"Erreur API streaming: {response.status} - {error_text} - Temps: {response_time:.2f}s")
+                        error_msg = f"❌ **Erreur API CSS (Code: {response.status})**\n\nL'API CSS a retourné une erreur. Veuillez réessayer plus tard.\n\n🔧 **Détails techniques:** {error_text[:100]}..."
+                        # Décoder les caractères Unicode échappés
+                        try:
+                            error_msg = error_msg.encode().decode('unicode_escape')
+                        except (UnicodeDecodeError, UnicodeEncodeError):
+                            pass
                         await message.edit_text(
-                            f"❌ **Erreur API CSS (Code: {response.status})**\n\nL'API CSS a retourné une erreur. Veuillez réessayer plus tard.\n\n🔧 **Détails techniques:** {error_text[:100]}...",
+                            error_msg,
                             parse_mode=ParseMode.MARKDOWN
                         )
                         self.stats['total_queries'] += 1
@@ -2008,8 +2107,11 @@ Envoyez une image puis posez votre question.
         except aiohttp.ClientConnectorError:
             response_time = time.time() - start_time
             logger.error(f"Impossible de se connecter à l'API CSS: {self.css_api_url} - Temps: {response_time:.2f}s")
+            error_msg = "🔌 **API CSS indisponible**\n\nImpossible de se connecter au service CSS.\n\n💡 **Solutions possibles:**\n• Vérifiez que l'API CSS est démarrée\n• Contactez l'administrateur si le problème persiste"
+            # Utiliser la méthode de correction d'encodage
+            error_msg = self.fix_unicode_encoding(error_msg)
             await message.edit_text(
-                "🔌 **API CSS indisponible**\n\nImpossible de se connecter au service CSS.\n\n💡 **Solutions possibles:**\n• Vérifiez que l'API CSS est démarrée\n• Contactez l'administrateur si le problème persiste",
+                error_msg,
                 parse_mode=ParseMode.MARKDOWN
             )
             self.stats['total_queries'] += 1
@@ -2017,8 +2119,14 @@ Envoyez une image puis posez votre question.
         except aiohttp.ServerTimeoutError as e:
             response_time = time.time() - start_time
             logger.error(f"Timeout API streaming: {e} - URL: {self.css_api_url} - Temps: {response_time:.2f}s")
+            error_msg = f"⏱️ **Timeout API CSS**\n\nLa requête streaming a pris trop de temps.\n\n🔧 **Solutions possibles:**\n• Réessayez avec une question plus simple\n• Vérifiez la charge du serveur\n• Contactez l'administrateur si le problème persiste"
+            # Décoder les caractères Unicode échappés
+            try:
+                error_msg = error_msg.encode().decode('unicode_escape')
+            except (UnicodeDecodeError, UnicodeEncodeError):
+                pass
             await message.edit_text(
-                f"⏱️ **Timeout API CSS**\n\nLa requête streaming a pris trop de temps.\n\n🔧 **Solutions possibles:**\n• Réessayez avec une question plus simple\n• Vérifiez la charge du serveur\n• Contactez l'administrateur si le problème persiste",
+                error_msg,
                 parse_mode=ParseMode.MARKDOWN
             )
             self.stats['total_queries'] += 1
@@ -2026,8 +2134,14 @@ Envoyez une image puis posez votre question.
         except aiohttp.ClientError as e:
             response_time = time.time() - start_time
             logger.error(f"Erreur client HTTP API streaming: {type(e).__name__}: {e} - URL: {self.css_api_url} - Temps: {response_time:.2f}s")
+            error_msg = f"🌐 **Erreur de connexion**\n\nProblème de communication avec l'API CSS.\n\n🔧 **Type d'erreur:** {type(e).__name__}\n**Détails:** {str(e)[:100]}..."
+            # Décoder les caractères Unicode échappés
+            try:
+                error_msg = error_msg.encode().decode('unicode_escape')
+            except (UnicodeDecodeError, UnicodeEncodeError):
+                pass
             await message.edit_text(
-                f"🌐 **Erreur de connexion**\n\nProblème de communication avec l'API CSS.\n\n🔧 **Type d'erreur:** {type(e).__name__}\n**Détails:** {str(e)[:100]}...",
+                error_msg,
                 parse_mode=ParseMode.MARKDOWN
             )
             self.stats['total_queries'] += 1
@@ -2036,28 +2150,132 @@ Envoyez une image puis posez votre question.
             response_time = time.time() - start_time
             logger.error(f"Erreur appel API streaming: {type(e).__name__}: {e} - URL: {self.css_api_url} - Temps: {response_time:.2f}s")
             logger.exception("Stack trace complète:")
+            error_msg = f'Erreur technique. Une erreur inattendue s\'est produite. Type: {type(e).__name__} Détails: {str(e)[:100]}...'
+            # Décoder les caractères Unicode échappés
+            try:
+                # error_msg = error_msg.encode().decode('unicode_escape')
+                # error_msg = error_msg.encode().decode('unicode_escape')
+                pass
+            except (UnicodeDecodeError, UnicodeEncodeError):
+                pass
             await message.edit_text(
-                f"⚠️ **Erreur technique**\n\nUne erreur inattendue s'est produite.\n\n🔧 **Type:** {type(e).__name__}\n**Détails:** {str(e)[:100]}...",
+                error_msg,
                 parse_mode=ParseMode.MARKDOWN
             )
             self.stats['total_queries'] += 1
             self.stats['failed_queries'] += 1
     
+    def fix_unicode_encoding(self, text: str) -> str:
+        """Corrige les problèmes d'encodage Unicode dans le texte"""
+        if not text or not isinstance(text, str):
+            return text
+            
+        try:
+            import json
+            import re
+            
+            # NOUVEAU: Détecter si le texte est une chaîne JSON sérialisée accidentellement
+            # (commence et finit par des guillemets)
+            if text.startswith('"') and text.endswith('"') and len(text) > 2:
+                try:
+                    # Désérialiser la chaîne JSON
+                    decoded_text = json.loads(text)
+                    text = decoded_text
+                except json.JSONDecodeError:
+                    # Si ça échoue, enlever juste les guillemets
+                    text = text[1:-1]
+            
+            # Méthode 1: Utiliser json.loads pour décoder les séquences Unicode
+            # Entourer le texte de guillemets pour en faire un JSON valide
+            if '\\u' in text:
+                json_text = '"' + text.replace('"', '\\"') + '"'
+                try:
+                    decoded_text = json.loads(json_text)
+                    return decoded_text
+                except json.JSONDecodeError:
+                    pass
+            
+            # Méthode 2: Utiliser une expression régulière pour remplacer les séquences \uXXXX
+            def unicode_replacer(match):
+                hex_code = match.group(1)
+                try:
+                    return chr(int(hex_code, 16))
+                except ValueError:
+                    return match.group(0)  # Retourner la séquence originale si erreur
+            
+            # Remplacer toutes les séquences \uXXXX
+            text = re.sub(r'\\u([0-9a-fA-F]{4})', unicode_replacer, text)
+            
+            # Étape 2: Décoder les séquences d'échappement courantes
+            text = text.replace('\\n', '\n')
+            text = text.replace('\\t', '\t')
+            text = text.replace('\\r', '\r')
+            text = text.replace('\\"', '"')
+            text = text.replace("\\\'", "'")
+            
+
+                
+        except Exception as e:
+            logger.warning(f"Erreur de décodage Unicode: {e}")
+            # En cas d'erreur, essayer une approche alternative
+            try:
+                # Approche alternative : remplacer manuellement les séquences courantes
+                replacements = {
+                    '\\u00e0': 'à', '\\u00e1': 'á', '\\u00e2': 'â', '\\u00e3': 'ã',
+                    '\\u00e4': 'ä', '\\u00e5': 'å', '\\u00e6': 'æ', '\\u00e7': 'ç',
+                    '\\u00e8': 'è', '\\u00e9': 'é', '\\u00ea': 'ê', '\\u00eb': 'ë',
+                    '\\u00ec': 'ì', '\\u00ed': 'í', '\\u00ee': 'î', '\\u00ef': 'ï',
+                    '\\u00f0': 'ð', '\\u00f1': 'ñ', '\\u00f2': 'ò', '\\u00f3': 'ó',
+                    '\\u00f4': 'ô', '\\u00f5': 'õ', '\\u00f6': 'ö', '\\u00f8': 'ø',
+                    '\\u00f9': 'ù', '\\u00fa': 'ú', '\\u00fb': 'û', '\\u00fc': 'ü',
+                    '\\u00fd': 'ý', '\\u00ff': 'ÿ',
+                    # Majuscules
+                    '\\u00c0': 'À', '\\u00c1': 'Á', '\\u00c2': 'Â', '\\u00c3': 'Ã',
+                    '\\u00c4': 'Ä', '\\u00c5': 'Å', '\\u00c6': 'Æ', '\\u00c7': 'Ç',
+                    '\\u00c8': 'È', '\\u00c9': 'É', '\\u00ca': 'Ê', '\\u00cb': 'Ë',
+                    '\\u00cc': 'Ì', '\\u00cd': 'Í', '\\u00ce': 'Î', '\\u00cf': 'Ï',
+                    '\\u00d1': 'Ñ', '\\u00d2': 'Ò', '\\u00d3': 'Ó', '\\u00d4': 'Ô',
+                    '\\u00d5': 'Õ', '\\u00d6': 'Ö', '\\u00d8': 'Ø', '\\u00d9': 'Ù',
+                    '\\u00da': 'Ú', '\\u00db': 'Û', '\\u00dc': 'Ü', '\\u00dd': 'Ý',
+                }
+                
+                for escaped, char in replacements.items():
+                    text = text.replace(escaped, char)
+                    
+                # Nettoyer les séquences d'échappement restantes
+                text = text.replace('\\n', '\n').replace('\\t', '\t').replace('\\r', '\r')
+                
+            except Exception as e2:
+                logger.error(f"Échec de l'approche alternative pour l'Unicode: {e2}")
+        
+        return text
+    
     def format_response(self, response_data: dict) -> str:
-        """Formate la réponse de l'API pour l'affichage"""
+        """Formate la réponse de l'API pour l'affichage avec décodage des caractères Unicode"""
+        response_text = ""
+        
         if isinstance(response_data, dict):
             if 'response' in response_data:
-                return response_data['response']
+                response_text = response_data['response']
             elif 'answer' in response_data:
-                return response_data['answer']
+                response_text = response_data['answer']
             elif 'result' in response_data:
-                return response_data['result']
+                response_text = response_data['result']
             else:
-                return str(response_data)
-        return str(response_data)
+                response_text = str(response_data)
+        else:
+            response_text = str(response_data)
+        
+        # OBLIGATOIRE : Appliquer la correction Unicode
+        response_text = self.fix_unicode_encoding(response_text)
+        
+        return response_text
     
     async def send_long_message(self, message_or_query, text: str, edit: bool = False):
         """Envoie un message long en le divisant si nécessaire"""
+        # AJOUT OBLIGATOIRE : Corriger l'encodage Unicode avant l'envoi
+        text = self.fix_unicode_encoding(text)
+        
         max_length = 4096  # Limite Telegram
         
         # Déterminer si c'est un CallbackQuery ou un Message
@@ -2120,14 +2338,15 @@ Envoyez une image puis posez votre question.
                 if i < len(chunks) - 1:
                     await asyncio.sleep(1)
     
-    def add_to_history(self, session: UserSession, question: str, response: str, success: bool):
+    def add_to_history(self, session: UserSession, question: str, response: str, success: bool, response_id: str = None):
         """Ajoute une entrée à l'historique des questions"""
         entry = {
             'timestamp': datetime.now().strftime('%d/%m/%Y %H:%M'),
             'question': question,
             'response': response,
             'success': success,
-            'query_type': session.current_query_type.value if session.current_query_type else 'unknown'
+            'query_type': session.current_query_type.value if session.current_query_type else 'unknown',
+            'response_id': response_id
         }
         
         session.question_history.append(entry)

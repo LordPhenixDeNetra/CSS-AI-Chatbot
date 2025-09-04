@@ -14,7 +14,8 @@ from PIL import Image
 from app.core.config import settings
 from app.models.schemas import (
     QuestionRequest, AdvancedQuestionResponse, DocumentResponse,
-    PerformanceMetrics, MultimodalUploadRequest, MultimodalQuestionRequest
+    PerformanceMetrics, MultimodalUploadRequest, MultimodalQuestionRequest,
+    SatisfactionRequest, SatisfactionResponse
 )
 from app.models.enums import Provider, ContentType, ModalityType
 from app.services.rag_service import multimodal_rag_system
@@ -1180,18 +1181,89 @@ async def multimodal_info():
             "Monitoring Prometheus",
             "Support multi-provider LLM",
             "Streaming responses"
-        ],
-        "supported_modalities": [e.value for e in ModalityType],
-        "supported_content_types": [e.value for e in ContentType],
-        "providers": [p.value for p in Provider],
-        "endpoints": {
-            "document_upload": "/upload-multimodal-document",
-            "text_question": "/ask-multimodal-question",
-            "image_question": "/ask-multimodal-with-image",
-            "image_analysis": "/analyze-image",
-            "image_search": "/search-by-image",
-            "document_list": "/multimodal-documents",
-            "capabilities": "/multimodal-capabilities",
-            "health": "/health-multimodal"
-        }
+        ]
     }
+
+
+@router.post("/record-satisfaction", response_model=SatisfactionResponse, summary="Enregistrer la satisfaction utilisateur")
+async def record_user_satisfaction(request: SatisfactionRequest):
+    """Enregistre la satisfaction de l'utilisateur pour une réponse donnée"""
+    start_time = time.time()
+    satisfaction_id = str(uuid.uuid4())
+    
+    try:
+        # Rechercher la réponse correspondante dans les fichiers CSV
+        import csv
+        import os
+        
+        question = ""
+        response = ""
+        found = False
+        
+        # Chercher dans tous les fichiers CSV de réponses
+        csv_files = [
+            "app/for-analysis/questions-answered/responses_ask_question_ultra.csv",
+            "app/for-analysis/questions-answered/responses_ask_question_stream_ultra.csv",
+            "app/for-analysis/questions-answered/responses_ask_multimodal_question.csv",
+            "app/for-analysis/questions-answered/responses_ask_multimodal_with_image.csv"
+        ]
+        
+        for csv_file in csv_files:
+            if os.path.exists(csv_file):
+                try:
+                    with open(csv_file, 'r', encoding='utf-8') as f:
+                        reader = csv.DictReader(f)
+                        for row in reader:
+                            if row.get('response_id') == request.response_id:
+                                question = row.get('question', '')
+                                response = row.get('response', row.get('final_response', ''))
+                                found = True
+                                break
+                    if found:
+                        break
+                except Exception as e:
+                    logger.warning(f"Erreur lecture fichier {csv_file}: {e}")
+                    continue
+        
+        if not found:
+            raise HTTPException(
+                status_code=404, 
+                detail=f"Response ID {request.response_id} non trouvé dans les logs"
+            )
+        
+        # Enregistrer la satisfaction
+        csv_logger.log_user_satisfaction(
+            satisfaction_id=satisfaction_id,
+            response_id=request.response_id,
+            question=question,
+            response=response,
+            is_satisfied=request.is_satisfied
+        )
+        
+        processing_time = (time.time() - start_time) * 1000
+        
+        return SatisfactionResponse(
+            satisfaction_id=satisfaction_id,
+            response_id=request.response_id,
+            question=question,
+            response=response,
+            is_satisfied=request.is_satisfied,
+            timestamp=datetime.now().isoformat(),
+            status="success"
+        )
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        # Enregistrer l'erreur
+        csv_logger.log_user_satisfaction(
+            satisfaction_id=satisfaction_id,
+            response_id=request.response_id,
+            question="",
+            response="",
+            is_satisfied=request.is_satisfied,
+            error_message=str(e)
+        )
+        
+        logger.error(f"Erreur enregistrement satisfaction: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
