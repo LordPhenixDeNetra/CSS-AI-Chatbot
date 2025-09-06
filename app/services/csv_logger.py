@@ -87,6 +87,7 @@ class AsyncCSVLogger:
     def log_ask_question_ultra(self, 
                               question: str,
                               response: str,
+                              response_id: Optional[str] = None,
                               sources: Optional[list] = None,
                               confidence_score: Optional[float] = None,
                               processing_time_ms: Optional[float] = None,
@@ -97,7 +98,7 @@ class AsyncCSVLogger:
         """Enregistre une réponse de l'endpoint ask-question-ultra"""
         
         data = {
-            "response_id": str(uuid.uuid4()),
+            "response_id": response_id or str(uuid.uuid4()),
             "timestamp": datetime.now().isoformat(),
             "question": question,
             "response": response,
@@ -117,6 +118,7 @@ class AsyncCSVLogger:
     
     def log_ask_question_stream_ultra(self,
                                      question: str,
+                                     response_id: Optional[str] = None,
                                      response_chunks: Optional[list] = None,
                                      final_response: Optional[str] = None,
                                      sources: Optional[list] = None,
@@ -131,7 +133,7 @@ class AsyncCSVLogger:
         """Enregistre une réponse de l'endpoint ask-question-stream-ultra"""
         
         data = {
-            "response_id": str(uuid.uuid4()),
+            "response_id": response_id or str(uuid.uuid4()),
             "timestamp": datetime.now().isoformat(),
             "question": question,
             "response_chunks": json.dumps(response_chunks) if response_chunks else "",
@@ -154,6 +156,7 @@ class AsyncCSVLogger:
     
     def log_ask_multimodal_question(self,
                                    question: str,
+                                   response_id: Optional[str] = None,
                                    images_count: Optional[int] = None,
                                    image_descriptions: Optional[list] = None,
                                    response: Optional[str] = None,
@@ -170,7 +173,7 @@ class AsyncCSVLogger:
         """Enregistre une réponse de l'endpoint ask-multimodal-question"""
         
         data = {
-            "response_id": str(uuid.uuid4()),
+            "response_id": response_id or str(uuid.uuid4()),
             "timestamp": datetime.now().isoformat(),
             "question": question,
             "images_count": images_count or "",
@@ -195,6 +198,7 @@ class AsyncCSVLogger:
     
     def log_ask_multimodal_with_image(self,
                                      question: str,
+                                     response_id: Optional[str] = None,
                                      query_image_info: Optional[dict] = None,
                                      image_analysis: Optional[dict] = None,
                                      response: Optional[str] = None,
@@ -213,7 +217,7 @@ class AsyncCSVLogger:
         """Enregistre une réponse de l'endpoint ask-multimodal-with-image"""
         
         data = {
-            "response_id": str(uuid.uuid4()),
+            "response_id": response_id or str(uuid.uuid4()),
             "timestamp": datetime.now().isoformat(),
             "question": question,
             "query_image_info": json.dumps(query_image_info) if query_image_info else "",

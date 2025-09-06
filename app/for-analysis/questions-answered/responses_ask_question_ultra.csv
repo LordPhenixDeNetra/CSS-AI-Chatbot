@@ -616,3 +616,175 @@ c07c8bbe-5fde-44f7-a4be-b2a13a8921f2,2025-09-04T19:27:45.102353,Comment allez vo
 d3271322-318f-4c0b-b452-252e7c17af85,2025-09-04T19:28:12.971081,Comment allez vous,Je suis là pour vous aider. Que souhaitez-vous savoir ?,"[""Base de connaissances CSS...""]",0.95,0.9634494781494141,,predefined_qa,,
 47c9e791-2680-44d8-b42d-c3d1f52dfe07,2025-09-04T19:28:51.005950,Comment ça va ?,"Bien, merci ! Comment puis-je vous aider aujourd'hui ?","[""Base de connaissances CSS...""]",0.95,,,predefined_qa,,
 51270644-27fc-4631-b444-2b3a57dc0ef9,2025-09-04T19:29:20.356178,Comment ça va ?,"Bien, merci ! Comment puis-je vous aider aujourd'hui ?","[""Base de connaissances CSS...""]",0.95,,,predefined_qa,,
+2cc15816-287b-47bd-9b73-1abbc6652941,2025-09-04T19:32:26.652526,Familiales Allocation,"Bonjour,
+
+En ma qualité d'expert de la Caisse de Sécurité Sociale du Sénégal, je vous informe sur les prestations familiales.
+
+Sur la base des textes en vigueur, voici les informations essentielles concernant les allocations familiales :
+
+**Bénéficiaires :**
+*   Travailleurs salariés (relevant du Code du travail ou de la marine marchande)
+*   Veuves d'allocataires
+*   Travailleurs en incapacité permanente totale (à la suite d'un Accident du Travail ou d'une Maladie Professionnelle - AT/MP)
+
+**Enfants concernés (Tranches d'âge couvertes) :**
+*   De 2 à 14 ans : tous les enfants à charge.
+*   De 15 à 18 ans : les enfants en apprentissage.
+*   De 15 à 21 ans : les enfants poursuivant des études.
+
+**Montant et limites :**
+*   Le montant est de **2 600 FCFA par mois et par enfant** éligible.
+*   Une limite de **6 enfants maximum** est appliquée, avec une possibilité de glissement.
+
+**Début des droits :**
+*   Les allocations sont dues à partir du 1er jour du mois suivant le 2ème anniversaire de l'enfant.
+
+**Exclusion importante :**
+*   Les enfants titulaires d'une bourse entière d'études sont exclus du bénéfice de cette allocation.
+
+Pour toute demande spécifique ou pour vérifier votre éligibilité en détail, n'hésitez pas à contacter votre agence de sécurité sociale.","[""..."", ""..."", ""...""]",,31270.392179489136,,deepseek,,
+70442d2c-afd2-4cfe-94a5-47919731feb0,2025-09-04T19:32:54.500024,Familiales Allocation,"Bonjour,
+
+En ma qualité d'expert de la Caisse de Sécurité Sociale du Sénégal, je vous informe sur les prestations familiales.
+
+Sur la base des textes en vigueur, voici les informations essentielles concernant les allocations familiales :
+
+**Bénéficiaires :**
+*   Travailleurs salariés (relevant du Code du travail ou de la marine marchande)
+*   Veuves d'allocataires
+*   Travailleurs en incapacité permanente totale (à la suite d'un Accident du Travail ou d'une Maladie Professionnelle - AT/MP)
+
+**Enfants concernés (Tranches d'âge couvertes) :**
+*   De 2 à 14 ans : tous les enfants à charge.
+*   De 15 à 18 ans : les enfants en apprentissage.
+*   De 15 à 21 ans : les enfants poursuivant des études.
+
+**Montant et limites :**
+*   Le montant est de **2 600 FCFA par mois et par enfant** éligible.
+*   Une limite de **6 enfants maximum** est appliquée, avec une possibilité de glissement.
+
+**Début des droits :**
+*   Les allocations sont dues à partir du 1er jour du mois suivant le 2ème anniversaire de l'enfant.
+
+**Exclusion importante :**
+*   Les enfants titulaires d'une bourse entière d'études sont exclus du bénéfice de cette allocation.
+
+Pour toute demande spécifique ou pour vérifier votre éligibilité en détail, n'hésitez pas à contacter votre agence de sécurité sociale.","[""..."", ""..."", ""...""]",,,,deepseek,,
+37f5b83a-6b4e-4c63-b95e-bf9c07ced62b,2025-09-04T19:40:54.925279,Les cotisations ?,"En ma qualité d'expert de la Caisse de Sécurité Sociale du Sénégal, voici les informations concernant les cotisations sociales.
+
+**Nature et Obligation de Paiement :**
+Les cotisations sociales sont **portables et non quérables**. Cela signifie que c'est une obligation stricte pour l'employeur de les verser spontanément et dans les délais, sans attendre qu'elles soient réclamées par les Institutions.
+
+**Délais de Paiement :**
+Les cotisations doivent être réglées dans les délais légaux fixés :
+*   **Pour les employeurs de plus de 10 salariés :** dans les 15 jours suivant la fin du mois échu.
+*   **Pour les employeurs de moins de 10 salariés :** dans les 15 jours suivant la fin du trimestre échu.
+
+**Modalités de Paiement :**
+Le règlement s'effectue en joignant la facture DNS téléchargeable sur le portail, et peut se faire de trois manières :
+1.  **Par chèque barré** à l'ordre de la CSS ou de l'IPRES.
+2.  **En espèces** dans les caisses des agences CSS/IPRES.
+3.  **Par virement bancaire** aux coordonnées suivantes :
+    *   **Bénéficiaire :** IPRES / CSS
+    *   **Banque :** Banque de Dakar
+    *   **RIB :** SN191 01001 002000137005 75
+    *   **Motif :** numéro de facture
+
+**Cas d'exigibilité immédiate :**
+Les cotisations deviennent immédiatement exigibles dans les situations suivantes :
+*   En cas de **cession** ou de **cessation d'activité** de l'entreprise.
+*   En cas de **cessation complète** de l'emploi des salariés.","[""..."", ""..."", ""...""]",,32092.93222427368,,deepseek,,
+536f9648-fd44-436f-b4f2-d9ff525b65b5,2025-09-04T19:41:21.975179,Les cotisations ?,"En ma qualité d'expert de la Caisse de Sécurité Sociale du Sénégal, voici les informations concernant les cotisations sociales.
+
+**Nature et Obligation de Paiement :**
+Les cotisations sociales sont **portables et non quérables**. Cela signifie que c'est une obligation stricte pour l'employeur de les verser spontanément et dans les délais, sans attendre qu'elles soient réclamées par les Institutions.
+
+**Délais de Paiement :**
+Les cotisations doivent être réglées dans les délais légaux fixés :
+*   **Pour les employeurs de plus de 10 salariés :** dans les 15 jours suivant la fin du mois échu.
+*   **Pour les employeurs de moins de 10 salariés :** dans les 15 jours suivant la fin du trimestre échu.
+
+**Modalités de Paiement :**
+Le règlement s'effectue en joignant la facture DNS téléchargeable sur le portail, et peut se faire de trois manières :
+1.  **Par chèque barré** à l'ordre de la CSS ou de l'IPRES.
+2.  **En espèces** dans les caisses des agences CSS/IPRES.
+3.  **Par virement bancaire** aux coordonnées suivantes :
+    *   **Bénéficiaire :** IPRES / CSS
+    *   **Banque :** Banque de Dakar
+    *   **RIB :** SN191 01001 002000137005 75
+    *   **Motif :** numéro de facture
+
+**Cas d'exigibilité immédiate :**
+Les cotisations deviennent immédiatement exigibles dans les situations suivantes :
+*   En cas de **cession** ou de **cessation d'activité** de l'entreprise.
+*   En cas de **cessation complète** de l'emploi des salariés.","[""..."", ""..."", ""...""]",,0.9546279907226562,,deepseek,,
+fe76ec96-3605-4066-b6cd-6e73a4097e0a,2025-09-04T20:09:12.764013,Les cotisations ?,"En ma qualité d'expert de la Caisse de Sécurité Sociale du Sénégal, voici les informations concernant les cotisations, basées sur notre réglementation :
+
+Les cotisations sociales sont dues immédiatement dans les cas suivants :
+- Cession d'activité
+- Cessation d'activité
+- Cessation complète de l'emploi des salariés
+
+De plus, le principe est que ces cotisations sont **portables et non quérables**. Cela signifie que c'est à la charge exclusive de l'employeur de les verser de manière spontanée et proactive, sans attendre une quelconque réclamation de la part des Institutions de sécurité sociale.
+
+Pour toute précision complémentaire sur votre situation spécifique, n'hésitez pas à reformuler votre question.","[""..."", ""..."", ""...""]",,22073.305368423462,,deepseek,,
+f6cd4728-04ad-43c9-9842-e49707e3adb3,2025-09-04T20:09:42.307986,Salut,Salut ! Comment puis-je vous aider aujourd'hui ?,"[""Base de connaissances CSS...""]",0.95,2.9909610748291016,,predefined_qa,,
+65364c57-64e3-4c0a-a947-95de1c7bd614,2025-09-04T20:10:17.136465,Les prestations,"Bonjour,
+
+En me basant sur les informations fournies, je peux vous informer sur l'Action Sanitaire, Sociale et Familiale (A.S.S.F).
+
+Il s'agit de prestations en nature qui ont pour objectif de compléter les prestations en espèces. Leur rôle est de protéger la mère et l'enfant en palliant les insuffisances du système national de santé.
+
+Pour des informations plus détaillées sur les types précis de prestations ou les conditions d'accès, je vous invite à reformuler votre question.","[""..."", ""..."", ""...""]",,19288.429498672485,,deepseek,,
+c665e5fe-ffab-470f-bd2c-a032f935bc19,2025-09-04T20:11:57.580836,Les prestations,"Bonjour,
+
+En me basant sur les informations fournies, je peux vous informer sur l'Action Sanitaire, Sociale et Familiale (A.S.S.F).
+
+Il s'agit de prestations en nature qui ont pour objectif de compléter les prestations en espèces. Leur mission principale est de protéger la mère et l'enfant en palliant les insuffisances du système national de santé.
+
+Pour des informations plus détaillées sur les types précis de prestations ou les conditions d'accès, je vous invite à reformuler votre question.","[""..."", ""..."", ""...""]",,22447.05104827881,,deepseek,,
+7ad4e00f-cf4b-4441-ba9b-6b576bd378e3,2025-09-04T20:13:17.337952,Les prestations,"Bonjour,
+
+En me basant sur les informations fournies, je peux vous informer sur l'objectif général des prestations en nature de l'Action Sanitaire, Sociale et Familiale (A.S.S.F).
+
+L'objectif principal de ces prestations est de **compléter les prestations en espèces pour protéger la mère et l'enfant en palliant les insuffisances du système national de santé.**
+
+Pour obtenir des détails plus précis sur les types de prestations, leurs conditions d'accès ou leurs modalités, je vous invite à reformuler votre question. Je serai alors en mesure de vous fournir une réponse plus complète.
+
+Cordialement,
+Votre assistant de la Caisse de Sécurité Sociale du Sénégal.","[""..."", ""..."", ""...""]",,20890.918970108032,,deepseek,,
+8dc3666b-09a3-4687-920b-acc762707caa,2025-09-04T22:19:22.063166,Les prestations,"Bonjour,
+
+En me basant sur les informations fournies, je peux vous informer sur l'Action Sanitaire, Sociale et Familiale (A.S.S.F).
+
+Il s'agit de prestations en nature qui ont pour objectif de compléter les prestations en espèces. Leur mission principale est de protéger la mère et l'enfant en palliant les insuffisances du système national de santé.
+
+Pour obtenir des détails plus précis sur les types de prestations ou les conditions d'accès, je vous invite à reformuler votre question.","[""..."", ""..."", ""...""]",,24052.73389816284,,deepseek,,
+0c3445c7-d952-49b8-89ce-a28110edd56d,2025-09-04T22:20:02.389283,Les prestations,"Bonjour,
+
+En me basant sur les informations fournies, je peux vous informer sur l'Action Sanitaire, Sociale et Familiale (A.S.S.F).
+
+Il s'agit de prestations en nature qui ont pour objectif de compléter les prestations en espèces. Leur mission principale est de protéger la mère et l'enfant en palliant les insuffisances du système national de santé.
+
+Pour obtenir des détails plus précis sur les types de prestations ou les conditions d'accès, je vous invite à reformuler votre question.","[""..."", ""..."", ""...""]",,,,deepseek,,
+9d87a676-00e3-4e17-b8c9-796e097e9e7a,2025-09-05T17:06:56.189291,Les Allocations,"Bonjour,
+
+En ma qualité d'expert de la Caisse de Sécurité Sociale du Sénégal, je vous présente une synthèse des principales allocations liées à la famille et à la maternité, basée sur la documentation officielle.
+
+Il existe trois types d'allocations principales :
+
+**1. Allocations Prénatales**
+*   **Bénéficiaires :** L'épouse d'un travailleur salarié, une femme salariée non mariée, ou une femme salariée mariée si son mari n'a pas d'activité rémunérée.
+*   **Période :** De la constatation de la grossesse jusqu'à l'accouchement (maximum 9 mois).
+*   **Montant :** 2 250 FCFA par mois.
+*   **Paiement :** Le versement est échelonné et conditionné à des visites médicales obligatoires (2 mensualités avant le 3ème mois, 4 vers le 6ème mois, 3 vers le 8ème mois). Toute visite manquée entraîne la perte de la fraction correspondante.
+
+**2. Allocations de Maternité**
+*   **Bénéficiaires :** Les mêmes que pour les allocations prénatales.
+*   **Période :** De la naissance jusqu'au 2ème anniversaire de l'enfant.
+*   **Montant :** 2 250 FCFA par mois.
+*   **Conditions obligatoires :** Naissance sous contrôle médical, enfant né viable et inscription à l'état civil (certificat d'accouchement et extrait d'acte de naissance requis).
+*   **Paiement :** Le versement est également échelonné par tranches d'âge (6 mensualités à la naissance, 6 à 6 mois, 6 à 12 mois, 3 à 18 mois, 3 à 24 mois) et est conditionné à des visites médicales régulières (tous les 2 mois la 1ère année, tous les 3 mois la 2ème année). Un rendez-vous manqué entraîne la perte du paiement correspondant.
+
+**3. Allocations Familiales**
+*   **Bénéficiaires :** Les travailleurs salariés, les veuves d'alloc","[""..."", ""..."", ""...""]",,38213.88363838196,,deepseek,,

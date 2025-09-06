@@ -1,3 +1,190 @@
 response_id,timestamp,question,images_count,image_descriptions,response,sources,confidence_score,processing_time_ms,tokens_used,model_used,cache_hit,multimodal_analysis,ocr_text,image_similarity_scores,error_message
 a2adde15-d413-40a2-aae0-b306024fe0e4,2025-09-02T16:20:05.692692,Test multimodal question avec ID,1,"[""Test image""]",Test multimodal response avec ID,"[""multimodal.pdf""]",0.92,3000.0,200,gpt-4-vision,False,"{""objects"": [""test""]}",Test OCR,[0.85],
 023596b1-e691-4938-bbd4-2da9dce04099,2025-09-02T16:39:35.142659,Test multimodal question,2,,Test multimodal response,,,200.8,,test_model,,,,,
+1b0977e2-420c-4d51-98a7-e61c20947c47,2025-09-05T15:53:45.646480,Âge de départ à la retraite,,,"L'âge légal de départ à la retraite au Sénégal est de 60 ans pour les salariés du secteur privé affiliés à la CSS. Cependant, il est possible de partir en retraite anticipée sous certaines conditions ou de prolonger l'activité jusqu'à 65 ans.","[""Base de connaissances CSS...""]",,,,deepseek,,,,,
+d63cdb20-2b56-4ee7-8f59-655672174363,2025-09-05T16:35:05.387223,Comment calculer ma pension ?,,,"Bonjour,
+
+Pour calculer le montant de votre pension de retraite à l'IPRES, la formule est la suivante :
+
+**Pension mensuelle = Nombre de points servis × Valeur mensuelle du point**
+
+Le montant de votre pension dépend principalement de deux facteurs :
+*   **La durée de votre cotisation**
+*   **Le niveau de votre salaire** pendant votre carrière
+
+Pour pouvoir prétendre à cette pension, vous devez remplir les conditions d'admission :
+*   **Conditions de cotisation :** Avoir cotisé au minimum 10 ans **OU** avoir capitalisé au moins 1 000 points.
+*   **Condition d'âge :** Avoir au moins 60 ans (âge normal). Une retraite anticipée est possible à partir de 55 ans, avec un abattement de 5% par année d'anticipation.
+*   **Condition d'activité :** Avoir cessé toute activité salariée.
+
+La pension prend effet le premier jour du mois au cours duquel votre demande parvient à l'IPRES.
+
+Pour une estimation précise, je vous invite à vous rapprocher directement de l'IPRES avec votre historique de carrière, qui pourra vous communiquer votre nombre total de points acquis et la valeur actuelle du point.","[""..."", ""..."", ""..."", ""..."", ""...""]",,32044.661283493042,,deepseek,,,,,
+ffbc037f-d3f4-4ab1-9932-9424500cb791,2025-09-05T16:39:31.521776,Comment calculer ma pension ?,,,"Bonjour,
+
+Pour calculer le montant de votre pension de retraite à l'IPRES, la formule est la suivante :
+
+**Pension mensuelle = Nombre de points servis × Valeur mensuelle du point**
+
+Le montant de votre pension dépend principalement de deux facteurs :
+*   **La durée de votre cotisation**
+*   **Le niveau de votre salaire** pendant votre carrière
+
+Pour pouvoir prétendre à cette pension, vous devez remplir les conditions d'admission :
+*   **Conditions de cotisation :** Avoir cotisé au minimum 10 ans **OU** avoir capitalisé au moins 1 000 points.
+*   **Condition d'âge :** Avoir au moins 60 ans (âge normal). Une retraite anticipée est possible à partir de 55 ans, avec un abattement de 5% par année d'anticipation.
+*   **Condition d'activité :** Avoir cessé toute activité salariée.
+
+La pension prend effet le premier jour du mois au cours duquel votre demande parvient à l'IPRES.
+
+Pour une estimation précise, je vous invite à vous rapprocher directement de l'IPRES avec votre historique de carrière, qui pourra vous communiquer votre nombre total de points acquis et la valeur actuelle du point.","[""..."", ""..."", ""..."", ""..."", ""...""]",,0.4775524139404297,,deepseek,,,,,
+f255ba9c-a727-4019-9649-01d7f3e40743,2025-09-05T16:48:36.864959,Cotisations employeur,,,"En ma qualité d'expert de la Caisse de Sécurité Sociale du Sénégal, voici les informations concernant les cotisations employeur.
+
+**Obligations de l'employeur :**
+L'employeur est tenu de verser spontanément les cotisations sociales sans attendre que les institutions viennent les réclamer. Elles sont dites ""portables et non quérables"". Ces cotisations deviennent immédiatement exigibles en cas de cession, de cessation d’activité ou de cessation complète de l’emploi des salariés.
+
+**Taux de cotisation :**
+Le taux de la part employeur varie selon le régime :
+*   **Régime Général :** 8,4%
+*   **Régime Complémentaire Cadre :** 3,6%
+*   **Régime Employés de Maison :** Le taux n'est pas précisé dans les sources fournies.
+
+**Délais de paiement :**
+*   **Pour les employeurs de plus de 10 salariés :** Dans les 15 jours suivant la fin du mois échu.
+*   **Pour les employeurs de moins de 10 salariés :** Dans les 15 jours suivant la fin du trimestre échu.
+
+**Modes de paiement :**
+Le règlement s'effectue en joignant la facture DNS et peut se faire :
+*   Par chèque barré à l’ordre de la CSS ou de l’IPRES.
+*   En espèces dans les caisses des agences CSS/IPRES.
+*   Par virement bancaire aux coordonnées de l'IPRES/CSS.
+
+Pour toute précision spécifique, n'hésitez pas à reformuler votre question.","[""..."", ""..."", ""..."", ""..."", ""...""]",,40109.66348648071,,deepseek,,,,,
+d37129d7-dbac-474b-8761-8e86baf17c2f,2025-09-05T16:55:37.435136,Test question,,,"Bonjour,
+
+Je suis l'assistant expert de la Caisse de Sécurité Sociale du Sénégal.
+
+Sur la base des documents fournis, je ne dispose pas d'informations contextuelles spécifiques pour répondre à votre ""Test question"".
+
+Afin de vous apporter une réponse précise et utile, pourriez-vous, s'il vous plaît, reformuler ou préciser votre demande ? Je suis là pour vous renseigner sur les procédures d'immatriculation, les prestations familiales, les droits des participants ou tout autre sujet relatif à la sécurité sociale.
+
+Je reste à votre disposition.","[""..."", ""..."", ""...""]",,23576.287269592285,,deepseek,,,,,
+e55e45eb-b9c7-4c64-b5cd-a5d8a026f600,2025-09-05T16:55:48.189636,Test question,,,"Bonjour,
+
+Je suis l'assistant expert de la Caisse de Sécurité Sociale du Sénégal.
+
+Sur la base des documents fournis, je ne dispose pas d'informations contextuelles spécifiques pour répondre à votre ""Test question"".
+
+Afin de vous apporter une réponse précise et utile, pourriez-vous, s'il vous plaît, reformuler ou préciser votre demande ? Je suis là pour vous renseigner sur les procédures d'immatriculation, les prestations familiales, les droits des participants ou tout autre sujet relatif à la sécurité sociale.
+
+Je reste à votre disposition.","[""..."", ""..."", ""...""]",,,,deepseek,,,,,
+d3c991b1-8c05-41a2-b70f-18cdf5ca36a3,2025-09-05T16:59:46.232146,Quels documents pour ma retraite ?,,,"Pour s'inscrire à la CSS, vous devez fournir : une copie de votre pièce d'identité, un certificat de travail, les bulletins de salaire des 3 derniers mois, une fiche d'état civil, et le formulaire d'immatriculation dûment rempli.","[""Base de connaissances CSS...""]",,11.481046676635742,,deepseek,,,,,
+bd63166d-4bc2-4d99-8984-272562a598a5,2025-09-05T17:04:16.991824,Prestations,,,"Bonjour,
+
+En ma qualité d'expert de la Caisse de Sécurité Sociale du Sénégal, je me permets de vous présenter une synthèse des prestations évoquées dans votre demande.
+
+Votre question est très générale. Afin de vous apporter une réponse précise et utile, je vais distinguer deux grands types de prestations pour lesquelles nous disposons d'informations.
+
+### 1. Prestations en Nature de l'Action Sanitaire, Sociale et Familiale (A.S.S.F)
+*   **Objectif** : Compléter les prestations en espèces pour protéger la mère et l'enfant en palliant les insuffisances du système national de santé.
+
+### 2. Prestations en Espèces en cas de décès (Pensions de survivants)
+Ces prestations sont soumises à une limite globale : l'ensemble des rentes versées ne peut excéder **85% du salaire annuel** de la victime.
+
+*   **Rente au conjoint survivant** :
+    *   **Conditions** : Mariage constaté avant le décès, absence de divorce, de séparation ou de condamnation pour abandon de famille.
+    *   **Montant** : 30% du salaire annuel de la victime.
+    *   **Polygamie** : Le montant est réparti de manière égale entre les veuves.
+    *   **Remariage** : Le droit à la rente cesse s'il n'y a pas d'enfant à charge. Dans ce cas, une indemnité forfaitaire égale à 3 fois le montant de la rente est versée.
+
+*   **Rente aux enfants** :
+    *   Le montant varie selon un barème précis :
+        *   1 enfant : 15% du salaire annuel
+        *   2 enfants : 30% du salaire annuel
+        *   3 enfants : 40% du salaire annuel
+        *   Chaque enfant supplémentaire : +10%
+
+*   **Rente aux ascendants** :
+    *   **Conditions** : L'ascendant doit avoir été à la charge de la victime au moment du décès et ne pas disposer de ressources suffisantes.
+    *   **Montant** : 10% par ascendant, avec un maximum de 30% au total.
+
+### Constitution du","[""..."", ""..."", ""...""]",,38632.24196434021,,deepseek,,,,,
+059ad659-4ac3-480d-bde8-ab766cc0e24f,2025-09-05T17:27:59.012075,Âge de départ à la retraite,,,"L'âge légal de départ à la retraite au Sénégal est de 60 ans pour les salariés du secteur privé affiliés à la CSS. Cependant, il est possible de partir en retraite anticipée sous certaines conditions ou de prolonger l'activité jusqu'à 65 ans.","[""Base de connaissances CSS...""]",,,,deepseek,,,,,
+785c907a-d4e9-45bf-ac29-9a1c68091c41,2025-09-05T17:32:50.898664,Prestations,,,"Bonjour,
+
+En ma qualité d'expert de la Caisse de Sécurité Sociale du Sénégal, je me permets de vous présenter une synthèse des prestations évoquées dans votre demande, en me basant strictement sur la documentation fournie.
+
+Votre question étant large, je vais me concentrer sur deux catégories principales : les prestations en nature de l'Action Sanitaire, Sociale et Familiale (A.S.S.F) et les prestations en espèces en cas de décès d'un assuré.
+
+### 1. Prestations en Nature (A.S.S.F)
+*   **Objectif** : Compléter les prestations en espèces pour protéger la mère et l'enfant en palliant les insuffisances du système national de santé.
+
+### 2. Prestations en Espèces en cas de Décès
+Il s'agit de rentes versées aux ayants droit du travailleur salarié décédé.
+
+**A. Rente au conjoint survivant :**
+*   **Conditions** :
+    *   Mariage constaté avant le décès.
+    *   Absence de divorce, de séparation de corps ou de condamnation pour abandon de famille.
+*   **Montant** : 30% du salaire annuel de la victime.
+*   **Cas de polygamie** : Le montant est réparti de manière égale entre les veuves.
+*   **En cas de remariage** :
+    *   Cessation du droit s'il n'y a pas d'enfant à charge.
+    *   Une indemnité forfaitaire, équivalente à 3 fois le montant de la rente, est alors versée.
+    *   Le rachat de la rente est reporté en présence d'enfants ayants droit.
+
+**B. Rente aux enfants :**
+Le montant varie selon le nombre d'enfants, selon le barème suivant :
+*   1 enfant : 15% du salaire annuel
+*   2 enfants : 30% du salaire annuel
+*   3 enfants : 40% du salaire annuel
+*   Chaque enfant supplémentaire : +10%
+
+**C. Rente aux ascendants :**
+*   **Conditions** :
+    *   Être à la charge de la victime au moment du décès.
+    *   Ne pas disposer","[""..."", ""..."", ""...""]",,43639.0585899353,,deepseek,,,,,
+e0e2f77e-fb91-48c2-bf0e-7b838444d601,2025-09-05T17:41:21.337356,Quels documents pour ma retraite ?,,,"Pour s'inscrire à la CSS, vous devez fournir : une copie de votre pièce d'identité, un certificat de travail, les bulletins de salaire des 3 derniers mois, une fiche d'état civil, et le formulaire d'immatriculation dûment rempli.","[""Base de connaissances CSS...""]",,1.993417739868164,,deepseek,,,,,
+a12436d6-3e29-43f1-84b8-74b1baa19fa4,2025-09-05T18:06:19.755156,Comment calculer ma pension ?,,,"Bonjour,
+
+Pour calculer le montant de votre pension de retraite, la formule est la suivante :
+
+**Pension mensuelle = Nombre de points servis × Valeur mensuelle du point**
+
+Le montant de votre pension dépend principalement de deux facteurs :
+*   **La durée de votre cotisation** (qui influence le nombre de points accumulés).
+*   **Le niveau de vos salaires** perçus tout au long de votre carrière (les cotisations versées, et donc les points acquis, sont calculées sur la base de votre rémunération).
+
+**Conditions préalables au calcul :**
+Pour pouvoir prétendre à une pension, vous devez préalablement remplir les conditions d'admission :
+*   **Conditions de cotisation :** Avoir cotisé au minimum 10 ans **OU** avoir capitalisé au moins 1 000 points.
+*   **Condition d'âge :** Avoir au moins 60 ans. Une retraite anticipée est possible à partir de 55 ans, avec un abattement de 5% par année d'anticipation.
+*   **Condition d'activité :** Avoir cessé toute activité salariée.
+
+Pour une estimation précise de votre pension, qui nécessite de connaître votre historique de points et la valeur actuelle du point, je vous invite à vous rapprocher directement de l'IPRES.","[""..."", ""..."", ""..."", ""..."", ""...""]",,30294.846296310425,,deepseek,,,,,
+1ec02fde-f85d-4410-9e97-da77cd897d2f,2025-09-05T18:10:57.225860,Les tranches par paiement,,,"Bonjour,
+
+Concernant les modalités de paiement des indemnités journalières de congé de maternité, celles-ci sont versées en trois tranches distinctes :
+
+1.  **Première tranche** : Un mois après le dépôt du dossier complet.
+2.  **Deuxième tranche** : Dès le lendemain de la date présumée de l'accouchement.
+3.  **Troisième tranche** : À la reprise effective du travail.
+
+Ces informations sont valables pour toute femme salariée éligible, conformément aux règles de la Caisse de Sécurité Sociale du Sénégal.","[""..."", ""..."", ""..."", ""..."", ""...""]",,21907.642602920532,,deepseek,,,,,
+53c68a2b-8276-43d4-aa25-0d00e70392d0,2025-09-05T18:12:32.474458,Cotisations employeur,,,"En ma qualité d'expert de la Caisse de Sécurité Sociale du Sénégal, voici les informations concernant les cotisations employeur, basées sur les textes officiels fournis :
+
+**Obligations de l'employeur :**
+L'employeur a l'obligation légale de verser spontanément les cotisations sociales sans attendre qu'elles soient réclamées par les Institutions. Ces cotisations sont dites ""portables et non quérables"".
+
+**Échéance des cotisations :**
+Les cotisations deviennent immédiatement exigibles dans deux cas spécifiques :
+1.  En cas de cession ou de cessation d’activité de l'entreprise.
+2.  En cas de cessation complète de l’emploi des salariés.
+
+**Impact pour le salarié :**
+Les cotisations versées par votre employeur sont automatiquement converties en points de retraite qui s'accumulent sur votre compte individuel à l'IPRES jusqu'à l'âge de la retraite.
+
+**Recommandation :**
+Il est conseillé aux assurés de consulter régulièrement le service des cotisations de l'IPRES pour vérifier que leurs cotisations ont été effectivement versées par leur employeur.","[""..."", ""..."", ""..."", ""..."", ""...""]",,26630.21469116211,,deepseek,,,,,
+c6d08804-6a17-402e-a5e9-8193ce230757,2025-09-05T23:40:00.598267,Bonjour,,,Bonjour ! Comment puis-je vous aider aujourd'hui ?,"[""Base de connaissances CSS...""]",,4164.792537689209,,deepseek,,,,,
+c0482873-dc1f-47ce-a87e-fb0efb175fb4,2025-09-05T23:40:54.449467,Parlez des prestations familiale ,,,"Les allocations familiales de la CSS sont versées mensuellement. Le montant varie selon le nombre d'enfants à charge et leur âge. Pour connaître le montant exact applicable à votre situation, veuillez consulter le barème en vigueur auprès de votre agence CSS.","[""Base de connaissances CSS...""]",,7.718324661254883,,deepseek,,,,,
