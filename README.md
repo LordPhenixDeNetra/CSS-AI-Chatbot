@@ -931,7 +931,6 @@ Ce projet est sous licence MIT. Voir le fichier `LICENSE` pour plus de détails.
 - [Hugging Face](https://huggingface.co/) pour les modèles pré-entraînés
 - [OpenAI CLIP](https://openai.com/blog/clip/) pour la vision par ordinateur
 
-
 <!-- python -m uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload -->
 
 ---

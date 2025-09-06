@@ -157,60 +157,58 @@ class UltraPerformantRAG:
             logger.info(f"Ajout du document multimodal: {filename}")
             
             # Traitement du document multimodal
-            processed_data = await self.multimodal_processor.process_document(
+            processed_data = await self.multimodal_processor.process_multimodal_document(
                 file_content, filename, extract_text, generate_captions
             )
             
             # Génération d'un ID unique pour le document
             document_id = f"multimodal_{filename}_{hash(file_content) % 1000000}"
             
-            # Ajout des chunks au système RAG
+            # Ajout du document au système RAG
             added_chunks = []
-            for i, chunk in enumerate(processed_data['chunks']):
-                chunk_id = f"{document_id}_chunk_{i}"
+            chunk_id = f"{document_id}_chunk_0"
+            
+            # Création des métadonnées enrichies
+            metadata = {
+                'document_id': document_id,
+                'chunk_id': chunk_id,
+                'filename': filename,
+                'chunk_index': 0,
+                'content_type': processed_data['metadata']['content_type'],
+                'modality': processed_data['metadata']['modality'],
+                'has_image': 'image' in processed_data,
+                'has_text': len(processed_data.get('content', '')) > 0,
+                'ocr_confidence': None,
+                'caption_confidence': None
+            }
                 
-                # Création des métadonnées enrichies
-                metadata = {
-                    'document_id': document_id,
-                    'chunk_id': chunk_id,
-                    'filename': filename,
-                    'chunk_index': i,
-                    'content_type': chunk.get('type', 'text'),
-                    'modality': chunk.get('modality', 'text'),
-                    'has_image': chunk.get('has_image', False),
-                    'has_text': chunk.get('has_text', True),
-                    'ocr_confidence': chunk.get('ocr_confidence'),
-                    'caption_confidence': chunk.get('caption_confidence')
-                }
-                
-                # Génération des embeddings multimodaux
-                if chunk.get('has_image') and chunk.get('image_data'):
-                    # Embedding d'image
-                    image_embedding = await self.multimodal_embeddings.encode_image(chunk['image_data'])
-                    embedding = image_embedding
+            # Génération des embeddings multimodaux
+            if 'image' in processed_data and processed_data['image']:
+                # Embedding d'image
+                embedding = self.multimodal_embeddings.embed_image(processed_data['image'])
+            else:
+                # Embedding de texte
+                text_content = processed_data.get('content', '')
+                if text_content:
+                    embedding = self.multimodal_embeddings.embed_multimodal_text(text_content)
                 else:
-                    # Embedding de texte
-                    text_content = chunk.get('text', '')
-                    if text_content:
-                        embedding = await self.multimodal_embeddings.encode_text(text_content)
-                    else:
-                        continue  # Skip chunks without content
-                
-                # Ajout à ChromaDB
-                self.collection.add(
-                    embeddings=[embedding.tolist()],
-                    documents=[chunk.get('text', '')],
-                    metadatas=[metadata],
-                    ids=[chunk_id]
-                )
-                
-                added_chunks.append({
-                    'chunk_id': chunk_id,
-                    'content_type': metadata['content_type'],
-                    'modality': metadata['modality'],
-                    'text_length': len(chunk.get('text', '')),
-                    'has_image': metadata['has_image']
-                })
+                    raise ValueError("Aucun contenu à traiter")
+            
+            # Ajout à ChromaDB
+            self.collection.add(
+                embeddings=[embedding.tolist()],
+                documents=[processed_data.get('content', '')],
+                metadatas=[metadata],
+                ids=[chunk_id]
+            )
+            
+            added_chunks.append({
+                'chunk_id': chunk_id,
+                'content_type': metadata['content_type'],
+                'modality': metadata['modality'],
+                'text_length': len(processed_data.get('content', '')),
+                'has_image': metadata['has_image']
+            })
             
             result = {
                 'document_id': document_id,
